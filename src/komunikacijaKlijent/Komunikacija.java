@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import komunikacija.Operacija;
 import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
@@ -239,6 +240,27 @@ public class Komunikacija {
         lista = (List<VrstaAktivnosti>) response.getOdgovor();
 
         return lista;
+    }
+
+    public boolean kreirajMesto(Mesto mesto) {
+        Request request = new Request(Operacija.KREIRAJ_MESTO, mesto);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiMesto(Mesto mesto) {
+        Request request = new Request(Operacija.OBRISI_MESTO, mesto);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        return response.getExc() == null;
+    }
+
+    public boolean promeniMesto(Mesto mesto) {
+        Request request = new Request(Operacija.PROMENI_MESTO, mesto);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        return response.getExc() == null;
     }
 
 }

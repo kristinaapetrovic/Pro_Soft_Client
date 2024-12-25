@@ -4,6 +4,7 @@
  */
 package controllerForme;
 
+import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -37,16 +38,20 @@ public class MestoFormaController {
         mf.getjTableMesta().setModel(mmt);
     }
 
+    public void azurirajTbelu() {
+        popuniTabelu();
+    }
+
     private void addActionListenr() {
         mf.pretraziActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String naziv = mf.getjTextFieldNaziv().getText().trim();
                 String posBroj = mf.getjTextFieldPostanski().getText().trim();
-                if(!provera(naziv, posBroj)){
+                if (!provera(naziv, posBroj)) {
                     return;
                 }
-                Mesto mesto=new Mesto(posBroj, naziv, false);
+                Mesto mesto = new Mesto(posBroj, naziv, false);
                 postaviListu(mesto);
             }
 
@@ -64,12 +69,12 @@ public class MestoFormaController {
             }
 
             private void postaviListu(Mesto mesto) {
-                List<Mesto> lista=komunikacijaKlijent.Komunikacija.getInstance().vratiListuMesto(mesto);
-                MestoModelTabele mmt=new MestoModelTabele(lista);
+                List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMesto(mesto);
+                MestoModelTabele mmt = new MestoModelTabele(lista);
                 mf.getjTableMesta().setModel(mmt);
             }
         });
-        
+
         mf.ocistiActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,6 +83,18 @@ public class MestoFormaController {
                 popuniTabelu();
             }
         });
+        mf.detaljiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovano = mf.getjTableMesta().getSelectedRow();
+                if (selektovano == -1) {
+                    JOptionPane.showMessageDialog(mf, "Odaberite mesto!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                MestoModelTabele mmt = (MestoModelTabele) mf.getjTableMesta().getModel();
+                Mesto mesto = mmt.getLista().get(selektovano);
+                Cordinator.getInstance().otvoriMestoKreirajFomru(mf, mesto);
+            }
+        });
     }
-
 }

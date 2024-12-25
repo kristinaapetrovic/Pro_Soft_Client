@@ -5,6 +5,7 @@
 package view;
 
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -199,9 +200,7 @@ public class MestoForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-
-        MestoKreirajForma mkf = new MestoKreirajForma(this, true);
-        mkf.setVisible(true);
+        Cordinator.getInstance().otvoriMestoKreirajFomru(this, null);
 
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
@@ -340,6 +339,10 @@ public class MestoForma extends javax.swing.JFrame {
 
     public void ocistiActionListener(ActionListener actionListener) {
         jButtonOcistiFilter.addActionListener(actionListener);
+    }
+
+    public void detaljiActionListener(ActionListener actionListener) {
+        jButtonDetalji.addActionListener(actionListener);
     }
 
 

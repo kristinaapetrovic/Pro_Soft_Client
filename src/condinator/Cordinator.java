@@ -8,6 +8,7 @@ import controllerForme.GlavnaFormaController;
 import controllerForme.MenadzerFormaController;
 import controllerForme.MenadzerNalogFromaController;
 import controllerForme.MestoFormaController;
+import controllerForme.MestoKreirajFormaController;
 import controllerForme.PrijavaController;
 import controllerForme.ProjektiFormaController;
 import controllerForme.RegistracijaController;
@@ -15,10 +16,12 @@ import controllerForme.SponzorFormaController;
 import controllerForme.StrucnaSpremaFormaController;
 import controllerForme.VrstaAktivnostiFormaController;
 import model.Menadzer;
+import model.Mesto;
 import view.GlavnaForma;
 import view.MenadzerForma;
 import view.MenadzerNalogForma;
 import view.MestoForma;
+import view.MestoKreirajForma;
 import view.PrijavaForma;
 import view.ProjektiForma;
 import view.RegistracijaForma;
@@ -44,6 +47,7 @@ public class Cordinator {
     private StrucnaSpremaFormaController ssFormaController;
     private VrstaAktivnostiFormaController vaFormaController;
     private ProjektiFormaController projektiFormaController;
+    private MestoKreirajFormaController mestoKreirajFormaController;
 
     public static Cordinator getInstance() {
         if (instance == null) {
@@ -119,4 +123,18 @@ public class Cordinator {
         projektiFormaController.otvoriFormu();
     }
 
+    public void otvoriMestoKreirajFomru(MestoForma parent, Mesto mesto) {
+        if (mesto == null) {
+            mestoKreirajFormaController = new MestoKreirajFormaController(new MestoKreirajForma(parent, true));
+        } else {
+            mestoKreirajFormaController = new MestoKreirajFormaController(new MestoKreirajForma(parent, true, mesto));
+        }
+        mestoKreirajFormaController.otvoriFormu();
+    }
+
+    public MestoFormaController getMestoFormaController() {
+        return mestoFormaController;
+    }
+
+    
 }

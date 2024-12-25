@@ -4,8 +4,11 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import model.Mesto;
 
@@ -184,24 +187,33 @@ public class MestoKreirajForma extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JTextField getjTextFieldNaziv() {
+        return jTextFieldNaziv;
+    }
+
+    public JTextField getjTextFieldPostanski() {
+        return jTextFieldPostanski;
+    }
+
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-//        String id = jTextFieldPostanski.getText();
-//        String naziv = jTextFieldNaziv.getText();
-//
-//        if (!validacija(id, naziv)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        Mesto mesto = new Mesto(id, naziv, false);
-//        boolean uspesno = Controller.getInstance().kreirajMesto(mesto);
-//        if (uspesno) {
-//            roditelj.popuniTabelu();
-//            JOptionPane.showMessageDialog(this, "Mesto je uspesno ubaceno u bazu", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
-//            this.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Greska pri unosu mesta u bazu", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        String id = jTextFieldPostanski.getText();
+        String naziv = jTextFieldNaziv.getText();
+
+        if (!validacija(id, naziv)) {
+            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Mesto mesto = new Mesto(id, naziv, false);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajMesto(mesto);
+
+        if (uspesno) {
+            Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
+            JOptionPane.showMessageDialog(this, "Mesto je uspesno ubaceno u bazu", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Greska pri unosu mesta u bazu", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
     private void jButtonIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIzmeniActionPerformed
@@ -222,24 +234,24 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonObrisiActionPerformed
 
     private void jButtonSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacuvajActionPerformed
-//        String id = jTextFieldPostanski.getText();
-//        String naziv = jTextFieldNaziv.getText();
-//
-//        if (!validacija(id, naziv)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        Mesto mesto = new Mesto(id, naziv, false);
-//        boolean uspesno = Controller.getInstance().promeniMesto(mesto);
-//        if (uspesno) {
-//            roditelj.popuniTabelu();
-//            JOptionPane.showMessageDialog(this, "Mesto je uspesno promenjeno", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
-//            this.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Greska pri promeni mesta", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-//        
-//        
+        String id = jTextFieldPostanski.getText();
+        String naziv = jTextFieldNaziv.getText();
+
+        if (!validacija(id, naziv)) {
+            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Mesto mesto = new Mesto(id, naziv, false);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMesto(mesto);
+        if (uspesno) {
+            Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
+            JOptionPane.showMessageDialog(this, "Mesto je uspesno promenjeno", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Greska pri promeni mesta", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
 
     /**
@@ -337,22 +349,22 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     public void obrisiMesto(Mesto mesto) {
 
         if (obrisiIzBaze(mesto)) {
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
 
         }
     }
 
     private boolean obrisiIzBaze(Mesto mesto) {
-//        mesto.setObrisano(true);
-//        boolean uspesno = Controller.getInstance().obrisiMesto(mesto);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Mesto je obrisano iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-//            return true;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Mesto nije obrisano iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }
-//    }
-        return true;
+        mesto.setObrisano(true);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMesto(mesto);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Mesto je obrisano iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Mesto nije obrisano iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
     }
+
 }
