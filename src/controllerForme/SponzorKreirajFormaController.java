@@ -4,6 +4,8 @@
  */
 package controllerForme;
 
+import java.util.List;
+import model.Mesto;
 import view.SponzorKreirajDetaljiForma;
 
 /**
@@ -11,13 +13,17 @@ import view.SponzorKreirajDetaljiForma;
  * @author Korisnik
  */
 public class SponzorKreirajFormaController {
+
     private final SponzorKreirajDetaljiForma skf;
 
     public SponzorKreirajFormaController(SponzorKreirajDetaljiForma skf) {
         this.skf = skf;
     }
-    
-    public void otvoriFormu(){
+
+    public void otvoriFormu() {
+       
         skf.setVisible(true);
     }
+
+
 }

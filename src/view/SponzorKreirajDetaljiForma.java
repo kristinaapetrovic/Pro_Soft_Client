@@ -4,10 +4,11 @@
  */
 package view;
 
-
+import condinator.Cordinator;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import model.Sponzor;
@@ -20,7 +21,15 @@ import model.Mesto;
 public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
 
     SponzorForma roditelj;
-    Sponzor izvodjac;
+    Sponzor sponzor;
+
+    public Sponzor getSponzor() {
+        return sponzor;
+    }
+
+    public JComboBox<Mesto> getjComboBoxMesto() {
+        return jComboBoxMesto;
+    }
 
     /**
      * Creates new form IzvodjacKreirajDetaljiForma
@@ -35,13 +44,14 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
 
     }
 
-    public SponzorKreirajDetaljiForma(java.awt.Frame parent, boolean modal, Sponzor izvodjac) {
+    public SponzorKreirajDetaljiForma(java.awt.Frame parent, boolean modal, Sponzor sponzor) {
         super(parent, modal);
         initComponents();
         popuniComboBox();
         setTitle("Detalji sponzora");
         roditelj = (SponzorForma) parent;
-        this.izvodjac = izvodjac;
+        this.sponzor = sponzor;
+        System.out.println(sponzor.getMesto());
         pripremiFormuDetalji();
 
     }
@@ -227,29 +237,26 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-//        String matBr = jTextFieldMBroj.getText();
-//        String naziv = jTextFieldNaziv.getText();
-//        String vlasnik = jTextFieldVlasnik.getText();
-//        Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
-//
-//        if (!validacija(matBr, naziv, vlasnik, mesto)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        Sponzor gi = new Sponzor(matBr, naziv, vlasnik, false, mesto);
-//        boolean uspesno = Controller.getInstance().kreirajSponzor(gi);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Sponzor je uspesno kreiran", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
-//            roditelj.popuniTabelu();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno kreiran", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        jTextFieldMBroj.setText("");
-//        jTextFieldNaziv.setText("");
-//        jTextFieldVlasnik.setText("");
-//        jComboBoxMesto.setSelectedItem(null);
+        String matBr = jTextFieldMBroj.getText();
+        String naziv = jTextFieldNaziv.getText();
+        String vlasnik = jTextFieldVlasnik.getText();
+        Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
+
+        if (!validacija(matBr, naziv, vlasnik, mesto)) {
+            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajSponzor(sponzor);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Sponzor je uspesno kreiran", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno kreiran", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
     private void jButtonIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIzmeniActionPerformed
@@ -264,40 +271,42 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonIzmeniActionPerformed
 
     private void jButtonSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacuvajActionPerformed
-//        String matBr = jTextFieldMBroj.getText();
-//        String naziv = jTextFieldNaziv.getText();
-//        String vlasnik = jTextFieldVlasnik.getText();
-//        Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
-//
-//        if (!validacija(matBr, naziv, vlasnik, mesto)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        Sponzor gi = new Sponzor(matBr, naziv, vlasnik, false, mesto);
-//        boolean uspesno = Controller.getInstance().promeniSponzor(gi);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Sponzor je uspesno izmenjen", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
-//            roditelj.popuniTabelu();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno izmenjen", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        String matBr = jTextFieldMBroj.getText();
+        String naziv = jTextFieldNaziv.getText();
+        String vlasnik = jTextFieldVlasnik.getText();
+        Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
+
+        if (!validacija(matBr, naziv, vlasnik, mesto)) {
+            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniSponzor(sponzor);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Sponzor je uspesno izmenjen", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno izmenjen", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
 
     private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
-//        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete sponzora?", "Potvrda", JOptionPane.YES_NO_OPTION);
-//        if (odgovor != JOptionPane.YES_OPTION) {
-//            return;
-//        }
-//        izvodjac.setObrisan(true);
-//        boolean uspesno = Controller.getInstance().obrisiSponzor(izvodjac);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Sponzor je uspesno obrisan", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
-//            roditelj.popuniTabelu();
-//            this.dispose();
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno obrisan", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete sponzora?", "Potvrda", JOptionPane.YES_NO_OPTION);
+        if (odgovor != JOptionPane.YES_OPTION) {
+            return;
+        }
+        sponzor.setObrisan(true);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiSponzor(sponzor);
+
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Sponzor je uspesno obrisan", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno obrisan", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
 
     }//GEN-LAST:event_jButtonObrisiActionPerformed
 
@@ -404,16 +413,10 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     }
 
     private void popuniComboBox() {
-//        List<Mesto> lista = new ArrayList<>();
-//        boolean uspesno = Controller.getInstance().vratiListuSviMesto(lista);
-//        if (uspesno) {
-//            for (Mesto mesto : lista) {
-//                jComboBoxMesto.addItem(mesto);
-//            }
-//
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu mesta", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+        for (Mesto mesto : lista) {
+            jComboBoxMesto.addItem(mesto);
+        }
     }
 
     private void pripremiFormuDetalji() {
@@ -424,9 +427,11 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         jTextFieldMBroj.setEnabled(false);
         jButtonSacuvaj.setEnabled(false);
 
-        jTextFieldMBroj.setText(izvodjac.getMaticniBroj());
-        jTextFieldNaziv.setText(izvodjac.getNazivFirme());
-        jTextFieldVlasnik.setText(izvodjac.getVlasnik());
-        jComboBoxMesto.setSelectedItem(izvodjac.getMesto());
+        jTextFieldMBroj.setText(sponzor.getMaticniBroj());
+        jTextFieldNaziv.setText(sponzor.getNazivFirme());
+        jTextFieldVlasnik.setText(sponzor.getVlasnik());
+        jComboBoxMesto.setSelectedItem(sponzor.getMesto());
+
     }
+
 }

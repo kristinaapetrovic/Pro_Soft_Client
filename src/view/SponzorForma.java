@@ -5,6 +5,7 @@
 package view;
 
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -264,8 +265,7 @@ public class SponzorForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDetaljiActionPerformed
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-        SponzorKreirajDetaljiForma ikdf = new SponzorKreirajDetaljiForma(this, true);
-        ikdf.setVisible(true);
+        Cordinator.getInstance().otvoriSponzorKreirajFormu(this, null);
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
     public JTextField getjTextFieldNaziv() {
@@ -412,5 +412,9 @@ public class SponzorForma extends javax.swing.JFrame {
 
     public void ocistiActionListener(ActionListener actionListener) {
         jButtonOcistiFilter.addActionListener(actionListener);
+    }
+
+    public void detaljiActionListener(ActionListener actionListener) {
+        jButtonDetalji.addActionListener(actionListener);
     }
 }

@@ -4,6 +4,7 @@
  */
 package controllerForme;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,6 +55,10 @@ public class SponzorFormaController {
             public void actionPerformed(ActionEvent e) {
                 String naziv = sf.getjTextFieldNaziv().getText();
                 Mesto mesto = (Mesto) sf.getjComboBoxMesta().getSelectedItem();
+                if(naziv.isEmpty() && mesto==null){
+                    JOptionPane.showMessageDialog(sf, "Unesite bar jedan kriterijum", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (!validacija(naziv, mesto)) {
                     return;
                 }
@@ -61,7 +66,6 @@ public class SponzorFormaController {
                 kriterijumSponzor.setNazivFirme(naziv);
                 kriterijumSponzor.setMesto(mesto);
                 postaviListu(kriterijumSponzor);
-
             }
 
             private boolean validacija(String naziv, Mesto mesto) {
@@ -88,5 +92,23 @@ public class SponzorFormaController {
                 popuniTabelu();
             }
         });
+        
+        sf.detaljiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovano=sf.getjTableSponzori().getSelectedRow();
+                if(selektovano==-1){
+                    JOptionPane.showMessageDialog(sf, "Izaberite sponzora", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                SponzorModelTabele smt=(SponzorModelTabele) sf.getjTableSponzori().getModel();
+                Sponzor sponzor=smt.getLista().get(selektovano);
+                Cordinator.getInstance().otvoriSponzorKreirajFormu(sf, sponzor);
+            }
+        });
+    }
+
+    public void azurirajTabelu() {
+        popuniTabelu();
     }
 }

@@ -13,10 +13,12 @@ import controllerForme.PrijavaController;
 import controllerForme.ProjektiFormaController;
 import controllerForme.RegistracijaController;
 import controllerForme.SponzorFormaController;
+import controllerForme.SponzorKreirajFormaController;
 import controllerForme.StrucnaSpremaFormaController;
 import controllerForme.VrstaAktivnostiFormaController;
 import model.Menadzer;
 import model.Mesto;
+import model.Sponzor;
 import view.GlavnaForma;
 import view.MenadzerForma;
 import view.MenadzerNalogForma;
@@ -26,6 +28,7 @@ import view.PrijavaForma;
 import view.ProjektiForma;
 import view.RegistracijaForma;
 import view.SponzorForma;
+import view.SponzorKreirajDetaljiForma;
 import view.StrucnaSpremaForma;
 import view.VrstaAktivnostiForma;
 
@@ -48,6 +51,7 @@ public class Cordinator {
     private VrstaAktivnostiFormaController vaFormaController;
     private ProjektiFormaController projektiFormaController;
     private MestoKreirajFormaController mestoKreirajFormaController;
+    private SponzorKreirajFormaController sponzorKFController;
 
     public static Cordinator getInstance() {
         if (instance == null) {
@@ -136,5 +140,17 @@ public class Cordinator {
         return mestoFormaController;
     }
 
+    public void otvoriSponzorKreirajFormu(SponzorForma parent, Sponzor sponzor) {
+        if (sponzor != null) {
+            sponzorKFController = new SponzorKreirajFormaController(new SponzorKreirajDetaljiForma(parent, true, sponzor));
+        } else {
+            sponzorKFController = new SponzorKreirajFormaController(new SponzorKreirajDetaljiForma(parent, true));
+        }
+        sponzorKFController.otvoriFormu();
+    }
     
+    public SponzorFormaController getsponzorFormaController(){
+        return sponzorFormaController;
+    }
+
 }

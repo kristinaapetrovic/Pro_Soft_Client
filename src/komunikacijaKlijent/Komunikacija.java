@@ -263,4 +263,28 @@ public class Komunikacija {
         return response.getExc() == null;
     }
 
+    public boolean kreirajSponzor(Sponzor sponzor) {
+        Request request = new Request(Operacija.KREIRAJ_SPONZOR, sponzor);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiSponzor(Sponzor sponzor) {
+       
+        Request request = new Request(Operacija.OBRISI_SPONZOR, sponzor);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        return response.getExc() == null;
+    }
+
+    public boolean promeniSponzor(Sponzor sponzor) {
+        Request request = new Request(Operacija.PROMENI_SPONZOR, sponzor);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        
+        return response.getExc() == null;
+    }
+
 }
