@@ -4,6 +4,7 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -135,7 +136,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
         }
         if (ubaciUbazu(naziv)) {
             JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je ubacena u bazu", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getvaFormaController().azurirajTabelu();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Greska pri unosu vrste aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -167,7 +168,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
         }
         if (izmeniVA(naziv)) {
             JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je izmenjena", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getvaFormaController().azurirajTabelu();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Greska pri izmeni vrste aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -233,9 +234,9 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
 
     private boolean ubaciUbazu(String naziv) {
 
-//        VrstaAktivnosti v = new VrstaAktivnosti(0, naziv, false);
-//        return Controller.getInstance().kreirajVrstaAktivnosti(v);
-        return true;
+        VrstaAktivnosti vrstaAktivnosti = new VrstaAktivnosti(0, naziv, false);
+        return komunikacijaKlijent.Komunikacija.getInstance().kreirajVrstaAktivnosti(vrstaAktivnosti);
+
     }
 
     private void popuniFormuKreiraj() {
@@ -254,27 +255,27 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     private void obrisiVA(VrstaAktivnosti vakt) {
 
         if (obrisiIzBaze(vakt)) {
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getvaFormaController().azurirajTabelu();
         }
     }
 
     private boolean obrisiIzBaze(VrstaAktivnosti vakt) {
-//        vakt.setObrisana(true);
-//        boolean uspesno = Controller.getInstance().obrisiVrstaAktivnosti(vakt);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-//            return true;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }
-        return true;
+        vakt.setObrisana(true);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiVrstaAktivnosti(vakt);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
     }
 
     private boolean izmeniVA(String naziv) {
-//        vakt.setNazivVrstaAktivnosti(naziv);
-//        return Controller.getInstance().promeniVrstaAktivnosti(vakt);
-        return true;
+        vakt.setNazivVrstaAktivnosti(naziv);
+        return komunikacijaKlijent.Komunikacija.getInstance().promeniVrstaAktivnosti(vakt);
+        
     }
 
 }

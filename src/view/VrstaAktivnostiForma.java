@@ -4,6 +4,7 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -44,24 +45,24 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonObrisi = new javax.swing.JButton();
+        jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcistiFilter = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
         jScrollPanePrviTab = new javax.swing.JScrollPane();
         jTableVA = new javax.swing.JTable();
         jButtonKreiraj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonObrisi.setText("Detalji");
-        jButtonObrisi.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDetalji.setText("Detalji");
+        jButtonDetalji.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonObrisiActionPerformed(evt);
+                jButtonDetaljiActionPerformed(evt);
             }
         });
 
@@ -123,10 +124,10 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNazadActionPerformed(evt);
             }
         });
 
@@ -161,20 +162,20 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
                     .addComponent(jScrollPanePrviTab))
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonObrisi)
+                    .addComponent(jButtonDetalji)
                     .addComponent(jButtonKreiraj)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonNazad))
                 .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(267, 267, 267)
-                .addComponent(jButtonObrisi)
+                .addComponent(jButtonDetalji)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonKreiraj)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(jButtonNazad)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(27, 27, 27)
@@ -188,13 +189,10 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-        
-
-       VrstaAktivnostiKreirajForma vakf=new VrstaAktivnostiKreirajForma(this, true);
-       vakf.setVisible(true);
+        Cordinator.getInstance().otvotiVAKreirajFormu(this,null);
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
-    private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
+    private void jButtonDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetaljiActionPerformed
 
 //        int selektovano = jTableVA.getSelectedRow();
 //
@@ -210,7 +208,7 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 //        VrstaAktivnostiKreirajForma vakf=new VrstaAktivnostiKreirajForma(this, true, va);
 //        vakf.setVisible(true);
 
-    }//GEN-LAST:event_jButtonObrisiActionPerformed
+    }//GEN-LAST:event_jButtonDetaljiActionPerformed
 
     public JTextField getjTextFieldNaziv() {
         return jTextFieldNaziv;
@@ -243,9 +241,9 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonPretraziActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNazadActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNazadActionPerformed
 
     private void jButtonOcistiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcistiFilterActionPerformed
 //        jTextFieldNaziv.setText("");
@@ -289,9 +287,9 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonDetalji;
     private javax.swing.JButton jButtonKreiraj;
-    private javax.swing.JButton jButtonObrisi;
+    private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcistiFilter;
     private javax.swing.JButton jButtonPretrazi;
     private javax.swing.JLabel jLabel1;
@@ -320,6 +318,10 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 
     public void ocistiActionListener(ActionListener actionListener) {
         jButtonOcistiFilter.addActionListener(actionListener);
+    }
+
+    public void detaljiActionListener(ActionListener actionListener) {
+        jButtonDetalji.addActionListener(actionListener);
     }
 
     

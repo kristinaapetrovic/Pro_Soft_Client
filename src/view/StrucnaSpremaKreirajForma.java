@@ -4,6 +4,7 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -135,7 +136,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
         }
         if (ubaciUbazu(naziv)) {
             JOptionPane.showMessageDialog(this, "Strucna sprema je ubacena u bazu", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Greska pri unosu strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -160,7 +161,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
         }
         if (izmeniSS(naziv)) {
             JOptionPane.showMessageDialog(this, "Strucna sprema je izmenjena", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Greska pri izmeni strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -183,45 +184,45 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                StrucnaSpremaKreirajForma dialog = new StrucnaSpremaKreirajForma(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                StrucnaSpremaKreirajForma dialog = new StrucnaSpremaKreirajForma(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIzmeni;
@@ -236,9 +237,9 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     }
 
     private boolean ubaciUbazu(String naziv) {
-//        StrucnaSprema ss = new StrucnaSprema(0, naziv, false);
-//        return Controller.getInstance().ubaciStrucnaSprema(ss);
-        return true;
+        StrucnaSprema ss = new StrucnaSprema(0, naziv, false);
+        return komunikacijaKlijent.Komunikacija.getInstance().kreirajStrucnaSprema(ss);
+
     }
 
     private void popuniFormuKreiraj() {
@@ -257,31 +258,31 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     }
 
     private boolean izmeniSS(String naziv) {
-//        this.strucnaSprema.setNazivStrucnaSprema(naziv);
-//        return Controller.getInstance().promeniStrucnaSprema(strucnaSprema);
-//  
-        return true;
+        this.strucnaSprema.setNazivStrucnaSprema(naziv);
+        return komunikacijaKlijent.Komunikacija.getInstance().promeniStrucnaSprema(strucnaSprema);
+  
+        
     }
 
     private void obrisiSS(StrucnaSprema ss) {
 
         if (obrisiIzBaze(ss)) {
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
 
         }
 
     }
 
     private boolean obrisiIzBaze(StrucnaSprema ss) {
-//        ss.setObrisana(true);
-//        boolean uspesno = Controller.getInstance().obrisiStrucnaSprema(ss);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Strucna sprema je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
-//            return true;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Strucna sprema nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }
-        return true;
+        ss.setObrisana(true);
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiStrucnaSprema(strucnaSprema);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Strucna sprema je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(this, "Strucna sprema nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
     }
 }

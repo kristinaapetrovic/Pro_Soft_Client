@@ -4,6 +4,7 @@
  */
 package controllerForme;
 
+import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -69,5 +70,25 @@ public class VrstaAktivnostiFormaController {
                 popuniTabelu();
             }
         });
+
+        vaf.detaljiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovano = vaf.getjTableVA().getSelectedRow();
+
+                if (selektovano == -1) {
+
+                    JOptionPane.showMessageDialog(vaf, "Odaberite vrstu aktivnosti!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                VrstaAktivnostiModelTabele vamt = (VrstaAktivnostiModelTabele) vaf.getjTableVA().getModel();
+                VrstaAktivnosti va=vamt.getLista().get(selektovano);
+                Cordinator.getInstance().otvotiVAKreirajFormu(vaf,va);
+            }
+        });
+    }
+    public void azurirajTabelu(){
+        popuniTabelu();
     }
 }

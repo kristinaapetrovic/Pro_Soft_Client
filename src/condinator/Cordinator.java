@@ -15,10 +15,14 @@ import controllerForme.RegistracijaController;
 import controllerForme.SponzorFormaController;
 import controllerForme.SponzorKreirajFormaController;
 import controllerForme.StrucnaSpremaFormaController;
+import controllerForme.StrucnaSpremaKreirajFormaController;
 import controllerForme.VrstaAktivnostiFormaController;
+import controllerForme.VrstaAktivnostiKreirajFormaController;
 import model.Menadzer;
 import model.Mesto;
 import model.Sponzor;
+import model.StrucnaSprema;
+import model.VrstaAktivnosti;
 import view.GlavnaForma;
 import view.MenadzerForma;
 import view.MenadzerNalogForma;
@@ -30,7 +34,9 @@ import view.RegistracijaForma;
 import view.SponzorForma;
 import view.SponzorKreirajDetaljiForma;
 import view.StrucnaSpremaForma;
+import view.StrucnaSpremaKreirajForma;
 import view.VrstaAktivnostiForma;
+import view.VrstaAktivnostiKreirajForma;
 
 /**
  *
@@ -52,6 +58,8 @@ public class Cordinator {
     private ProjektiFormaController projektiFormaController;
     private MestoKreirajFormaController mestoKreirajFormaController;
     private SponzorKreirajFormaController sponzorKFController;
+    private StrucnaSpremaKreirajFormaController strucnaSpremaKFController;
+    private VrstaAktivnostiKreirajFormaController vrstaAKFController;
 
     public static Cordinator getInstance() {
         if (instance == null) {
@@ -148,9 +156,36 @@ public class Cordinator {
         }
         sponzorKFController.otvoriFormu();
     }
-    
-    public SponzorFormaController getsponzorFormaController(){
+
+    public SponzorFormaController getsponzorFormaController() {
         return sponzorFormaController;
+    }
+
+    public void otvoriStrucnaSpremaDetaljiFormu(StrucnaSpremaForma parent, StrucnaSprema ss) {
+        if (ss != null) {
+            strucnaSpremaKFController = new StrucnaSpremaKreirajFormaController(new StrucnaSpremaKreirajForma(parent, true, ss));
+        } else {
+            strucnaSpremaKFController = new StrucnaSpremaKreirajFormaController(new StrucnaSpremaKreirajForma(parent, true));
+        }
+        strucnaSpremaKFController.otvoriFormu();
+    }
+
+    public StrucnaSpremaFormaController getStrucnaSpremaForma() {
+        return ssFormaController;
+    }
+
+    public void otvotiVAKreirajFormu(VrstaAktivnostiForma vaf, VrstaAktivnosti vakt) {
+        if (vakt == null) {
+            vrstaAKFController = new VrstaAktivnostiKreirajFormaController(new VrstaAktivnostiKreirajForma(vaf, true));
+        } else {
+            vrstaAKFController = new VrstaAktivnostiKreirajFormaController(new VrstaAktivnostiKreirajForma(vaf, true, vakt));
+        }
+
+        vrstaAKFController.otvoriFormu();
+
+    }
+    public VrstaAktivnostiFormaController getvaFormaController(){
+        return vaFormaController;
     }
 
 }

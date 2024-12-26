@@ -271,11 +271,11 @@ public class Komunikacija {
     }
 
     public boolean obrisiSponzor(Sponzor sponzor) {
-       
+
         Request request = new Request(Operacija.OBRISI_SPONZOR, sponzor);
         sender.send(request);
         Response response = (Response) receiver.receive();
-        
+
         return response.getExc() == null;
     }
 
@@ -283,7 +283,55 @@ public class Komunikacija {
         Request request = new Request(Operacija.PROMENI_SPONZOR, sponzor);
         sender.send(request);
         Response response = (Response) receiver.receive();
-        
+
+        return response.getExc() == null;
+    }
+
+    public boolean promeniStrucnaSprema(StrucnaSprema strucnaSprema) {
+        Request request = new Request(Operacija.PROMENI_STRUCNA_SPREMA, strucnaSprema);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiStrucnaSprema(StrucnaSprema strucnaSprema) {
+        Request request = new Request(Operacija.OBRISI_STRUCNA_SPREMA, strucnaSprema);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean kreirajStrucnaSprema(StrucnaSprema strucnaSprema) {
+        Request request = new Request(Operacija.UBACI_STRUCNA_SPREMA, strucnaSprema);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean promeniVrstaAktivnosti(VrstaAktivnosti vakt) {
+        Request request = new Request(Operacija.PROMENI_VRSTA_AKTIVNOSTI, vakt);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
+        Request request = new Request(Operacija.OBRISI_VRSTA_AKTIVNOSTI, vrstaAktivnosti);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
+        Request request = new Request(Operacija.KREIRAJ_VRSTA_AKTIVNOSTI, vrstaAktivnosti);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
         return response.getExc() == null;
     }
 

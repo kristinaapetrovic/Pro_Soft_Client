@@ -5,6 +5,7 @@
 package view;
 
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -192,8 +193,7 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
 
-        StrucnaSpremaKreirajForma sskf=new StrucnaSpremaKreirajForma(this, true);
-        sskf.setVisible(true);
+        Cordinator.getInstance().otvoriStrucnaSpremaDetaljiFormu(this, null);
 
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
@@ -325,6 +325,10 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
     public void ocistiActionListener(ActionListener actionListener) {
         jButtonOcistiFilter.addActionListener(actionListener);
+    }
+
+    public void detaljiActionListener(ActionListener actionListener) {
+        jButtonDetalji.addActionListener(actionListener);
     }
 
 

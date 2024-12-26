@@ -4,6 +4,7 @@
  */
 package controllerForme;
 
+import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -69,5 +70,25 @@ public class StrucnaSpremaFormaController {
                 popuniTabelu();
             }
         });
+
+        ssf.detaljiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovano = ssf.getjTableSS().getSelectedRow();
+
+                if (selektovano == -1) {
+                    JOptionPane.showMessageDialog(ssf, "Odaberite strucnu spremu!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                StrucnaSpremaModelTabele ssmt = (StrucnaSpremaModelTabele) ssf.getjTableSS().getModel();
+                StrucnaSprema ss = ssmt.getLista().get(selektovano);
+                Cordinator.getInstance().otvoriStrucnaSpremaDetaljiFormu(ssf,ss);
+            }
+        });
+    }
+
+    public void azurirajTabelu() {
+        popuniTabelu();
     }
 }
