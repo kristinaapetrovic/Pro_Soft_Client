@@ -81,7 +81,7 @@ public class Cordinator {
         glavnaFormaController.otvoriGlavnuFormu();
     }
 
-    public static void setUlogovani(Menadzer ulogovani) {
+    public void setUlogovani(Menadzer ulogovani) {
         Cordinator.ulogovani = ulogovani;
     }
 

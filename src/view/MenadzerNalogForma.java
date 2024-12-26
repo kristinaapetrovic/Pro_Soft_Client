@@ -5,6 +5,7 @@
 package view;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.text.ParseException;
@@ -14,7 +15,9 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import model.MSS;
 import model.Menadzer;
@@ -32,8 +35,6 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     /**
      * Creates new form MenadzerNalogForma
      */
-   
-
     public Menadzer getMen() {
         return men;
     }
@@ -41,7 +42,6 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     public void setMen(Menadzer men) {
         this.men = men;
     }
-    
 
     private void listen() {
         jTextFieldDatum.addFocusListener(new FocusListener() {
@@ -175,7 +175,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         setTitle("Nalog menadzera");
         this.men = menadzer;
         this.registracija = registracija;
-       
+
         if (registracija) {
             inicijalizacijaReg();
         } else {
@@ -190,8 +190,6 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setTitle("Nalog menadzera");
         this.men = menadzer;
-
-        
 
         blokirajOpcije();
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
@@ -507,6 +505,14 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public JTextField getjTextFieldDatumRodj() {
+        return jTextFieldDatumRodj;
+    }
+
+    public boolean isRegistracija() {
+        return registracija;
+    }
+
     private void jButtonDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajActionPerformed
 //        StrucnaSprema ss = (StrucnaSprema) jComboBoxSS.getSelectedItem();
 //        String datum = jTextFieldDatum.getText();
@@ -574,6 +580,14 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 //        }
 
     }//GEN-LAST:event_jButtonObrisiSSActionPerformed
+
+    public JPasswordField getjPasswordFieldNova() {
+        return jPasswordFieldNova;
+    }
+
+    public JPasswordField getjPasswordFieldStara() {
+        return jPasswordFieldStara;
+    }
 
     private void jButtonSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSacuvajActionPerformed
 //        String loz1 = new String(jPasswordFieldStara.getPassword());
@@ -714,10 +728,6 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldJMBG;
     // End of variables declaration//GEN-END:variables
 
-
-
-  
-
     public JComboBox<StrucnaSprema> getjComboBoxSS() {
         return jComboBoxSS;
     }
@@ -733,7 +743,6 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     public void setjTableSS(JTable jTableSS) {
         this.jTableSS = jTableSS;
     }
-    
 
     private void inicijalizacijaReg() {
         jTextFieldJMBG.setText(men.getJmbg());
@@ -785,7 +794,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     }
 
     private void inicijalizacija() {
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         jTextFieldDatum.setEnabled(false);
         jTextFieldJMBG.setText(men.getJmbg());
         jTextFieldImePrezime.setText(men.getImePrezime());
@@ -837,6 +846,22 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         jButtonIzmeni.setEnabled(false);
         jButtonUgasiNalog.setEnabled(false);
 
+    }
+
+    public void dodajSSActionListener(ActionListener actionListener) {
+        jButtonDodaj.addActionListener(actionListener);
+    }
+
+    public void obrisiActionListener(ActionListener actionListener) {
+        jButtonObrisiSS.addActionListener(actionListener);
+    }
+
+    public void ugasiNalogActionListener(ActionListener actionListener) {
+        jButtonUgasiNalog.addActionListener(actionListener);
+    }
+
+    public void sacuvajIzmeneActionListener(ActionListener actionListener) {
+        jButtonSacuvaj.addActionListener(actionListener);
     }
 
 }

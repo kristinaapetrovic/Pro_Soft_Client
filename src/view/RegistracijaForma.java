@@ -6,6 +6,7 @@ package view;
 
 import condinator.Cordinator;
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.security.NoSuchAlgorithmException;
@@ -16,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -64,7 +66,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
         jTextFieldImePrezime = new javax.swing.JTextField();
         jTextFieldDatRodj = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonRegistrujSe = new javax.swing.JButton();
         jLabelProvera = new javax.swing.JLabel();
         jButtonOdustani = new javax.swing.JButton();
 
@@ -80,10 +82,10 @@ public class RegistracijaForma extends javax.swing.JFrame {
 
         jLabel4.setText("Datum rodjenja");
 
-        jButton1.setText("Registruj se");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRegistrujSe.setText("Registruj se");
+        jButtonRegistrujSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonRegistrujSeActionPerformed(evt);
             }
         });
 
@@ -121,7 +123,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
                 .addContainerGap(138, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonRegistrujSe)
                 .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
@@ -147,7 +149,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
                 .addComponent(jLabelProvera, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonRegistrujSe)
                     .addComponent(jButtonOdustani))
                 .addGap(99, 99, 99))
         );
@@ -155,14 +157,30 @@ public class RegistracijaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    public JTextField getjTextFieldDatRodj() {
+        return jTextFieldDatRodj;
+    }
+
+    public JTextField getjTextFieldEmail() {
+        return jTextFieldEmail;
+    }
+
+    public JTextField getjTextFieldImePrezime() {
+        return jTextFieldImePrezime;
+    }
+
+    public JTextField getjTextFieldJMBG() {
+        return jTextFieldJMBG;
+    }
+
+    private void jButtonRegistrujSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrujSeActionPerformed
 
         String jmbg = jTextFieldJMBG.getText().trim();
         String imePrezime = jTextFieldImePrezime.getText().trim();
         String datumRodj = jTextFieldDatRodj.getText().trim();
         String email = jTextFieldEmail.getText().trim();
 
-        Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, null, true, true, null);
+        
 
 //        if (postoji(menadzer)) {
 //            int odgovor = JOptionPane.showConfirmDialog(this, "Nalog sa ovom email adresom ili jmbg-om vec postoji!\n Prijavite se?", "Obavestenje", JOptionPane.YES_NO_OPTION);
@@ -190,7 +208,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
             return;
         }
         
-        menadzer.setDatumRodjenja(datumRodjenja);
+        Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, datumRodjenja, true, true, null);
       
         
 //        Random random = new Random();
@@ -221,7 +239,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
 //        PrijavaForma pf = new PrijavaForma();
 //        pf.setVisible(true);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonRegistrujSeActionPerformed
 
     private void jButtonOdustaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOdustaniActionPerformed
 
@@ -268,8 +286,8 @@ public class RegistracijaForma extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonOdustani;
+    private javax.swing.JButton jButtonRegistrujSe;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -349,4 +367,8 @@ public class RegistracijaForma extends javax.swing.JFrame {
 //    private boolean postoji(Menadzer menadzer) {
 //        return Controller.getInstance().postoji(menadzer);
 //    }
+
+    public void regActionListener(ActionListener actionListener) {
+        jButtonRegistrujSe.addActionListener(actionListener);
+    }
 }

@@ -51,10 +51,13 @@ public class PrijavaController {
                 
                 if(ulogovani==null){
                     JOptionPane.showMessageDialog(pf, "Pogresan email ili lozinka", "Greska", JOptionPane.ERROR_MESSAGE);
-                }else{
+                }else if(!ulogovani.isPrviLog()){
                     Cordinator.getInstance().setUlogovani(ulogovani);
                     Cordinator.getInstance().otvoriGlavnuFormu();
                     pf.dispose();
+                }else{
+                    Cordinator.getInstance().setUlogovani(ulogovani);
+                    Cordinator.getInstance().otvoriMenadzerNalogFormu(ulogovani, true, true);
                 }
             }
 

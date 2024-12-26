@@ -335,4 +335,44 @@ public class Komunikacija {
         return response.getExc() == null;
     }
 
+    public boolean kreirajMSS(MSS mss) {
+        Request request = new Request(Operacija.KREIRAJ_MSS, mss);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiMSS(MSS mss) {
+        Request request = new Request(Operacija.OBRISI_MSS, mss);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean obrisiMenadzer(Menadzer men) {
+        Request request = new Request(Operacija.OBRISI_MENADZER, men);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean promeniMenadzer(Menadzer men) {
+        Request request = new Request(Operacija.PROMENI_MENADZER, men);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public Menadzer kreirajMenadzer(Menadzer menadzer) {
+        Request request = new Request(Operacija.KREIRAJ_MENADZER, menadzer);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return (Menadzer) response.getOdgovor();
+    }
+
 }
