@@ -4,10 +4,21 @@
  */
 package controllerForme;
 
+import view.ProjektiKreirajForma;
+
 /**
  *
  * @author Korisnik
  */
 public class ProjektiKreirajFormaController {
+    private final ProjektiKreirajForma pf;
+
+    public ProjektiKreirajFormaController(ProjektiKreirajForma pf) {
+        this.pf = pf;
+    }
+    
+    public void otvoriFormu(){
+        pf.setVisible(true);
+    }
     
 }

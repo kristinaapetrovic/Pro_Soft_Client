@@ -4,6 +4,7 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -55,13 +56,9 @@ public class ProjektiForma extends javax.swing.JFrame {
         this.jComboBoxMenadzer = jComboBoxMenadzer;
     }
 
-    public JComboBox<VrstaAktivnosti> getjComboBoxVAktivnosti() {
-        return jComboBoxVAktivnosti;
-    }
+   
 
-    public void setjComboBoxVAktivnosti(JComboBox<VrstaAktivnosti> jComboBoxVAktivnosti) {
-        this.jComboBoxVAktivnosti = jComboBoxVAktivnosti;
-    }
+   
 
     public JTable getjTableProjekti() {
         return jTableProjekti;
@@ -115,11 +112,9 @@ public class ProjektiForma extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jTextFieldRegBroj = new javax.swing.JTextField();
         jComboBoxMenadzer = new javax.swing.JComboBox<>();
         jComboBoxSponzor = new javax.swing.JComboBox<>();
-        jComboBoxVAktivnosti = new javax.swing.JComboBox<>();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcistiFilter = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -140,8 +135,6 @@ public class ProjektiForma extends javax.swing.JFrame {
         jLabel3.setText("Menadzer");
 
         jLabel4.setText("Sponzor");
-
-        jLabel5.setText("Vrsta aktivnosti");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -170,17 +163,15 @@ public class ProjektiForma extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jComboBoxSponzor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxMenadzer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jComboBoxVAktivnosti, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxSponzor, 0, 189, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxMenadzer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(128, 128, 128)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jButtonOcistiFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -209,15 +200,11 @@ public class ProjektiForma extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jComboBoxSponzor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBoxVAktivnosti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxSponzor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jButtonOcistiFilter)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jTableProjekti.setModel(new javax.swing.table.DefaultTableModel(
@@ -317,9 +304,7 @@ public class ProjektiForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonKreirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonKreirajActionPerformed
-        ProjektiKreirajForma kpf = new ProjektiKreirajForma(this, true);
-
-        kpf.setVisible(true);
+        Cordinator.getInstance().otvoriProjektiKreirajFormu(this, null);
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
     private void jButtonDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetaljiActionPerformed
@@ -400,11 +385,11 @@ public class ProjektiForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonNazadActionPerformed
 
     private void jButtonOcistiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcistiFilterActionPerformed
-        jTextFieldRegBroj.setText("");
-        jComboBoxSponzor.setSelectedItem(null);
-        jComboBoxMenadzer.setSelectedItem(null);
-        jComboBoxVAktivnosti.setSelectedItem(null);
-        popuniTabelu();
+//        jTextFieldRegBroj.setText("");
+//        jComboBoxSponzor.setSelectedItem(null);
+//        jComboBoxMenadzer.setSelectedItem(null);
+//        
+//        popuniTabelu();
     }//GEN-LAST:event_jButtonOcistiFilterActionPerformed
 
     /**
@@ -451,12 +436,10 @@ public class ProjektiForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPretrazi;
     private javax.swing.JComboBox<Menadzer> jComboBoxMenadzer;
     private javax.swing.JComboBox<model.Sponzor> jComboBoxSponzor;
-    private javax.swing.JComboBox<VrstaAktivnosti> jComboBoxVAktivnosti;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -542,5 +525,13 @@ public class ProjektiForma extends javax.swing.JFrame {
 
     public void pretraziActionListener(ActionListener actionListener) {
         jButtonPretrazi.addActionListener(actionListener);
+    }
+
+    public void ocitstiActionListener(ActionListener actionListener) {
+        jButtonOcistiFilter.addActionListener(actionListener);
+    }
+
+    public void detaljiActionListener(ActionListener actionListener) {
+        jButtonDetalji.addActionListener(actionListener);
     }
 }

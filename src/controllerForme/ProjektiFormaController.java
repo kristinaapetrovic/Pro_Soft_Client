@@ -4,12 +4,15 @@
  */
 package controllerForme;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import model.JeSponzor;
 import model.Menadzer;
 import model.Projekat;
 import model.Sponzor;
@@ -45,7 +48,6 @@ public class ProjektiFormaController {
     private void popuniComboBox() {
         List<Menadzer> listaMenadzera = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
         List<Sponzor> listaSponzora = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
-        List<VrstaAktivnosti> listaVA = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
 
         for (Menadzer men : listaMenadzera) {
             pf.getjComboBoxMenadzer().addItem(men);
@@ -53,9 +55,9 @@ public class ProjektiFormaController {
         for (Sponzor sp : listaSponzora) {
             pf.getjComboBoxSponzor().addItem(sp);
         }
-        for (VrstaAktivnosti va:listaVA  ) {
-            pf.getjComboBoxVAktivnosti().addItem(va);
-        }
+
+        pf.getjComboBoxSponzor().setSelectedItem(null);
+        pf.getjComboBoxMenadzer().setSelectedItem(null);
 
     }
 
@@ -66,11 +68,16 @@ public class ProjektiFormaController {
                 String regBroj = pf.getjTextFieldRegBroj().getText();
                 Menadzer menadzer = (Menadzer) pf.getjComboBoxMenadzer().getSelectedItem();
                 Sponzor sponzor = (Sponzor) pf.getjComboBoxSponzor().getSelectedItem();
-                VrstaAktivnosti vakt = (VrstaAktivnosti) pf.getjComboBoxVAktivnosti().getSelectedItem();
+
+                if (regBroj.isEmpty() && menadzer == null && sponzor == null) {
+                    JOptionPane.showMessageDialog(pf, "Unesite barjem jedan kriterijum", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (!validacija(regBroj)) {
                     return;
                 }
-                filtriraj(regBroj, menadzer, sponzor, vakt);
+
+                filtriraj(regBroj, menadzer, sponzor);
 
             }
 
@@ -83,40 +90,72 @@ public class ProjektiFormaController {
                 return true;
             }
 
-            private void filtriraj(String regBroj, Menadzer menadzer, Sponzor sponzor, VrstaAktivnosti vakt) {
-                Projekat ugovor = new Projekat();
+            private void filtriraj(String regBroj, Menadzer menadzer, Sponzor sponzor) {
+                Projekat projekat = new Projekat();
                 ProjekatModelTabele pmt = null;
+                List<Projekat> listaUgovora = new ArrayList<>();
+
+                projekat.setRegBroj("");
 
                 boolean kriterijumUgovor = false;
                 boolean kriterijumIzvodjac = false;
                 boolean kriterijumMenadzer = false;
-                boolean kriterijumVakt = false;
 
                 if (!regBroj.isEmpty()) {
-                    ugovor.setRegBroj(regBroj);
-//                    kriterijumUgovor = Controller.getInstance().vratiListuProjektniUgovor(ugovor, listaUgovora);
+                    projekat.setRegBroj(regBroj);
+                    kriterijumUgovor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(projekat, listaUgovora);
 
                 }
                 if (sponzor != null) {
-                    //       kriterijumIzvodjac = Controller.getInstance().vratiListuProjektniUgovor(izvodjac, listaUgovora);
+                    kriterijumIzvodjac = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, listaUgovora);
                 }
                 if (menadzer != null) {
-                    //       kriterijumMenadzer = Controller.getInstance().vratiListuProjektniUgovor(menadzer, listaUgovora);
-                }
-                if (vakt != null) {
-                    //      kriterijumVakt = Controller.getInstance().vratiListuProjektniUgovor(vakt, listaUgovora);
+                    kriterijumMenadzer = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(menadzer, listaUgovora);
                 }
 
-                if (kriterijumMenadzer || kriterijumIzvodjac || kriterijumVakt || kriterijumUgovor) {
+                if (kriterijumMenadzer || kriterijumIzvodjac || kriterijumUgovor) {
 
-//                    pmt = new ProjekatModelTabele(listaUgovora);
-//
-//                    jTableProjekti.setModel(pmt);
+                    pmt = new ProjekatModelTabele(listaUgovora);
+
+                    pf.getjTableProjekti().setModel(pmt);
+
                 } else {
-                    JOptionPane.showMessageDialog(pf, "Sistem ne moze da pronadje ugovor o radu");
+                    JOptionPane.showMessageDialog(pf, "Sistem ne moze da pronadje ugovor o radu", "Greska", JOptionPane.ERROR_MESSAGE);
 
                 }
+
             }
         });
+
+        pf.ocitstiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pf.getjTextFieldRegBroj().setText("");
+                pf.getjComboBoxSponzor().setSelectedItem(null);
+                pf.getjComboBoxMenadzer().setSelectedItem(null);
+
+                popuniTabelu();
+            }
+        });
+
+        pf.detaljiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int sel = pf.getjTableProjekti().getSelectedRow();
+
+                if (sel == -1) {
+                    JOptionPane.showMessageDialog(pf, "Odaberite projektni ugovor", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
+
+                ProjekatModelTabele pmt = (ProjekatModelTabele) pf.getjTableProjekti().getModel();
+
+                Projekat projekat = pmt.getLista().get(sel);
+
+                Cordinator.getInstance().otvoriProjektiKreirajFormu(pf, projekat);
+               
+            }
+        });
+
     }
 }

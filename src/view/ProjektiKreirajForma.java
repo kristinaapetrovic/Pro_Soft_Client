@@ -7,11 +7,10 @@ package view;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.text.ParseException;
+import java.lang.ModuleLayer.Controller;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -22,6 +21,8 @@ import model.Sponzor;
 import model.Menadzer;
 import model.Projekat;
 import model.VrstaAktivnosti;
+import modeliTabela.AktivnostModelTabele;
+import modeliTabela.JeSponzorModelTabele;
 
 /**
  *
@@ -559,45 +560,45 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                ProjektiKreirajForma dialog = new ProjektiKreirajForma(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ProjektiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                ProjektiKreirajForma dialog = new ProjektiKreirajForma(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -646,38 +647,30 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void popuniComboBox() {
-//        List<Menadzer> listaMen = new ArrayList<>();
-//        boolean uspesnoM = Controller.getInstance().vratiListuSviMenadzer(listaMen);
-//        if (uspesnoM) {
-//            for (Menadzer men : listaMen) {
-//                jComboBoxMenadzer.addItem(men);
-//            }
-//            jComboBoxMenadzer.setSelectedItem(null);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu menadzera", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        List<Sponzor> listaGI = new ArrayList<>();
-//        boolean uspesnoI = Controller.getInstance().vratiListuSviSponzor(listaGI);
-//        if (uspesnoI) {
-//            for (Sponzor gi : listaGI) {
-//                jComboBoxSponzor.addItem(gi);
-//            }
-//            jComboBoxSponzor.setSelectedItem(null);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu izvodjaca", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-//
-//        List<VrstaAktivnosti> listaVA = new ArrayList<>();
-//        boolean uspesnoVA = Controller.getInstance().vratiListuSviVrstaAktivnosti(listaVA);
-//        if (uspesnoVA) {
-//            for (VrstaAktivnosti va:listaVA  ) {
-//                jComboBoxVAktivnosti.addItem(va);
-//            }
-//            jComboBoxVAktivnosti.setSelectedItem(null);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu vrsta aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        List<Menadzer> listaMen = new ArrayList<>();
+        listaMen = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
+
+        for (Menadzer men : listaMen) {
+            jComboBoxMenadzer.addItem(men);
+        }
+        jComboBoxMenadzer.setSelectedItem(null);
+
+        List<Sponzor> listaSponzor = new ArrayList<>();
+        listaSponzor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+
+        for (Sponzor sponzor : listaSponzor) {
+            jComboBoxSponzor.addItem(gi);
+        }
+        jComboBoxSponzor.setSelectedItem(null);
+
+        List<VrstaAktivnosti> listaVA = new ArrayList<>();
+        listaVA = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
+
+        for (VrstaAktivnosti va:listaVA  ) {
+            jComboBoxVAktivnosti.addItem(va);
+        }
+        jComboBoxVAktivnosti.setSelectedItem(null);
+
     }
 
     private void popuniTabeluKreiraj() {
@@ -694,19 +687,17 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void popuniTabeluDetalji() {
-//        List<JeSponzor> listaS = new ArrayList<>();
-//        boolean uspesno1 = Controller.getInstance().vratiListuJeSponzor(pu, listaS);
-//        JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
-//        jTableSponzori.setModel(smt);
-//
-//        List<Aktivnost> lista = new ArrayList<>();
-//        boolean uspesno = Controller.getInstance().vratiListuAktivnost(pu, lista);
-//        if (uspesno) {
-//            AktivnostModelTabele amt = new AktivnostModelTabele(lista, true);
-//            jTableAktivnost.setModel(amt);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
+        List<JeSponzor> listaS = new ArrayList<>();
+        listaS = komunikacijaKlijent.Komunikacija.getInstance().vratiListuJeSponzor(pu);
+        
+        JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
+        jTableSponzori.setModel(smt);
+
+        List<Aktivnost> lista = new ArrayList<>();
+        lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuAktivnost(pu);
+
+        AktivnostModelTabele amt = new AktivnostModelTabele(lista, true);
+        jTableAktivnost.setModel(amt);
 
     }
 
@@ -835,41 +826,42 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void popuniFormuDetalji() {
-//        jButtonSacuvaj.setText("Sacuvaj izmene");
-//        jButtonObrisiAkt.setVisible(false);
-//        jButtonDodajAkt.setVisible(false);
-//        jTextFieldRegBr.setText(pu.getRegBroj() + "");
-//        jTextFieldNaziv.setText(pu.getNazivProjekta());
-//        jTextFieldOpisProjekta.setText(pu.getOpisProjekta());
-//        jTextFieldDatumDO.setText(Controller.getInstance().getFormatDatuma().format(pu.getDatumZavrsetka()));
-//        jTextFielDatumOD.setText(Controller.getInstance().getFormatDatuma().format(pu.getDatumPocetka()));
-//        jTextFieldTrajanje.setText(pu.getTrajanje() + "");
-//        jTextFieldBudzet.setText(pu.getBudzet() + "");
-//        jComboBoxMenadzer.setSelectedItem(pu.getMenadzer());
-//
-//        jButtonDodajSponzor.setVisible(false);
-//        jButtonObrisiSponzor.setVisible(false);
-//
-//        jTextFieldRegBr.setEnabled(false);
-//        jTextFieldNaziv.setEnabled(false);
-//        jTextFieldOpisProjekta.setEnabled(false);
-//        jTextFieldDatumDO.setEnabled(false);
-//        jTextFielDatumOD.setEnabled(false);
-//        jTextFieldTrajanje.setEnabled(false);
-//        jTextFieldBudzet.setEnabled(false);
-//        jComboBoxMenadzer.setEnabled(false);
-//        jComboBoxSponzor.setEnabled(false);
-//
-//        jTextFieldNazivAkt.setEnabled(false);
-//        jTextFieldOpisAkt.setEnabled(false);
-//        jComboBoxVAktivnosti.setEnabled(false);
-//
-//        jTableAktivnost.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JCheckBox()));
-//        jTableSponzori.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JCheckBox()));
-//        jTableSponzori.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JCheckBox()));
-//        jCheckBoxRobni.setEnabled(false);
-//        jCheckBoxNovcani.setEnabled(false);
-//        jTextFieldIznosSponz.setEnabled(false);
+        jButtonSacuvaj.setText("Sacuvaj izmene");
+        jButtonObrisiAkt.setVisible(false);
+        jButtonDodajAkt.setVisible(false);
+        jTextFieldRegBr.setText(pu.getRegBroj() + "");
+        jTextFieldNaziv.setText(pu.getNazivProjekta());
+        jTextFieldOpisProjekta.setText(pu.getOpisProjekta());
+        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        jTextFieldDatumDO.setText(format.format(pu.getDatumZavrsetka()));
+        jTextFielDatumOD.setText(format.format(pu.getDatumPocetka()));
+        jTextFieldTrajanje.setText(pu.getTrajanje() + "");
+        jTextFieldBudzet.setText(pu.getBudzet() + "");
+        jComboBoxMenadzer.setSelectedItem(pu.getMenadzer());
+
+        jButtonDodajSponzor.setVisible(false);
+        jButtonObrisiSponzor.setVisible(false);
+
+        jTextFieldRegBr.setEnabled(false);
+        jTextFieldNaziv.setEnabled(false);
+        jTextFieldOpisProjekta.setEnabled(false);
+        jTextFieldDatumDO.setEnabled(false);
+        jTextFielDatumOD.setEnabled(false);
+        jTextFieldTrajanje.setEnabled(false);
+        jTextFieldBudzet.setEnabled(false);
+        jComboBoxMenadzer.setEnabled(false);
+        jComboBoxSponzor.setEnabled(false);
+
+        jTextFieldNazivAkt.setEnabled(false);
+        jTextFieldOpisAkt.setEnabled(false);
+        jComboBoxVAktivnosti.setEnabled(false);
+
+        jTableAktivnost.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        jTableSponzori.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        jTableSponzori.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        jCheckBoxRobni.setEnabled(false);
+        jCheckBoxNovcani.setEnabled(false);
+        jTextFieldIznosSponz.setEnabled(false);
 
     }
 

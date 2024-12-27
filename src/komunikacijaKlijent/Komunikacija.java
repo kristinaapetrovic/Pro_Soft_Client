@@ -15,9 +15,12 @@ import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
 import komunikacija.Sender;
+import model.Aktivnost;
+import model.JeSponzor;
 import model.MSS;
 import model.Menadzer;
 import model.Mesto;
+import model.OpstiDomenskiObjekat;
 import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
@@ -373,6 +376,47 @@ public class Komunikacija {
         Response response = (Response) receiver.receive();
 
         return (Menadzer) response.getOdgovor();
+    }
+
+    public boolean vratiListuProjektniUgovor(OpstiDomenskiObjekat kriterijum, List<Projekat> listaUgovora) {
+        Request request = new Request(Operacija.PRETRAZI_PROJEKAT, kriterijum);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        List<Projekat> dobijenaLista = (List<Projekat>) response.getOdgovor();
+        for (Projekat p : dobijenaLista) {
+            if (!listaUgovora.contains(p)) {
+                listaUgovora.add(p);
+            }
+        }
+        return response.getExc() == null;
+    }
+
+    public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) {
+        List<JeSponzor> lista = new ArrayList<>();
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_JESPONZOR_PROJEKTA, projekat);
+
+        sender.send(request);
+
+        Response response = (Response) receiver.receive();
+
+        lista = (List<JeSponzor>) response.getOdgovor();
+
+        return lista;
+    }
+
+    public List<Aktivnost> vratiListuAktivnost(Projekat projekat) {
+        List<Aktivnost> lista = new ArrayList<>();
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_AKTIVNOST_PROJEKTA, projekat);
+
+        sender.send(request);
+
+        Response response = (Response) receiver.receive();
+        
+        lista = (List<Aktivnost>) response.getOdgovor();
+        
+        return lista;
     }
 
 }

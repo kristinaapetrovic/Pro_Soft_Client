@@ -11,6 +11,7 @@ import controllerForme.MestoFormaController;
 import controllerForme.MestoKreirajFormaController;
 import controllerForme.PrijavaController;
 import controllerForme.ProjektiFormaController;
+import controllerForme.ProjektiKreirajFormaController;
 import controllerForme.RegistracijaController;
 import controllerForme.SponzorFormaController;
 import controllerForme.SponzorKreirajFormaController;
@@ -20,6 +21,7 @@ import controllerForme.VrstaAktivnostiFormaController;
 import controllerForme.VrstaAktivnostiKreirajFormaController;
 import model.Menadzer;
 import model.Mesto;
+import model.Projekat;
 import model.Sponzor;
 import model.StrucnaSprema;
 import model.VrstaAktivnosti;
@@ -30,6 +32,7 @@ import view.MestoForma;
 import view.MestoKreirajForma;
 import view.PrijavaForma;
 import view.ProjektiForma;
+import view.ProjektiKreirajForma;
 import view.RegistracijaForma;
 import view.SponzorForma;
 import view.SponzorKreirajDetaljiForma;
@@ -60,6 +63,7 @@ public class Cordinator {
     private SponzorKreirajFormaController sponzorKFController;
     private StrucnaSpremaKreirajFormaController strucnaSpremaKFController;
     private VrstaAktivnostiKreirajFormaController vrstaAKFController;
+    private ProjektiKreirajFormaController projektiKFController;
 
     public static Cordinator getInstance() {
         if (instance == null) {
@@ -184,8 +188,18 @@ public class Cordinator {
         vrstaAKFController.otvoriFormu();
 
     }
-    public VrstaAktivnostiFormaController getvaFormaController(){
+
+    public VrstaAktivnostiFormaController getvaFormaController() {
         return vaFormaController;
+    }
+
+    public void otvoriProjektiKreirajFormu(ProjektiForma parent, Projekat projekat) {
+        if (projekat != null) {
+            projektiKFController = new ProjektiKreirajFormaController(new ProjektiKreirajForma(parent, true, projekat));
+        }else{
+            projektiKFController = new ProjektiKreirajFormaController(new ProjektiKreirajForma(parent, true));
+        }
+        projektiKFController.otvoriFormu();
     }
 
 }
