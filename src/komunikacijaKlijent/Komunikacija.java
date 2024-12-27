@@ -419,4 +419,36 @@ public class Komunikacija {
         return lista;
     }
 
+    public boolean kreirajProjektniUgovor(Projekat ugovor) {
+        Request request = new Request(Operacija.KREIRAJ_UGOVOR, ugovor);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean kreirajAktivnost(Aktivnost aktivnosti) {
+        Request request = new Request(Operacija.KREIRAJ_AKTIVNOST, aktivnosti);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean kreirajJeSponzor(JeSponzor js) {
+        Request request = new Request(Operacija.KREIRAJ_JESPONZOR, js);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
+    public boolean promeniAktivnost(Aktivnost aktivnost) {
+        Request request = new Request(Operacija.PROMENI_AKTIVNOST, aktivnost);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+
+        return response.getExc() == null;
+    }
+
 }

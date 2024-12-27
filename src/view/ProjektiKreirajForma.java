@@ -4,10 +4,11 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.lang.ModuleLayer.Controller;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -474,78 +475,78 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
 
     private void jButtonDodajAktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajAktActionPerformed
-//
-//        String naziv = jTextFieldNazivAkt.getText();
-//        String opis = jTextFieldOpisAkt.getText();
-//
-//        VrstaAktivnosti vakt = (VrstaAktivnosti) jComboBoxVAktivnosti.getSelectedItem();
-//
-//        if (!validacijaAktivnosti(naziv, opis, vakt)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
-//        Aktivnost akt = new Aktivnost(pu, ++brojAkt, naziv, opis, false, vakt, null);
-//        amt.dodajElement(akt);
-//        azurirajRedneBrojeve();
+
+        String naziv = jTextFieldNazivAkt.getText();
+        String opis = jTextFieldOpisAkt.getText();
+
+        VrstaAktivnosti vakt = (VrstaAktivnosti) jComboBoxVAktivnosti.getSelectedItem();
+
+        if (!validacijaAktivnosti(naziv, opis, vakt)) {
+            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
+        Aktivnost akt = new Aktivnost(pu, ++brojAkt, naziv, opis, false, vakt, null);
+        amt.dodajElement(akt);
+        azurirajRedneBrojeve();
 
     }//GEN-LAST:event_jButtonDodajAktActionPerformed
 
     private void jButtonObrisiAktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiAktActionPerformed
-//        int sel = jTableAktivnost.getSelectedRow();
-//        if (sel == -1) {
-//            JOptionPane.showMessageDialog(this, "Odaberite aktivnost", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
-//            return;
-//        }
-//        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
-//
-//        amt.ukloniElement(amt.getLista().get(sel));
-//        azurirajRedneBrojeve();
+        int sel = jTableAktivnost.getSelectedRow();
+        if (sel == -1) {
+            JOptionPane.showMessageDialog(this, "Odaberite aktivnost", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
+
+        amt.ukloniElement(amt.getLista().get(sel));
+        azurirajRedneBrojeve();
 
     }//GEN-LAST:event_jButtonObrisiAktActionPerformed
 
     private void jButtonDodajSponzorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajSponzorActionPerformed
-//        Sponzor sponzor = (Sponzor) jComboBoxSponzor.getSelectedItem();
-//        if (sponzor == null) {
-//            JOptionPane.showMessageDialog(this, "Odaberite sponzora iz liste", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        boolean robni = false;
-//        boolean novcani = false;
-//        double iznos = 0;
-//        robni = jCheckBoxRobni.isSelected();
-//        novcani = jCheckBoxNovcani.isSelected();
-//        if (!robni && !novcani) {
-//            JOptionPane.showMessageDialog(this, "Sponzor mora biti bar jedno od ponudjenog: robni, novcani!", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        if (!jTextFieldIznosSponz.getText().matches("\\d+(\\.\\d+)?")) {
-//            JOptionPane.showMessageDialog(this, "Greska pri unosu iznosa", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        iznos = Double.parseDouble(jTextFieldIznosSponz.getText());
-//
-//        JeSponzor js = new JeSponzor(pu, sponzor, robni, novcani, iznos);
-//
-//        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
-//        smt.dodajElement(js);
+        Sponzor sponzor = (Sponzor) jComboBoxSponzor.getSelectedItem();
+        if (sponzor == null) {
+            JOptionPane.showMessageDialog(this, "Odaberite sponzora iz liste", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        boolean robni = false;
+        boolean novcani = false;
+        double iznos = 0;
+        robni = jCheckBoxRobni.isSelected();
+        novcani = jCheckBoxNovcani.isSelected();
+        if (!robni && !novcani) {
+            JOptionPane.showMessageDialog(this, "Sponzor mora biti bar jedno od ponudjenog: robni, novcani!", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!jTextFieldIznosSponz.getText().matches("\\d+(\\.\\d+)?")) {
+            JOptionPane.showMessageDialog(this, "Greska pri unosu iznosa", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        iznos = Double.parseDouble(jTextFieldIznosSponz.getText());
+
+        JeSponzor js = new JeSponzor(pu, sponzor, robni, novcani, iznos);
+
+        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
+        smt.dodajElement(js);
 
 
     }//GEN-LAST:event_jButtonDodajSponzorActionPerformed
 
     private void jButtonObrisiSponzorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiSponzorActionPerformed
-//
-//        int selektovan = jTableSponzori.getSelectedRow();
-//        if (selektovan == -1) {
-//            JOptionPane.showMessageDialog(this, "Odaberite sponzora", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
-//
-//        smt.ukloniElement(selektovan);
+
+        int selektovan = jTableSponzori.getSelectedRow();
+        if (selektovan == -1) {
+            JOptionPane.showMessageDialog(this, "Odaberite sponzora", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
+
+        smt.ukloniElement(selektovan);
 
     }//GEN-LAST:event_jButtonObrisiSponzorActionPerformed
 
@@ -659,7 +660,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         listaSponzor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
 
         for (Sponzor sponzor : listaSponzor) {
-            jComboBoxSponzor.addItem(gi);
+            jComboBoxSponzor.addItem(sponzor);
         }
         jComboBoxSponzor.setSelectedItem(null);
 
@@ -674,15 +675,15 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void popuniTabeluKreiraj() {
-//
-//        List<Aktivnost> lista = new ArrayList<>();
-//
-//        AktivnostModelTabele amt = new AktivnostModelTabele(lista, false);
-//        jTableAktivnost.setModel(amt);
-//
-//        List<JeSponzor> listaS = new ArrayList<>();
-//        JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
-//        jTableSponzori.setModel(smt);
+
+        List<Aktivnost> lista = new ArrayList<>();
+
+        AktivnostModelTabele amt = new AktivnostModelTabele(lista, false);
+        jTableAktivnost.setModel(amt);
+
+        List<JeSponzor> listaS = new ArrayList<>();
+        JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
+        jTableSponzori.setModel(smt);
 
     }
 
@@ -702,126 +703,128 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private boolean validacija(String regBroj, String naziv, String opisProj, String trajanje, String budzet, Menadzer men) {
-//        boolean regBrReg = regBroj.matches("\\d{4}/20\\d{2}");
-//        boolean nazivReg = naziv.matches("^[A-Z][a-zA-Z ]*$");
-//        boolean opisProjReg = !opisProj.isEmpty();
-//        boolean trajanjeReg = trajanje.matches("[1-9]+[0-9]*");
-//        boolean budzetReg = budzet.matches("^\\d+(\\.\\d+)?$");
-//        boolean menReg = men != null;
-//
-//        if (regBrReg && nazivReg && opisProjReg && trajanjeReg && budzetReg && menReg) {
-//            return true;
-//        }
-//
-//        if (!regBrReg) {
-//            jTextFieldRegBr.setBorder(new LineBorder(Color.RED, 3));
-//
-//        }
-//        if (!nazivReg) {
-//            jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
-//        }
-//        if (!opisProjReg) {
-//            jTextFieldOpisProjekta.setBorder(new LineBorder(Color.RED, 3));
-//        }
-//        if (!trajanjeReg) {
-//            jTextFieldTrajanje.setBorder(new LineBorder(Color.RED, 3));
-//        }
-//        if (!budzetReg) {
-//            jTextFieldBudzet.setBorder(new LineBorder(Color.RED, 3));
-//        }
-//        if (!menReg) {
-//            jComboBoxMenadzer.setBorder(new LineBorder(Color.RED, 3));
-//        }
-//
-//        return false;
-        return true;
+        boolean regBrReg = regBroj.matches("\\d{4}/20\\d{2}");
+        boolean nazivReg = naziv.matches("^[A-Z][a-zA-Z ]*$");
+        boolean opisProjReg = !opisProj.isEmpty();
+        boolean trajanjeReg = trajanje.matches("[1-9]+[0-9]*");
+        boolean budzetReg = budzet.matches("^\\d+(\\.\\d+)?$");
+        boolean menReg = men != null;
+
+        if (regBrReg && nazivReg && opisProjReg && trajanjeReg && budzetReg && menReg) {
+            return true;
+        }
+
+        if (!regBrReg) {
+            jTextFieldRegBr.setBorder(new LineBorder(Color.RED, 3));
+
+        }
+        if (!nazivReg) {
+            jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
+        }
+        if (!opisProjReg) {
+            jTextFieldOpisProjekta.setBorder(new LineBorder(Color.RED, 3));
+        }
+        if (!trajanjeReg) {
+            jTextFieldTrajanje.setBorder(new LineBorder(Color.RED, 3));
+        }
+        if (!budzetReg) {
+            jTextFieldBudzet.setBorder(new LineBorder(Color.RED, 3));
+        }
+        if (!menReg) {
+            jComboBoxMenadzer.setBorder(new LineBorder(Color.RED, 3));
+        }
+
+        return false;
+    
     }
 
     private void sacuvajKreiranje() {
-//
-//        Projekat ugovor = pokupiPodatkeVratiUgovor();
-//
-//        if (ugovor == null) {
-//            JOptionPane.showMessageDialog(this, "Greska pri ucitavanju podataka", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        boolean uspesno = Controller.getInstance().kreirajProjektniUgovor(ugovor);
-//        if (uspesno) {
-//            JOptionPane.showMessageDialog(this, "Sistem je zapamtio projektni ugovor", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
-//            roditelj.popuniTabelu();
-//
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti projektni ugovor", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
-//        sacuvajAktivnosti(ugovor);
-//        sacuvajSponzore(ugovor);
-//        this.dispose();
+
+        Projekat ugovor = pokupiPodatkeVratiUgovor();
+
+        if (ugovor == null) {
+            JOptionPane.showMessageDialog(this, "Greska pri ucitavanju podataka", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajProjektniUgovor(ugovor);
+        if (uspesno) {
+            JOptionPane.showMessageDialog(this, "Sistem je zapamtio projektni ugovor", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            roditelj.popuniTabelu();
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti projektni ugovor", "Greska", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        sacuvajAktivnosti(ugovor);
+        sacuvajSponzore(ugovor);
+        this.dispose();
 
     }
 
     private void sacuvajIzmene() {
-//        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
-//        List<Aktivnost> lista = amt.getLista();
-//        for (Aktivnost akt : lista) {
-//            if (!Controller.getInstance().promeniAktivnost(akt)) {
-//                JOptionPane.showMessageDialog(this, "Greska pri cuvanju izmena", "Greska", JOptionPane.ERROR_MESSAGE);
-//                return;
-//            }
-//        }
-//        JOptionPane.showMessageDialog(this, "Izmene su uspesno sacuvane!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
+        List<Aktivnost> lista = amt.getLista();
+        for (Aktivnost akt : lista) {
+            if (!komunikacijaKlijent.Komunikacija.getInstance().promeniAktivnost(akt)) {
+                JOptionPane.showMessageDialog(this, "Greska pri cuvanju izmena", "Greska", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Izmene su uspesno sacuvane!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private Projekat pokupiPodatkeVratiUgovor() {
-//        String regBroj = jTextFieldRegBr.getText().trim();
-//        String naziv = jTextFieldNaziv.getText();
-//        String opisProj = jTextFieldOpisProjekta.getText();
-//        String datumPocetka = jTextFielDatumOD.getText();
-//        String datumZavrsetka = jTextFieldDatumDO.getText();
-//        String trajanje = jTextFieldTrajanje.getText();
-//        String budzet = jTextFieldBudzet.getText();
-//        Menadzer men = (Menadzer) jComboBoxMenadzer.getSelectedItem();
-//        Sponzor izv = (Sponzor) jComboBoxSponzor.getSelectedItem();
-//
-//        if (!validacija(regBroj, naziv, opisProj, trajanje, budzet, men)) {
-//            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return null;
-//        }
-//
-//        int tr = Integer.parseInt(trajanje);
-//        double budz = Double.parseDouble(budzet);
-//        java.util.Date datumOd = null;
-//        java.util.Date datumDo = null;
-//        try {
-//            datumOd = Controller.getInstance().getFormatDatuma().parse(datumPocetka);
-//            datumDo = Controller.getInstance().getFormatDatuma().parse(datumZavrsetka);
-//
-//        } catch (ParseException ex) {
-//            jTextFielDatumOD.setBorder(new LineBorder(Color.RED, 3));
-//            jTextFieldDatumDO.setBorder(new LineBorder(Color.RED, 3));
-//            JOptionPane.showMessageDialog(this, "Greska pri unosu datuma", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return null;
-//        }
-//
-//        Projekat pu = new Projekat(regBroj, naziv, opisProj, budz, tr, datumOd, datumDo, men, false);
-//        return pu;
-        return null;
+        String regBroj = jTextFieldRegBr.getText().trim();
+        String naziv = jTextFieldNaziv.getText();
+        String opisProj = jTextFieldOpisProjekta.getText();
+        String datumPocetka = jTextFielDatumOD.getText();
+        String datumZavrsetka = jTextFieldDatumDO.getText();
+        String trajanje = jTextFieldTrajanje.getText();
+        String budzet = jTextFieldBudzet.getText();
+        Menadzer men = (Menadzer) jComboBoxMenadzer.getSelectedItem();
+        Sponzor izv = (Sponzor) jComboBoxSponzor.getSelectedItem();
+
+        if (!validacija(regBroj, naziv, opisProj, trajanje, budzet, men)) {
+            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        int tr = Integer.parseInt(trajanje);
+        double budz = Double.parseDouble(budzet);
+        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        java.util.Date datumOd = null;
+        java.util.Date datumDo = null;
+        try {
+            datumOd = format.parse(datumPocetka);
+            datumDo = format.parse(datumZavrsetka);
+
+        } catch (ParseException ex) {
+            jTextFielDatumOD.setBorder(new LineBorder(Color.RED, 3));
+            jTextFieldDatumDO.setBorder(new LineBorder(Color.RED, 3));
+            JOptionPane.showMessageDialog(this, "Greska pri unosu datuma", "Greska", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        Projekat pu = new Projekat(regBroj, naziv, opisProj, budz, tr, datumOd, datumDo, men, false);
+        return pu;
+        
+        
     }
 
     private void sacuvajAktivnosti(Projekat ugovor) {
-//
-//        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
-//        if (amt.getLista().isEmpty()) {
-//            return;
-//        }
-//        List<Aktivnost> lista = amt.getLista();
-//        for (Aktivnost akt : lista) {
-//            akt.setProjektniUgovor(ugovor);
-//            if (!Controller.getInstance().kreirajAktivnost(akt)) {
-//                return;
-//            }
-//        }
+
+        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
+        if (amt.getLista().isEmpty()) {
+            return;
+        }
+        List<Aktivnost> lista = amt.getLista();
+        for (Aktivnost akt : lista) {
+            akt.setProjektniUgovor(ugovor); 
+            if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajAktivnost(akt)) {
+                return;
+            }
+        }
 
     }
 
@@ -888,19 +891,19 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void sacuvajSponzore(Projekat ugovor) {
-//
-//        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
-//        if (smt.getLista().isEmpty()) {
-//            return;
-//        }
-//        List<JeSponzor> lista = smt.getLista();
-//        for (JeSponzor s : lista) {
-//            s.setProjekat(ugovor);
-//            if (!Controller.getInstance().kreirajJeSponzor(s)) {
-//                return;
-//            }
-//
-//        }
+
+        JeSponzorModelTabele smt = (JeSponzorModelTabele) jTableSponzori.getModel();
+        if (smt.getLista().isEmpty()) {
+            return;
+        }
+        List<JeSponzor> lista = smt.getLista();
+        for (JeSponzor s : lista) {
+            s.setProjekat(ugovor);
+            if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajJeSponzor(s)) {
+                return;
+            }
+
+        }
 
     }
 
@@ -908,7 +911,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFielDatumOD.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                // Kada korisnik klikne na polje, brišemo tekst
+             
                 if (jTextFielDatumOD.getText().equals("dd-mm-yyyy")) {
                     jTextFielDatumOD.setText("");
                 }
@@ -916,7 +919,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
             @Override
             public void focusLost(FocusEvent e) {
-                // Ako polje ostane prazno, postavljamo podrazumevani tekst
+                
                 if (jTextFielDatumOD.getText().isEmpty()) {
                     jTextFielDatumOD.setText("dd-mm-yyyy");
                 }
@@ -925,7 +928,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFieldDatumDO.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                // Kada korisnik klikne na polje, brišemo tekst
+                
                 if (jTextFieldDatumDO.getText().equals("dd-mm-yyyy")) {
                     jTextFieldDatumDO.setText("");
                 }
@@ -933,7 +936,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
             @Override
             public void focusLost(FocusEvent e) {
-                // Ako polje ostane prazno, postavljamo podrazumevani tekst
+                
                 if (jTextFieldDatumDO.getText().isEmpty()) {
                     jTextFieldDatumDO.setText("dd-mm-yyyy");
                 }
@@ -942,23 +945,23 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void pripremiFormuKreiraj() {
-//        jComboBoxMenadzer.setSelectedItem(Controller.getInstance().getUlogovani());
+
         jComboBoxMenadzer.setEnabled(false);
         kreiranje = true;
         listen();
         setDefaultCloseOperation(ProjektiKreirajForma.DISPOSE_ON_CLOSE);
-        //jLabel1.setVisible(false);
+        jComboBoxMenadzer.setSelectedItem(Cordinator.getInstance().getUlogovani());
         jTableSponzori.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(new JCheckBox()));
         jTableSponzori.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(new JCheckBox()));
 
     }
 
     private void azurirajRedneBrojeve() {
-//        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
-//        List<Aktivnost> aktivnosti = amt.getLista();
-//        for (int i = 0; i < aktivnosti.size(); i++) {
-//            aktivnosti.get(i).setRedniBroj(i + 1);
-//        }
+        AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
+        List<Aktivnost> aktivnosti = amt.getLista();
+        for (int i = 0; i < aktivnosti.size(); i++) {
+            aktivnosti.get(i).setRedniBroj(i + 1);
+        }
     }
 
 }
