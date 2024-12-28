@@ -133,11 +133,28 @@ public class Cordinator {
         vaFormaController.otvoriFormu();
 
     }
-
+    
     public void otvoriProjektiFormu() {
+
         projektiFormaController = new ProjektiFormaController(new ProjektiForma());
+
         projektiFormaController.otvoriFormu();
     }
+    
+    public void otvoriProjektiFormu(Menadzer menadzer) {
+
+        projektiFormaController = new ProjektiFormaController(new ProjektiForma(menadzer));
+
+        projektiFormaController.otvoriFormu();
+    }
+
+    public void otvoriProjektiFormu(Sponzor sponzor) {
+
+        projektiFormaController = new ProjektiFormaController(new ProjektiForma(sponzor));
+
+        projektiFormaController.otvoriFormu();
+    }
+    
 
     public void otvoriMestoKreirajFomru(MestoForma parent, Mesto mesto) {
         if (mesto == null) {
@@ -196,10 +213,14 @@ public class Cordinator {
     public void otvoriProjektiKreirajFormu(ProjektiForma parent, Projekat projekat) {
         if (projekat != null) {
             projektiKFController = new ProjektiKreirajFormaController(new ProjektiKreirajForma(parent, true, projekat));
-        }else{
+        } else {
             projektiKFController = new ProjektiKreirajFormaController(new ProjektiKreirajForma(parent, true));
         }
         projektiKFController.otvoriFormu();
+    }
+
+    public ProjektiFormaController getProjektiFormaController() {
+        return projektiFormaController;
     }
 
 }

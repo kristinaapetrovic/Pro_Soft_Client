@@ -4,6 +4,7 @@
  */
 package view;
 
+import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
@@ -650,9 +651,8 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUgasiNalogActionPerformed
 
     private void jButtonUgovoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUgovoriActionPerformed
-//
-//        ProjektiForma pf = new ProjektiForma(men);
-//        pf.setVisible(true);
+        
+        Cordinator.getInstance().otvoriProjektiFormu(men);
 
     }//GEN-LAST:event_jButtonUgovoriActionPerformed
 

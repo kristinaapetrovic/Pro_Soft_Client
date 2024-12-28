@@ -33,7 +33,9 @@ public class ProjektiFormaController {
     }
 
     public void otvoriFormu() {
-        popuniTabelu();
+        if (pf.getMen() == null && pf.getSponzor()==null) {
+            popuniTabelu();
+        }
         popuniComboBox();
         pf.setVisible(true);
         addActionListener();
@@ -153,9 +155,13 @@ public class ProjektiFormaController {
                 Projekat projekat = pmt.getLista().get(sel);
 
                 Cordinator.getInstance().otvoriProjektiKreirajFormu(pf, projekat);
-               
+
             }
         });
 
+    }
+
+    public void azurirajTabelu() {
+        popuniTabelu();
     }
 }

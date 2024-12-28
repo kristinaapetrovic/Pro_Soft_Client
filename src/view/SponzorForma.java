@@ -417,4 +417,8 @@ public class SponzorForma extends javax.swing.JFrame {
     public void detaljiActionListener(ActionListener actionListener) {
         jButtonDetalji.addActionListener(actionListener);
     }
+
+    public void projektiActionListener(ActionListener actionListener) {
+        jButtonProjekti.addActionListener(actionListener);
+    }
 }

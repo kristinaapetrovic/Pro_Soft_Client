@@ -749,7 +749,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajProjektniUgovor(ugovor);
         if (uspesno) {
             JOptionPane.showMessageDialog(this, "Sistem je zapamtio projektni ugovor", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
-            roditelj.popuniTabelu();
+            Cordinator.getInstance().getProjektiFormaController().azurirajTabelu();
 
         } else {
             JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti projektni ugovor", "Greska", JOptionPane.ERROR_MESSAGE);
@@ -758,6 +758,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         sacuvajAktivnosti(ugovor);
         sacuvajSponzore(ugovor);
+        
         this.dispose();
 
     }

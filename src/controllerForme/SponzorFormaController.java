@@ -106,6 +106,24 @@ public class SponzorFormaController {
                 Cordinator.getInstance().otvoriSponzorKreirajFormu(sf, sponzor);
             }
         });
+        sf.projektiActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selektovan = sf.getjTableSponzori().getSelectedRow();
+
+                if (selektovan == -1) {
+                    JOptionPane.showMessageDialog(sf, "Izaberite izvodjaca", "Greska", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                SponzorModelTabele smt = (SponzorModelTabele) sf.getjTableSponzori().getModel();
+                Sponzor sponzor = smt.getLista().get(selektovan);
+                
+                Cordinator.getInstance().otvoriProjektiFormu(sponzor);
+                
+
+
+            }
+        });
     }
 
     public void azurirajTabelu() {

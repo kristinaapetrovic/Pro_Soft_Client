@@ -5,20 +5,18 @@
 package view;
 
 import condinator.Cordinator;
-import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import model.Sponzor;
 import model.Menadzer;
 import model.Projekat;
-import model.StrucnaSprema;
-import model.VrstaAktivnosti;
+import modeliTabela.ProjekatModelTabele;
 
 /**
  *
@@ -26,7 +24,12 @@ import model.VrstaAktivnosti;
  */
 public class ProjektiForma extends javax.swing.JFrame {
 
-    private Sponzor gi = null;
+    private Sponzor sponzor = null;
+    private Menadzer men;
+
+    public Sponzor getSponzor() {
+        return sponzor;
+    }
 
     /**
      * Creates new form ProjektiForma
@@ -35,7 +38,7 @@ public class ProjektiForma extends javax.swing.JFrame {
         initComponents();
 
         setTitle("Projekti");
-        popuniTabelu();
+
         popuniComboBox();
         setDefaultCloseOperation(ProjektiForma.DISPOSE_ON_CLOSE);
     }
@@ -56,10 +59,6 @@ public class ProjektiForma extends javax.swing.JFrame {
         this.jComboBoxMenadzer = jComboBoxMenadzer;
     }
 
-   
-
-   
-
     public JTable getjTableProjekti() {
         return jTableProjekti;
     }
@@ -67,20 +66,17 @@ public class ProjektiForma extends javax.swing.JFrame {
     public void setjTableProjekti(JTable jTableProjekti) {
         this.jTableProjekti = jTableProjekti;
     }
-    
 
-    public ProjektiForma(Sponzor gi) {
+    public ProjektiForma(Sponzor sponzor) {
         initComponents();
 
         setTitle("Projekti");
-        popuniTabelu();
+
         popuniComboBox();
         setDefaultCloseOperation(ProjektiForma.DISPOSE_ON_CLOSE);
-        if (!popuniFiltrirano(gi)) {
-            this.dispose();
-        }
+        popuniFiltrirano(sponzor);
 
-        this.gi = gi;
+        this.sponzor = sponzor;
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
 
     }
@@ -88,13 +84,16 @@ public class ProjektiForma extends javax.swing.JFrame {
     public ProjektiForma(Menadzer men) {
         initComponents();
 
-        popuniTabelu();
         setTitle("Projekti");
         popuniComboBox();
-        if (!popuniFiltrirano(men)) {
-            this.dispose();
-        }
-        setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
+        this.men = men;
+        popuniFiltrirano(men);
+
+        setDefaultCloseOperation(ProjektiForma.DISPOSE_ON_CLOSE);
+    }
+
+    public Menadzer getMen() {
+        return men;
     }
 
     /**
@@ -448,18 +447,6 @@ public class ProjektiForma extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldRegBroj;
     // End of variables declaration//GEN-END:variables
 
-    public void popuniTabelu() {
-//        List<Projekat> lista = new ArrayList<>();
-//        boolean uspesno = Controller.getInstance().vratiListuSviProjektniUgovor(lista);
-//        if (uspesno) {
-//            ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
-//            jTableProjekti.setModel(pmt);
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
-//        }
-
-    }
-
     private void popuniComboBox() {
 //        List<Menadzer> listaMen = new ArrayList<>();
 //        boolean uspesnoM = Controller.getInstance().vratiListuSviMenadzer(listaMen);
@@ -495,32 +482,31 @@ public class ProjektiForma extends javax.swing.JFrame {
 //        }
     }
 
-    private boolean popuniFiltrirano(Menadzer men) {
-//        List<Projekat> lista = new ArrayList<>();
-//        boolean uspesno = Controller.getInstance().vratiListuProjektniUgovor(men, lista);
-//        if (uspesno) {
-//            ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
-//            jTableProjekti.setModel(pmt);
-//            return true;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }
-        return true;
+    private void popuniFiltrirano(Menadzer men) {
+        List<Projekat> lista = new ArrayList<>();
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(men, lista);
+        if (uspesno) {
+            ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
+            jTableProjekti.setModel(pmt);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        }
+
     }
 
-    private boolean popuniFiltrirano(Sponzor gi) {
-//        List<Projekat> lista = new ArrayList<>();
-//        boolean uspesno = Controller.getInstance().vratiListuProjektniUgovor(gi, lista);
-//        if (uspesno) {
-//            ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
-//            jTableProjekti.setModel(pmt);
-//            return true;
-//        } else {
-//            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
-//            return false;
-//        }
-        return true;
+    private void popuniFiltrirano(Sponzor sponzor) {
+        List<Projekat> lista = new ArrayList<>();
+        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, lista);
+        if (uspesno) {
+            ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
+            jTableProjekti.setModel(pmt);
+
+        } else {
+            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
     public void pretraziActionListener(ActionListener actionListener) {
