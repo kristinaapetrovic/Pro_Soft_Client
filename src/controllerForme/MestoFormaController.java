@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import language.LanguageManager;
 import model.Mesto;
 import modeliTabela.MestoModelTabele;
 import view.MestoForma;
@@ -57,11 +58,11 @@ public class MestoFormaController {
 
             private boolean provera(String naziv, String posBroj) {
                 if (naziv.isEmpty() && posBroj.isEmpty()) {
-                    JOptionPane.showMessageDialog(mf, "Unesite barem jedan kriterijum pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 if ((!naziv.isEmpty() && !naziv.matches("^[a-zA-Z ]+$")) || (!posBroj.isEmpty() && !posBroj.matches("\\d{5}"))) {
-                    JOptionPane.showMessageDialog(mf, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 return true;
@@ -88,7 +89,7 @@ public class MestoFormaController {
             public void actionPerformed(ActionEvent e) {
                 int selektovano = mf.getjTableMesta().getSelectedRow();
                 if (selektovano == -1) {
-                    JOptionPane.showMessageDialog(mf, "Odaberite mesto!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("city_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 MestoModelTabele mmt = (MestoModelTabele) mf.getjTableMesta().getModel();

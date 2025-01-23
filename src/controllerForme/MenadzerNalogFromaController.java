@@ -7,7 +7,6 @@ package controllerForme;
 import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.ModuleLayer.Controller;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,11 +15,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import language.LanguageManager;
 import model.MSS;
 import model.Menadzer;
 import model.StrucnaSprema;
 import modeliTabela.MSSModelTabele;
-import modeliTabela.StrucnaSpremaModelTabele;
 import view.MenadzerNalogForma;
 
 /**
@@ -63,7 +62,7 @@ public class MenadzerNalogFromaController {
                 String datum = mnf.getjTextFieldDatumRodj().getText();
 
                 if (ss == null || datum.isEmpty()) {
-                    JOptionPane.showMessageDialog(mnf, "Izaberite strucnu spremu", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("chooese_education"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 Date datumSS = null;
@@ -71,7 +70,7 @@ public class MenadzerNalogFromaController {
                 try {
                     datumSS = format.parse(datum);
                 } catch (ParseException ex) {
-                    JOptionPane.showMessageDialog(mnf, "Proverite format datuma", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("check_date_format"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -88,9 +87,9 @@ public class MenadzerNalogFromaController {
                 MSSModelTabele ssmt = (MSSModelTabele) mnf.getjTableSS().getModel();
                 if (!ssmt.getLista().contains(mss)) {
                     ssmt.dodajElement(mss);
-                    JOptionPane.showMessageDialog(mnf, "Strucna sprema je uspesno dodata", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(mnf, "Strucna sprema je vec uneta", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_education_exist"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -101,9 +100,9 @@ public class MenadzerNalogFromaController {
                 MSSModelTabele mssmt = (MSSModelTabele) mnf.getjTableSS().getModel();
                 if (uspesno) {
                     mssmt.dodajElement(mss);
-                    JOptionPane.showMessageDialog(mnf, "Strucna sprema je uspesno dodata", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(mnf, "Greska pri unosu strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -114,11 +113,11 @@ public class MenadzerNalogFromaController {
 
                 int selektovana = mnf.getjTableSS().getSelectedRow();
                 if (selektovana == -1) {
-                    JOptionPane.showMessageDialog(mnf, "Odaberite strucnu spremu", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("choose_education"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                int odgovor = JOptionPane.showConfirmDialog(mnf, "Da li zelite da obrisete strucnu spremu?", "Provera", JOptionPane.YES_NO_OPTION);
+                int odgovor = JOptionPane.showConfirmDialog(mnf, LanguageManager.getString("delete_education_question"), LanguageManager.getString("chech"), JOptionPane.YES_NO_OPTION);
                 if (odgovor != JOptionPane.YES_OPTION) {
                     return;
                 }
@@ -131,9 +130,9 @@ public class MenadzerNalogFromaController {
                     boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMSS(mss);
                     if (uspesno) {
                         mssmt.ukloniElement(mss);
-                        JOptionPane.showMessageDialog(mnf, "Strucna sprema je uspesno obrisana", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("delete_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(mnf, "Greska pri brisanju strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("delete_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -141,16 +140,16 @@ public class MenadzerNalogFromaController {
         mnf.ugasiNalogActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int odgovor = JOptionPane.showConfirmDialog(mnf, "Kada ugasite nalog, prijava nece biti moguca.\n Potvrdite brisanje: ", "Upozorenje", JOptionPane.YES_NO_OPTION);
+                int odgovor = JOptionPane.showConfirmDialog(mnf, LanguageManager.getString("delete_manager_question"), LanguageManager.getString("warning"), JOptionPane.YES_NO_OPTION);
                 if (odgovor == JOptionPane.YES_OPTION) {
                     Menadzer men = Cordinator.getInstance().getUlogovani();
                     men.setAktivanNalog(false);
                     boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMenadzer(men);
                     if (uspesno) {
-                        JOptionPane.showMessageDialog(mnf, "Dovidjenja", "Poruka", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("bye"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                         System.exit(0);
                     } else {
-                        JOptionPane.showMessageDialog(mnf, "Greska pri gasenju naloga", "Greska", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("delete_manager_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -162,7 +161,7 @@ public class MenadzerNalogFromaController {
                 String loz2 = new String(mnf.getjPasswordFieldNova().getPassword());
                 if (mnf.isRegistracija()) {
                     if (loz1.isEmpty() || loz2.isEmpty()) {
-                        JOptionPane.showMessageDialog(mnf, "Unesite nove lozinke!", "Greska", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("empty_pass"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     MSSModelTabele ssmt = (MSSModelTabele) mnf.getjTableSS().getModel();
@@ -170,18 +169,18 @@ public class MenadzerNalogFromaController {
                     if (loz1.equals(loz2)) {
                         ubaciMenadzera(loz1);
                         ubaciMSS(lista);
-                        JOptionPane.showMessageDialog(mnf, "Vas nalog je uspesno konfigurisan", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                         mnf.dispose();
                         Cordinator.getInstance().otvoriGlavnuFormu();
 
                     } else {
-                        JOptionPane.showMessageDialog(mnf, "Lozike nisu iste!", "Greska", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("different_pass"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     }
 
                 } else {
 
                     proveriPromenuLozinke(loz1, loz2);
-                    JOptionPane.showMessageDialog(mnf, "Vas nalog je uspesno konfigurisan", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf,LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
                 }
             }
@@ -199,11 +198,11 @@ public class MenadzerNalogFromaController {
                     }
                     if (men.getLozinka().equals(kriptovana)) {
                         if (promeniLozinku(loz2)) {
-                            JOptionPane.showMessageDialog(mnf, "Lozinka je uspesno promenjena", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.showMessageDialog(mnf, LanguageManager.getString("update_pass_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
                 } else {
-                    JOptionPane.showMessageDialog(mnf, "Unesite staru i novu lozinku!", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("check_pass"), LanguageManager.getString("warning"), JOptionPane.ERROR_MESSAGE);
                 }
 
             }
@@ -221,10 +220,10 @@ public class MenadzerNalogFromaController {
                 Cordinator.getInstance().setUlogovani(men);
                 boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMenadzer(men);
                 if (uspesno) {
-                    JOptionPane.showMessageDialog(mnf, "Usesno ste podesili svoj nalog!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
                 } else {
-                    JOptionPane.showMessageDialog(mnf, "Greska pri kreiranju naloga", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("acc_config_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }
             }
 
@@ -232,12 +231,12 @@ public class MenadzerNalogFromaController {
                 for (MSS mss : lista) {
                     mss.setMenadzer(Cordinator.getInstance().getUlogovani());
                     if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajMSS(mss)) {
-                        JOptionPane.showMessageDialog(mnf, "Neuspesno ubacivanje strucnih sprema", "Greska", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_educations_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                 }
                 if (!lista.isEmpty()) {
-                    JOptionPane.showMessageDialog(mnf, "Uspesno ubacivanje strucnih sprema", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_educations_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 

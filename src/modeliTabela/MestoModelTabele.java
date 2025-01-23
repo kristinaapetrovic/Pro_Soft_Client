@@ -7,6 +7,7 @@ package modeliTabela;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.Mesto;
 
 /**
@@ -16,13 +17,13 @@ import model.Mesto;
 public class MestoModelTabele extends AbstractTableModel {
 
     private List<Mesto> lista = new ArrayList<>();
-    private String naziviKolona[] = {"Postanski broj", "Naziv mesta"};
-
+    String kol1 = LanguageManager.getString("postal_code");
+    String kol2 = LanguageManager.getString("city_name");
+    private String naziviKolona[] = {kol1, kol2};
 
     public List<Mesto> getLista() {
         return lista;
     }
-    
 
     public MestoModelTabele(List<Mesto> lista) {
         this.lista = lista;

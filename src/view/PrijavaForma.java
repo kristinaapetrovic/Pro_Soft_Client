@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import language.LanguageManager;
 import model.Menadzer;
 
 /**
@@ -26,16 +27,19 @@ public class PrijavaForma extends javax.swing.JFrame {
     public PrijavaForma() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Prijava");
+        setTitle(LanguageManager.getString("login"));
         setResizable(false);
+        popuniComboBox();
     }
 
     public PrijavaForma(String email) {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Prijava");
         setResizable(false);
+        setTitle(LanguageManager.getString("login"));
         jTextFieldEmail.setText(email);
+        popuniComboBox();
+
     }
 
     /**
@@ -48,12 +52,14 @@ public class PrijavaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jButtonPrijaviSe = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelLozinka = new javax.swing.JLabel();
+        jLabelRegistracija = new javax.swing.JLabel();
         jButtonRegistrujSe = new javax.swing.JButton();
         jTextFieldEmail = new javax.swing.JTextField();
         jPasswordFieldLozinka = new javax.swing.JPasswordField();
+        jLabelJezik = new javax.swing.JLabel();
+        jComboBoxJezik = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,11 +70,11 @@ public class PrijavaForma extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Email");
+        jLabelEmail.setText("Email");
 
-        jLabel2.setText("Lozinka");
+        jLabelLozinka.setText("Lozinka");
 
-        jLabel3.setText("Niste registrovani?");
+        jLabelRegistracija.setText("Niste registrovani?");
 
         jButtonRegistrujSe.setText("Registruj se");
         jButtonRegistrujSe.addActionListener(new java.awt.event.ActionListener() {
@@ -85,46 +91,69 @@ public class PrijavaForma extends javax.swing.JFrame {
             }
         });
 
+        jLabelJezik.setText("Odaberite jezik");
+
+        jComboBoxJezik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxJezikActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addComponent(jButtonRegistrujSe)
-                .addGap(65, 65, 65))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonPrijaviSe)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                    .addComponent(jPasswordFieldLozinka, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(48, 48, 48)
+                                        .addComponent(jButtonPrijaviSe))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(56, 56, 56)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jPasswordFieldLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelJezik, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jComboBoxJezik, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 91, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelRegistracija, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRegistrujSe)
+                        .addGap(64, 64, 64))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                    .addComponent(jLabelJezik)
+                    .addComponent(jComboBoxJezik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordFieldLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                    .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelEmail))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelLozinka)
+                    .addComponent(jPasswordFieldLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jButtonPrijaviSe)
-                .addGap(49, 49, 49)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRegistrujSe)
-                    .addComponent(jLabel3))
-                .addGap(67, 67, 67))
+                    .addComponent(jLabelRegistracija)
+                    .addComponent(jButtonRegistrujSe))
+                .addGap(51, 51, 51))
         );
 
         pack();
@@ -132,7 +161,7 @@ public class PrijavaForma extends javax.swing.JFrame {
 
     private void jButtonRegistrujSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrujSeActionPerformed
         Cordinator.getInstance().otvoriRegistracijaFormu();
-        
+
     }//GEN-LAST:event_jButtonRegistrujSeActionPerformed
 
     public JButton getjButtonPrijaviSe() {
@@ -192,6 +221,14 @@ public class PrijavaForma extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jPasswordFieldLozinkaActionPerformed
 
+    private void jComboBoxJezikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJezikActionPerformed
+
+        String izabraniJezik = (String) jComboBoxJezik.getSelectedItem();
+        LanguageManager.setLanguage(izabraniJezik);
+        updateLabels();
+
+    }//GEN-LAST:event_jComboBoxJezikActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,9 +267,11 @@ public class PrijavaForma extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonPrijaviSe;
     private javax.swing.JButton jButtonRegistrujSe;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JComboBox<String> jComboBoxJezik;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelJezik;
+    private javax.swing.JLabel jLabelLozinka;
+    private javax.swing.JLabel jLabelRegistracija;
     private javax.swing.JPasswordField jPasswordFieldLozinka;
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
@@ -245,5 +284,21 @@ public class PrijavaForma extends javax.swing.JFrame {
         jButtonPrijaviSe.addActionListener(actionListener);
     }
 
- 
+    private void popuniComboBox() {
+        jComboBoxJezik.removeAllItems();
+        jComboBoxJezik.addItem(LanguageManager.getString("serbian_language"));
+        jComboBoxJezik.addItem(LanguageManager.getString("english_language"));
+    }
+
+    private void updateLabels() {
+        jLabelEmail.setText(LanguageManager.getString("email"));
+        jLabelJezik.setText(LanguageManager.getString("select_language"));
+        jLabelLozinka.setText(LanguageManager.getString("password"));
+        jLabelRegistracija.setText(LanguageManager.getString("not_registered"));
+        jButtonPrijaviSe.setText(LanguageManager.getString("login_button"));
+        jButtonRegistrujSe.setText(LanguageManager.getString("register_button"));
+        popuniComboBox();
+
+    }
+
 }

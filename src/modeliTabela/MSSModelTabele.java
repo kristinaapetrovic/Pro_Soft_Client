@@ -4,21 +4,24 @@
  */
 package modeliTabela;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.MSS;
 
 /**
  *
  * @author Korisnik
  */
-public class MSSModelTabele extends AbstractTableModel{
+public class MSSModelTabele extends AbstractTableModel {
 
-    private List<MSS> lista=new ArrayList<>();
-    private String [] naziviKolona={"Naziv strucne spreme", "Datum"};
+    private List<MSS> lista = new ArrayList<>();
+    String kol1 = LanguageManager.getString("name_education");
+    String kol2 = LanguageManager.getString("date");
+    private String[] naziviKolona = {kol1, kol2};
+
     public MSSModelTabele(List<MSS> lista) {
         this.lista = lista;
     }
@@ -27,9 +30,6 @@ public class MSSModelTabele extends AbstractTableModel{
         return lista;
     }
 
-    
-    
-    
     @Override
     public int getRowCount() {
         return lista.size();
@@ -42,12 +42,15 @@ public class MSSModelTabele extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        MSS mss=lista.get(rowIndex);
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-        switch(columnIndex){
-            case 0: return mss.getStrucnaSprema().getNazivStrucnaSprema();
-            case 1: return format.format(mss.getDatumMSS());
-            default: return "greska";
+        MSS mss = lista.get(rowIndex);
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        switch (columnIndex) {
+            case 0:
+                return mss.getStrucnaSprema().getNazivStrucnaSprema();
+            case 1:
+                return format.format(mss.getDatumMSS());
+            default:
+                return "greska";
         }
     }
 
@@ -65,5 +68,5 @@ public class MSSModelTabele extends AbstractTableModel{
         lista.remove(mss);
         fireTableDataChanged();
     }
-    
+
 }

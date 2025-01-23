@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Menadzer;
 import modeliTabela.MenadzerModelTabele;
 import view.MenadzerForma;
@@ -49,7 +50,7 @@ public class MenadzerFormaController {
             private void pretrazi() {
                 String imePrezime = mf.getjTextFieldIP().getText();
                 if (validacija(imePrezime)) {
-                    JOptionPane.showMessageDialog(mf, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     mf.getjTextFieldIP().setBorder(new LineBorder(Color.RED, 3));
                     return;
                 }

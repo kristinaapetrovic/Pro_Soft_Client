@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Menadzer;
 import view.RegistracijaForma;
 
@@ -41,7 +42,7 @@ public class RegistracijaController {
                 String datumRodj = rf.getjTextFieldDatRodj().getText().trim();
                 String email = rf.getjTextFieldEmail().getText().trim();
                 if (!statickaValidacija(jmbg, imePrezime, email)) {
-                    JOptionPane.showMessageDialog(rf, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 java.util.Date datumRodjenja = null;
@@ -53,14 +54,14 @@ public class RegistracijaController {
                     System.out.println("Greska pri parsiranju datuma");
                     return;
                 }
-                
+
                 Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, datumRodjenja, true, true, null);
-                menadzer=registruj(menadzer);
-                if(menadzer!=null){
-                    JOptionPane.showMessageDialog(rf, "Na svom mejl nalogu: " + email + ", mozete videti svoju privremenu lozinku", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);    
+                menadzer = registruj(menadzer);
+                if (menadzer != null) {
+                    JOptionPane.showMessageDialog(rf, "Na svom mejl nalogu: " + email + ", mozete videti svoju privremenu lozinku", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
                     rf.dispose();
                     Cordinator.getInstance().otvoriPrijavaFormu();
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(rf, "Greska prilikom registracij", "Greska", JOptionPane.ERROR_MESSAGE);
                 }
             }

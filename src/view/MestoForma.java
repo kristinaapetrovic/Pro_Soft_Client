@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Mesto;
 
 
@@ -29,7 +30,8 @@ public class MestoForma extends javax.swing.JFrame {
     public MestoForma() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Mesto");
+        setTitle(LanguageManager.getString("city"));
+        setLabels();
         popuniTabelu();
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
     }
@@ -50,9 +52,9 @@ public class MestoForma extends javax.swing.JFrame {
 
         jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelKriterijum = new javax.swing.JLabel();
+        jLabelPB = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldPostanski = new javax.swing.JTextField();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
@@ -73,11 +75,11 @@ public class MestoForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Podaci:");
+        jLabelKriterijum.setText("Kriterijum pretrage");
 
-        jLabel2.setText("Postanski broj");
+        jLabelPB.setText("Postanski broj");
 
-        jLabel3.setText("Naziv");
+        jLabelNaziv.setText("Naziv");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -101,12 +103,12 @@ public class MestoForma extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelKriterijum, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelPB, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldPostanski, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
@@ -121,15 +123,15 @@ public class MestoForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelKriterijum)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelPB)
                     .addComponent(jTextFieldPostanski, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPretrazi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonOcistiFilter))
                 .addGap(14, 14, 14))
@@ -310,9 +312,9 @@ public class MestoForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcistiFilter;
     private javax.swing.JButton jButtonPretrazi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelKriterijum;
+    private javax.swing.JLabel jLabelNaziv;
+    private javax.swing.JLabel jLabelPB;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPanePrviTab;
     private javax.swing.JTable jTableMesta;
@@ -343,6 +345,17 @@ public class MestoForma extends javax.swing.JFrame {
 
     public void detaljiActionListener(ActionListener actionListener) {
         jButtonDetalji.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKriterijum.setText(LanguageManager.getString("criteria"));
+        jLabelNaziv.setText(LanguageManager.getString("city_name"));
+        jLabelPB.setText(LanguageManager.getString("postal_code"));
+        jButtonDetalji.setText(LanguageManager.getString("details"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
     }
 
 

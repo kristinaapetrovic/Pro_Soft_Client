@@ -5,10 +5,10 @@
 package view;
 
 import condinator.Cordinator;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JLabel;
+import language.LanguageManager;
 
 /**
  *
@@ -22,8 +22,9 @@ public class GlavnaForma extends javax.swing.JFrame {
      */
     public GlavnaForma() {
         initComponents();
-        setTitle("Upravljanje projektima");
+        setTitle(LanguageManager.getString("main_form_title"));
         setLocationRelativeTo(null);
+        setLabels();
         //jLabelIPM.setText(Controller.getInstance().getUlogovani().toString());
 
         setDefaultCloseOperation(GlavnaForma.DISPOSE_ON_CLOSE);
@@ -53,31 +54,31 @@ public class GlavnaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelMenadzeri = new javax.swing.JLabel();
         jButtonMenadzeri = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelProjekti = new javax.swing.JLabel();
         jButtonProjekti = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jButtonIzvodjaci = new javax.swing.JButton();
+        jLabelSponzori = new javax.swing.JLabel();
+        jButtonSponzori = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelDobrodosli = new javax.swing.JLabel();
         jLabelIPM = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuNalog = new javax.swing.JMenu();
+        jMenuItemMojNalog = new javax.swing.JMenuItem();
+        jMenuItemOdjaviSe = new javax.swing.JMenuItem();
+        jMenuPodesavanja = new javax.swing.JMenu();
+        jMenuItemMesto = new javax.swing.JMenuItem();
+        jMenuItemSS = new javax.swing.JMenuItem();
+        jMenuItemVA = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Pogledajte menadzere");
+        jLabelMenadzeri.setText("Pogledajte menadzere");
 
         jButtonMenadzeri.setText("Menadzeri");
         jButtonMenadzeri.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +93,7 @@ public class GlavnaForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelMenadzeri, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addComponent(jButtonMenadzeri)
                 .addGap(64, 64, 64))
@@ -102,14 +103,14 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(31, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelMenadzeri)
                     .addComponent(jButtonMenadzeri))
                 .addGap(24, 24, 24))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setText("Pogledajte projekte");
+        jLabelProjekti.setText("Pogledajte projekte");
 
         jButtonProjekti.setText("Projekti");
         jButtonProjekti.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +125,7 @@ public class GlavnaForma extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelProjekti, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonProjekti, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
@@ -134,19 +135,19 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(39, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelProjekti)
                     .addComponent(jButtonProjekti))
                 .addGap(30, 30, 30))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel3.setText("Pogledajte sponzore");
+        jLabelSponzori.setText("Pogledajte sponzore");
 
-        jButtonIzvodjaci.setText("Sponzori");
-        jButtonIzvodjaci.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSponzori.setText("Sponzori");
+        jButtonSponzori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonIzvodjaciActionPerformed(evt);
+                jButtonSponzoriActionPerformed(evt);
             }
         });
 
@@ -156,9 +157,9 @@ public class GlavnaForma extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelSponzori, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonIzvodjaci, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonSponzori, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56))
         );
         jPanel3Layout.setVerticalGroup(
@@ -166,12 +167,12 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jButtonIzvodjaci))
+                    .addComponent(jLabelSponzori)
+                    .addComponent(jButtonSponzori))
                 .addGap(31, 31, 31))
         );
 
-        jLabel4.setText("Dobrodosli, ");
+        jLabelDobrodosli.setText("Dobrodosli, ");
 
         jLabelIPM.setText("menadzer ip");
 
@@ -181,7 +182,7 @@ public class GlavnaForma extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addComponent(jLabel4)
+                .addComponent(jLabelDobrodosli)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelIPM, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -191,58 +192,58 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                    .addComponent(jLabelDobrodosli, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                     .addComponent(jLabelIPM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jMenu1.setText("Nalog");
+        jMenuNalog.setText("Nalog");
 
-        jMenuItem1.setText("Moj nalog");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemMojNalog.setText("Moj nalog");
+        jMenuItemMojNalog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemMojNalogActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenuNalog.add(jMenuItemMojNalog);
 
-        jMenuItem2.setText("Odjavi se");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemOdjaviSe.setText("Odjavi se");
+        jMenuItemOdjaviSe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemOdjaviSeActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenuNalog.add(jMenuItemOdjaviSe);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuNalog);
 
-        jMenu2.setText("Podesavanja");
+        jMenuPodesavanja.setText("Podesavanja");
 
-        jMenuItem3.setText("Mesto");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemMesto.setText("Mesto");
+        jMenuItemMesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                jMenuItemMestoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem3);
+        jMenuPodesavanja.add(jMenuItemMesto);
 
-        jMenuItem4.setText("Strucna sprema");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemSS.setText("Strucna sprema");
+        jMenuItemSS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMenuItemSSActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenuPodesavanja.add(jMenuItemSS);
 
-        jMenuItem5.setText("Vrste aktivnosti");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemVA.setText("Vrste aktivnosti");
+        jMenuItemVA.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                jMenuItemVAActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem5);
+        jMenuPodesavanja.add(jMenuItemVA);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMenuPodesavanja);
 
         setJMenuBar(jMenuBar1);
 
@@ -276,9 +277,9 @@ public class GlavnaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItemVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVAActionPerformed
         Cordinator.getInstance().otvoriVrstaAktivnostiFormu();
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_jMenuItemVAActionPerformed
 
     private void jButtonMenadzeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenadzeriActionPerformed
         Cordinator.getInstance().otvoriMenadzerForma();
@@ -288,30 +289,30 @@ public class GlavnaForma extends javax.swing.JFrame {
         Cordinator.getInstance().otvoriProjektiFormu();
     }//GEN-LAST:event_jButtonProjektiActionPerformed
 
-    private void jButtonIzvodjaciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonIzvodjaciActionPerformed
+    private void jButtonSponzoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSponzoriActionPerformed
         Cordinator.getInstance().otvoriSponzorForma();
 
 
-    }//GEN-LAST:event_jButtonIzvodjaciActionPerformed
+    }//GEN-LAST:event_jButtonSponzoriActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemMojNalogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMojNalogActionPerformed
         Cordinator.getInstance().otvoriMenadzerNalogFormu(Cordinator.getInstance().getUlogovani(), false, true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemMojNalogActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItemOdjaviSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOdjaviSeActionPerformed
         Cordinator.getInstance().otvoriPrijavaFormu();
 
         this.dispose();
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jMenuItemOdjaviSeActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItemMestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemMestoActionPerformed
         Cordinator.getInstance().otvoriMestoFormu();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jMenuItemMestoActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItemSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSSActionPerformed
 
         Cordinator.getInstance().otvoriStrucnaSpremaFormu();
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    }//GEN-LAST:event_jMenuItemSSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -350,26 +351,44 @@ public class GlavnaForma extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonIzvodjaci;
     private javax.swing.JButton jButtonMenadzeri;
     private javax.swing.JButton jButtonProjekti;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jButtonSponzori;
+    private javax.swing.JLabel jLabelDobrodosli;
     private javax.swing.JLabel jLabelIPM;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JLabel jLabelMenadzeri;
+    private javax.swing.JLabel jLabelProjekti;
+    private javax.swing.JLabel jLabelSponzori;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItemMesto;
+    private javax.swing.JMenuItem jMenuItemMojNalog;
+    private javax.swing.JMenuItem jMenuItemOdjaviSe;
+    private javax.swing.JMenuItem jMenuItemSS;
+    private javax.swing.JMenuItem jMenuItemVA;
+    private javax.swing.JMenu jMenuNalog;
+    private javax.swing.JMenu jMenuPodesavanja;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
+
+    private void setLabels() {
+        jLabelDobrodosli.setText(LanguageManager.getString("welcome"));
+        jLabelMenadzeri.setText(LanguageManager.getString("view_managers"));
+        jLabelProjekti.setText(LanguageManager.getString("view_projects"));
+        jLabelSponzori.setText(LanguageManager.getString("view_sponsors"));
+        jButtonMenadzeri.setText(LanguageManager.getString("managers"));
+        jButtonProjekti.setText(LanguageManager.getString("projects"));
+        jButtonSponzori.setText(LanguageManager.getString("sponsors"));
+        
+        jMenuNalog.setText(LanguageManager.getString("account"));
+        jMenuItemMojNalog.setText(LanguageManager.getString("my_account"));
+        jMenuItemOdjaviSe.setText(LanguageManager.getString("logout"));
+        jMenuItemMesto.setText(LanguageManager.getString("city"));
+        jMenuItemSS.setText(LanguageManager.getString("education"));
+        jMenuItemVA.setText(LanguageManager.getString("act_type"));
+        jMenuPodesavanja.setText(LanguageManager.getString("settings"));
+    }
 
 }

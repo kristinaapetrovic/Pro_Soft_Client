@@ -20,6 +20,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.MSS;
 import model.Menadzer;
 import model.StrucnaSprema;
@@ -173,7 +174,8 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     public MenadzerNalogForma(Menadzer menadzer, boolean registracija) {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Nalog menadzera");
+        setLabels();
+        setTitle(LanguageManager.getString("men_acc_title"));
         this.men = menadzer;
         this.registracija = registracija;
 
@@ -189,9 +191,9 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     public MenadzerNalogForma(Menadzer menadzer) {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Nalog menadzera");
+        setTitle(LanguageManager.getString("men_acc_title"));
         this.men = menadzer;
-
+        setLabels();
         blokirajOpcije();
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
 
@@ -207,26 +209,26 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelJMBG = new javax.swing.JLabel();
         jTextFieldJMBG = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelImePrezime = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
         jLabelSL = new javax.swing.JLabel();
         jLabelNL = new javax.swing.JLabel();
         jTextFieldImePrezime = new javax.swing.JTextField();
         jTextFieldEmail = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabelDatumRodj = new javax.swing.JLabel();
         jTextFieldDatumRodj = new javax.swing.JTextField();
         jPasswordFieldStara = new javax.swing.JPasswordField();
         jPasswordFieldNova = new javax.swing.JPasswordField();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelPodaci = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableSS = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelSS = new javax.swing.JLabel();
         jComboBoxSS = new javax.swing.JComboBox<>();
-        jButtonDodaj = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        jButtonDodajSS = new javax.swing.JButton();
+        jLabelDatumSS = new javax.swing.JLabel();
         jTextFieldDatum = new javax.swing.JTextField();
         jButtonObrisiSS = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -240,19 +242,19 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("JMBG");
+        jLabelJMBG.setText("JMBG");
 
-        jLabel2.setText("Ime i prezime");
+        jLabelImePrezime.setText("Ime i prezime");
 
-        jLabel3.setText("Email");
+        jLabelEmail.setText("Email");
 
         jLabelSL.setText("Stara lozinka");
 
         jLabelNL.setText("Nova lozinka");
 
-        jLabel6.setText("Datum rodjenja");
+        jLabelDatumRodj.setText("Datum rodjenja");
 
-        jLabel7.setText("Podaci");
+        jLabelPodaci.setText("Podaci");
 
         jTableSS.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -269,16 +271,16 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel8.setText("Odaberite strucnu spremu/e");
+        jLabelSS.setText("Odaberite strucnu spremu/e");
 
-        jButtonDodaj.setText("Dodaj");
-        jButtonDodaj.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDodajSS.setText("Dodaj");
+        jButtonDodajSS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDodajActionPerformed(evt);
+                jButtonDodajSSActionPerformed(evt);
             }
         });
 
-        jLabel4.setText("Datum");
+        jLabelDatumSS.setText("Datum");
 
         jTextFieldDatum.setText("dd-mm-yyyy");
 
@@ -288,13 +290,13 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(107, 107, 107)
-                .addComponent(jButtonDodaj)
+                .addComponent(jButtonDodajSS)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelSS, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDatumSS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBoxSS, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,13 +309,13 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxSS, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabelSS))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelDatumSS)
                     .addComponent(jTextFieldDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addComponent(jButtonDodaj)
+                .addComponent(jButtonDodajSS)
                 .addGap(17, 17, 17))
         );
 
@@ -332,7 +334,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(120, 120, 120)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelPodaci, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -346,18 +348,18 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
                                 .addComponent(jPasswordFieldNova))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2))
+                                    .addComponent(jLabelJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabelImePrezime))
                                 .addGap(54, 54, 54)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFieldImePrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(jLabelDatumRodj)
                                 .addGap(44, 44, 44)
                                 .addComponent(jTextFieldDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(90, 90, 90)
                                 .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(67, 67, 67)
@@ -373,20 +375,20 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addComponent(jLabelPodaci)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabelJMBG))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabelImePrezime)
                             .addComponent(jTextFieldImePrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
+                            .addComponent(jLabelDatumRodj)
                             .addComponent(jTextFieldDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,7 +396,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabelEmail))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelSL)
@@ -479,28 +481,31 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jButtonNazad)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonNazad)
+                        .addGap(57, 57, 57))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jButtonNazad)
-                        .addGap(81, 81, 81)
+                        .addGap(37, 37, 37)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -514,7 +519,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         return registracija;
     }
 
-    private void jButtonDodajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajActionPerformed
+    private void jButtonDodajSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajSSActionPerformed
 //        StrucnaSprema ss = (StrucnaSprema) jComboBoxSS.getSelectedItem();
 //        String datum = jTextFieldDatum.getText();
 //
@@ -552,7 +557,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 //        }
 
 
-    }//GEN-LAST:event_jButtonDodajActionPerformed
+    }//GEN-LAST:event_jButtonDodajSSActionPerformed
 
     private void jButtonObrisiSSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiSSActionPerformed
 
@@ -629,7 +634,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         jLabelSL.setVisible(true);
         jPasswordFieldNova.setVisible(true);
         jPasswordFieldStara.setVisible(true);
-        jButtonDodaj.setEnabled(true);
+        jButtonDodajSS.setEnabled(true);
         jButtonObrisiSS.setEnabled(true);
         jComboBoxSS.setEnabled(true);
         jButtonUgasiNalog.setEnabled(false);
@@ -651,7 +656,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonUgasiNalogActionPerformed
 
     private void jButtonUgovoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUgovoriActionPerformed
-        
+
         Cordinator.getInstance().otvoriProjektiFormu(men);
 
     }//GEN-LAST:event_jButtonUgovoriActionPerformed
@@ -697,7 +702,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDodaj;
+    private javax.swing.JButton jButtonDodajSS;
     private javax.swing.JButton jButtonIzmeni;
     private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonObrisiSS;
@@ -705,15 +710,15 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonUgasiNalog;
     private javax.swing.JButton jButtonUgovori;
     private javax.swing.JComboBox<StrucnaSprema> jComboBoxSS;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelDatumRodj;
+    private javax.swing.JLabel jLabelDatumSS;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelImePrezime;
+    private javax.swing.JLabel jLabelJMBG;
     private javax.swing.JLabel jLabelNL;
+    private javax.swing.JLabel jLabelPodaci;
     private javax.swing.JLabel jLabelSL;
+    private javax.swing.JLabel jLabelSS;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -756,8 +761,8 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         jTextFieldImePrezime.setEnabled(false);
         jTextFieldEmail.setEnabled(false);
         jTextFieldDatumRodj.setEnabled(false);
-        jLabelSL.setText("Unesite lozinku: ");
-        jLabelNL.setText("Ponovite unos: ");
+        jLabelSL.setText(LanguageManager.getString("enter_pass"));
+        jLabelNL.setText(LanguageManager.getString("enter_pass_2"));
 
     }
 
@@ -811,7 +816,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
         jPasswordFieldNova.setVisible(false);
         jPasswordFieldStara.setVisible(false);
 
-        jButtonDodaj.setEnabled(false);
+        jButtonDodajSS.setEnabled(false);
         jButtonObrisiSS.setEnabled(false);
         jComboBoxSS.setEnabled(false);
     }
@@ -849,7 +854,7 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
     }
 
     public void dodajSSActionListener(ActionListener actionListener) {
-        jButtonDodaj.addActionListener(actionListener);
+        jButtonDodajSS.addActionListener(actionListener);
     }
 
     public void obrisiActionListener(ActionListener actionListener) {
@@ -862,6 +867,26 @@ public class MenadzerNalogForma extends javax.swing.JFrame {
 
     public void sacuvajIzmeneActionListener(ActionListener actionListener) {
         jButtonSacuvaj.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelDatumRodj.setText(LanguageManager.getString("birthday"));
+        jLabelEmail.setText(LanguageManager.getString("email"));
+        jLabelDatumRodj.setText(LanguageManager.getString("date"));
+        jLabelImePrezime.setText(LanguageManager.getString("name_surname"));
+        jLabelJMBG.setText(LanguageManager.getString("umcn"));
+        jLabelNL.setText(LanguageManager.getString("new_pass"));
+        jLabelSL.setText(LanguageManager.getString("old_pass"));
+        jLabelSS.setText(LanguageManager.getString("choose_education"));
+        jLabelPodaci.setText(LanguageManager.getString("data"));
+       
+        jButtonDodajSS.setText(LanguageManager.getString("add_education_button"));
+        jButtonIzmeni.setText(LanguageManager.getString("update_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonObrisiSS.setText(LanguageManager.getString("delete_education_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
+        jButtonUgasiNalog.setText(LanguageManager.getString("delete_acc_button"));
+        jButtonUgovori.setText(LanguageManager.getString("projects"));
     }
 
 }

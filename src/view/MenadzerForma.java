@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Menadzer;
 import modeliTabela.MenadzerModelTabele;
 //import modeliTabela.MenadzerModelTabele;
@@ -31,7 +32,7 @@ public class MenadzerForma extends javax.swing.JFrame {
     public MenadzerForma() {
         initComponents();
         setTitle("Menadzeri");
-
+        setLabels();
         popuniTabelu();
         setDefaultCloseOperation(MenadzerForma.DISPOSE_ON_CLOSE);
         osluskivanje();
@@ -62,8 +63,8 @@ public class MenadzerForma extends javax.swing.JFrame {
 
         jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelKriterijum = new javax.swing.JLabel();
+        jLabelImePrezime = new javax.swing.JLabel();
         jTextFieldIP = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcisti = new javax.swing.JButton();
@@ -82,9 +83,9 @@ public class MenadzerForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Kriterijumi pretrage");
+        jLabelKriterijum.setText("Kriterijumi pretrage");
 
-        jLabel2.setText("Ime i prezime");
+        jLabelImePrezime.setText("Ime i prezime");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -114,9 +115,9 @@ public class MenadzerForma extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelKriterijum, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelImePrezime, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(145, 145, 145)))
@@ -126,11 +127,11 @@ public class MenadzerForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(jLabelKriterijum)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldIP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabelImePrezime))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPretrazi)
@@ -285,8 +286,8 @@ public class MenadzerForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcisti;
     private javax.swing.JButton jButtonPretrazi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelImePrezime;
+    private javax.swing.JLabel jLabelKriterijum;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPaneTab1;
     private javax.swing.JTable jTableMenadzeri;
@@ -328,6 +329,15 @@ public class MenadzerForma extends javax.swing.JFrame {
 
     public void ocistiFilterActionListener(ActionListener actionListener) {
         jButtonOcisti.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKriterijum.setText(LanguageManager.getString("criteria"));
+        jLabelImePrezime.setText(LanguageManager.getString("name_surname"));
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcisti.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
     }
     
 

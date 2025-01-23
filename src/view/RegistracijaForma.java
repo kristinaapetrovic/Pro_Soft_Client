@@ -9,10 +9,8 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,6 +20,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+import language.LanguageManager;
 import model.Menadzer;
 
 /**
@@ -35,9 +34,10 @@ public class RegistracijaForma extends javax.swing.JFrame {
      */
     public RegistracijaForma() {
         initComponents();
-        setTitle("Registracija");
+        setTitle(LanguageManager.getString("register"));
         setResizable(false);
         setLocationRelativeTo(null);
+        setLabels();
         dinamickaValidacija();
         setDefaultCloseOperation(RegistracijaForma.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -58,10 +58,10 @@ public class RegistracijaForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelJMBG = new javax.swing.JLabel();
+        jLabelImePrez = new javax.swing.JLabel();
+        jLabelEmail = new javax.swing.JLabel();
+        jLabelDatumRodj = new javax.swing.JLabel();
         jTextFieldJMBG = new javax.swing.JTextField();
         jTextFieldImePrezime = new javax.swing.JTextField();
         jTextFieldDatRodj = new javax.swing.JTextField();
@@ -74,13 +74,13 @@ public class RegistracijaForma extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("JMBG");
+        jLabelJMBG.setText("JMBG");
 
-        jLabel2.setText("Ime i prezime");
+        jLabelImePrez.setText("Ime i prezime");
 
-        jLabel3.setText("Email");
+        jLabelEmail.setText("Email");
 
-        jLabel4.setText("Datum rodjenja");
+        jLabelDatumRodj.setText("Datum rodjenja");
 
         jButtonRegistrujSe.setText("Registruj se");
         jButtonRegistrujSe.addActionListener(new java.awt.event.ActionListener() {
@@ -107,10 +107,10 @@ public class RegistracijaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelImePrez)
+                            .addComponent(jLabelDatumRodj, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(83, 83, 83)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
@@ -131,19 +131,19 @@ public class RegistracijaForma extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelJMBG)
                     .addComponent(jTextFieldJMBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelImePrez)
                     .addComponent(jTextFieldImePrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelDatumRodj)
                     .addComponent(jTextFieldDatRodj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelEmail)
                     .addComponent(jTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabelProvera, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -175,40 +175,28 @@ public class RegistracijaForma extends javax.swing.JFrame {
 
     private void jButtonRegistrujSeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrujSeActionPerformed
 
-        String jmbg = jTextFieldJMBG.getText().trim();
-        String imePrezime = jTextFieldImePrezime.getText().trim();
-        String datumRodj = jTextFieldDatRodj.getText().trim();
-        String email = jTextFieldEmail.getText().trim();
-
-        
-
-//        if (postoji(menadzer)) {
-//            int odgovor = JOptionPane.showConfirmDialog(this, "Nalog sa ovom email adresom ili jmbg-om vec postoji!\n Prijavite se?", "Obavestenje", JOptionPane.YES_NO_OPTION);
-//            if (odgovor == JOptionPane.YES_OPTION) {
-//                this.dispose();
-//                PrijavaForma pf = new PrijavaForma(email);
-//                pf.setVisible(true);
-//            } else {
-//                return;
-//            }
+//        String jmbg = jTextFieldJMBG.getText().trim();
+//        String imePrezime = jTextFieldImePrezime.getText().trim();
+//        String datumRodj = jTextFieldDatRodj.getText().trim();
+//        String email = jTextFieldEmail.getText().trim();
+//
+//        
+//        if (!statickaValidacija(jmbg, imePrezime, email)) {
+//            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+//            return;
 //        }
 //
-        if (!statickaValidacija(jmbg, imePrezime, email)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke");
-            return;
-        }
-
-        java.util.Date datumRodjenja = null;
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            datumRodjenja = format.parse(datumRodj);
-        } catch (ParseException ex) {
-            jTextFieldDatRodj.setBorder(new LineBorder(Color.RED, 3));
-            System.out.println("Greska pri parsiranju datuma");
-            return;
-        }
-        
-        Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, datumRodjenja, true, true, null);
+//        java.util.Date datumRodjenja = null;
+//        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+//        try {
+//            datumRodjenja = format.parse(datumRodj);
+//        } catch (ParseException ex) {
+//            jTextFieldDatRodj.setBorder(new LineBorder(Color.RED, 3));
+//            System.out.println("Greska pri parsiranju datuma");
+//            return;
+//        }
+//        
+//        Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, datumRodjenja, true, true, null);
       
         
 //        Random random = new Random();
@@ -289,10 +277,10 @@ public class RegistracijaForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonOdustani;
     private javax.swing.JButton jButtonRegistrujSe;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelDatumRodj;
+    private javax.swing.JLabel jLabelEmail;
+    private javax.swing.JLabel jLabelImePrez;
+    private javax.swing.JLabel jLabelJMBG;
     private javax.swing.JLabel jLabelProvera;
     private javax.swing.JTextField jTextFieldDatRodj;
     private javax.swing.JTextField jTextFieldEmail;
@@ -350,7 +338,7 @@ public class RegistracijaForma extends javax.swing.JFrame {
                     String text = e.getDocument().getText(0, e.getDocument().getLength());
                     text.trim();
                     if (!text.matches("[A-Za-z][A-Za-z0-9_.]*@gmail.com") && !text.isEmpty()) {
-                        jLabelProvera.setText("Proverite format email-a");
+                        jLabelProvera.setText(LanguageManager.getString("email_format"));
                     } else {
                         jLabelProvera.setText("");
                     }
@@ -370,5 +358,14 @@ public class RegistracijaForma extends javax.swing.JFrame {
 
     public void regActionListener(ActionListener actionListener) {
         jButtonRegistrujSe.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelJMBG.setText(LanguageManager.getString("umcn"));
+        jLabelImePrez.setText(LanguageManager.getString("name_surname"));
+        jLabelEmail.setText(LanguageManager.getString("email"));
+        jLabelDatumRodj.setText(LanguageManager.getString("birthday"));
+        jButtonOdustani.setText(LanguageManager.getString("back_button"));
+        jButtonRegistrujSe.setText(LanguageManager.getString("register_button"));
     }
 }

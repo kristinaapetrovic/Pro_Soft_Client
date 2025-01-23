@@ -4,11 +4,11 @@
  */
 package modeliTabela;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.Menadzer;
 
 /**
@@ -18,12 +18,15 @@ import model.Menadzer;
 public class MenadzerModelTabele extends AbstractTableModel {
 
     private List<Menadzer> lista = new ArrayList<>();
-    private String naziviKolona[] = {"JMBG", "Ime i prezime", "Email", "Datum rodjenja"};
+    String kol1 = LanguageManager.getString("umcn");
+    String kol2 = LanguageManager.getString("name_surname");
+    String kol3 = LanguageManager.getString("email");
+    String kol4 = LanguageManager.getString("birthday");
+    private String naziviKolona[] = {kol1, kol2, kol3, kol4};
 
     public List<Menadzer> getLista() {
         return lista;
     }
-    
 
     public MenadzerModelTabele(List<Menadzer> lista) {
         this.lista = lista;
@@ -47,7 +50,7 @@ public class MenadzerModelTabele extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Menadzer menadzer = lista.get(rowIndex);
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         switch (columnIndex) {
             case 0:
                 return menadzer.getJmbg();
