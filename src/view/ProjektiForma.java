@@ -13,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import language.LanguageManager;
 import model.Sponzor;
 import model.Menadzer;
 import model.Projekat;
@@ -36,8 +37,8 @@ public class ProjektiForma extends javax.swing.JFrame {
      */
     public ProjektiForma() {
         initComponents();
-
-        setTitle("Projekti");
+        setLabels();
+        setTitle(LanguageManager.getString("projects"));
 
         popuniComboBox();
         setDefaultCloseOperation(ProjektiForma.DISPOSE_ON_CLOSE);
@@ -70,7 +71,7 @@ public class ProjektiForma extends javax.swing.JFrame {
     public ProjektiForma(Sponzor sponzor) {
         initComponents();
 
-        setTitle("Projekti");
+        setTitle(LanguageManager.getString("projects"));
 
         popuniComboBox();
         setDefaultCloseOperation(ProjektiForma.DISPOSE_ON_CLOSE);
@@ -83,8 +84,10 @@ public class ProjektiForma extends javax.swing.JFrame {
 
     public ProjektiForma(Menadzer men) {
         initComponents();
+        setLabels();
 
-        setTitle("Projekti");
+        setTitle(LanguageManager.getString("project"));
+
         popuniComboBox();
         this.men = men;
         popuniFiltrirano(men);
@@ -107,10 +110,10 @@ public class ProjektiForma extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelKriterijumi = new javax.swing.JLabel();
+        jLabelRegBr = new javax.swing.JLabel();
+        jLabelMen = new javax.swing.JLabel();
+        jLabelSponz = new javax.swing.JLabel();
         jTextFieldRegBroj = new javax.swing.JTextField();
         jComboBoxMenadzer = new javax.swing.JComboBox<>();
         jComboBoxSponzor = new javax.swing.JComboBox<>();
@@ -127,13 +130,13 @@ public class ProjektiForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Kriterijumi pretrage");
+        jLabelKriterijumi.setText("Kriterijumi pretrage");
 
-        jLabel2.setText("Reg broj");
+        jLabelRegBr.setText("Reg broj");
 
-        jLabel3.setText("Menadzer");
+        jLabelMen.setText("Menadzer");
 
-        jLabel4.setText("Sponzor");
+        jLabelSponz.setText("Sponzor");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -157,14 +160,14 @@ public class ProjektiForma extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelKriterijumi, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabelMen, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                                .addComponent(jLabelRegBr, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabelSponz, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(38, 38, 38)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -184,21 +187,21 @@ public class ProjektiForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jLabel1)
+                .addComponent(jLabelKriterijumi)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelRegBr)
                     .addComponent(jTextFieldRegBroj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelMen)
                     .addComponent(jComboBoxMenadzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPretrazi))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
+                            .addComponent(jLabelSponz)
                             .addComponent(jComboBoxSponzor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
@@ -435,10 +438,10 @@ public class ProjektiForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonPretrazi;
     private javax.swing.JComboBox<Menadzer> jComboBoxMenadzer;
     private javax.swing.JComboBox<model.Sponzor> jComboBoxSponzor;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelKriterijumi;
+    private javax.swing.JLabel jLabelMen;
+    private javax.swing.JLabel jLabelRegBr;
+    private javax.swing.JLabel jLabelSponz;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -490,7 +493,7 @@ public class ProjektiForma extends javax.swing.JFrame {
             jTableProjekti.setModel(pmt);
 
         } else {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("read_projects_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             this.dispose();
         }
 
@@ -504,7 +507,7 @@ public class ProjektiForma extends javax.swing.JFrame {
             jTableProjekti.setModel(pmt);
 
         } else {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da ucita listu projektnih ugovora", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,  LanguageManager.getString("read_projects_error"),  LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }
@@ -519,5 +522,18 @@ public class ProjektiForma extends javax.swing.JFrame {
 
     public void detaljiActionListener(ActionListener actionListener) {
         jButtonDetalji.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKriterijumi.setText(LanguageManager.getString("criteria"));
+        jLabelMen.setText(LanguageManager.getString("managers"));
+        jLabelRegBr.setText(LanguageManager.getString("reg_num"));
+        jLabelSponz.setText(LanguageManager.getString("sponsors"));
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
+
     }
 }

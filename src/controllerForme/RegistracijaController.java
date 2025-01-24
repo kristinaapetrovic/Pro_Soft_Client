@@ -58,11 +58,11 @@ public class RegistracijaController {
                 Menadzer menadzer = new Menadzer(jmbg, imePrezime, email, null, datumRodjenja, true, true, null);
                 menadzer = registruj(menadzer);
                 if (menadzer != null) {
-                    JOptionPane.showMessageDialog(rf, "Na svom mejl nalogu: " + email + ", mozete videti svoju privremenu lozinku", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(rf, LanguageManager.getString("reg_mail_1") + email + LanguageManager.getString("reg_mail_2"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                     rf.dispose();
                     Cordinator.getInstance().otvoriPrijavaFormu();
                 } else {
-                    JOptionPane.showMessageDialog(rf, "Greska prilikom registracij", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rf, LanguageManager.getString("reg_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }
             }
 

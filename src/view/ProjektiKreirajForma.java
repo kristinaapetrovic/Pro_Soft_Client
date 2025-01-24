@@ -16,6 +16,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Aktivnost;
 import model.JeSponzor;
 import model.Sponzor;
@@ -43,7 +44,8 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     public ProjektiKreirajForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Kreiraj projekat");
+        setLabels();
+        setTitle(LanguageManager.getString("create_project_title"));
         roditelj = (ProjektiForma) parent;
         popuniComboBox();
         popuniTabeluKreiraj();
@@ -54,15 +56,15 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     public ProjektiKreirajForma(java.awt.Frame parent, boolean modal, Projekat pu) {
         super(parent, modal);
         initComponents();
+        setLabels();
         roditelj = (ProjektiForma) parent;
         this.pu = pu;
         popuniComboBox();
         popuniTabeluDetalji();
         kreiranje = false;
         popuniFormuDetalji();
-        setTitle("Detalji projekta");
+        setTitle(LanguageManager.getString("update_project_title"));
         setDefaultCloseOperation(ProjektiKreirajForma.DISPOSE_ON_CLOSE);
-
     }
 
     /**
@@ -76,14 +78,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        jLabelRegBroj = new javax.swing.JLabel();
+        jLabelNazivProj = new javax.swing.JLabel();
+        jLabelOpisProj = new javax.swing.JLabel();
+        jLabelDatPoc = new javax.swing.JLabel();
+        jLabelDatZav = new javax.swing.JLabel();
+        jLabelTrajanje = new javax.swing.JLabel();
+        jLabelBudzet = new javax.swing.JLabel();
+        jLabelMen = new javax.swing.JLabel();
         jTextFieldRegBr = new javax.swing.JTextField();
         jTextFieldNaziv = new javax.swing.JTextField();
         jTextFieldOpisProjekta = new javax.swing.JTextField();
@@ -92,11 +94,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFieldTrajanje = new javax.swing.JTextField();
         jTextFieldBudzet = new javax.swing.JTextField();
         jComboBoxMenadzer = new javax.swing.JComboBox<>();
+        jButtonSacuvaj = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        jLabelPodaciAkt = new javax.swing.JLabel();
+        jLabelNazviAkt = new javax.swing.JLabel();
+        jLabelOpisAkt = new javax.swing.JLabel();
+        jLabelVrstaAkt = new javax.swing.JLabel();
         jTextFieldNazivAkt = new javax.swing.JTextField();
         jTextFieldOpisAkt = new javax.swing.JTextField();
         jComboBoxVAktivnosti = new javax.swing.JComboBox<>();
@@ -104,9 +109,11 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jButtonObrisiAkt = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAktivnost = new javax.swing.JTable();
-        jButtonSacuvaj = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableSponzori = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabelSpon = new javax.swing.JLabel();
         jComboBoxSponzor = new javax.swing.JComboBox<>();
         jButtonDodajSponzor = new javax.swing.JButton();
         jButtonObrisiSponzor = new javax.swing.JButton();
@@ -114,9 +121,6 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jCheckBoxNovcani = new javax.swing.JCheckBox();
         jTextFieldIznosSponz = new javax.swing.JTextField();
         jLabelIznosSpon = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTableSponzori = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -124,21 +128,21 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         jLabel1.setText("Podaci o projektu");
 
-        jLabel2.setText("Reg broj");
+        jLabelRegBroj.setText("Reg broj");
 
-        jLabel3.setText("Naziv projekta");
+        jLabelNazivProj.setText("Naziv projekta");
 
-        jLabel4.setText("Opsi projekta");
+        jLabelOpisProj.setText("Opsi projekta");
 
-        jLabel5.setText("Datum pocetka");
+        jLabelDatPoc.setText("Datum pocetka");
 
-        jLabel6.setText("Datum zavrsetka");
+        jLabelDatZav.setText("Datum zavrsetka");
 
-        jLabel7.setText("Trajanje [h]");
+        jLabelTrajanje.setText("Trajanje [h]");
 
-        jLabel8.setText("Budzet [€]");
+        jLabelBudzet.setText("Budzet [€]");
 
-        jLabel9.setText("Menadzer");
+        jLabelMen.setText("Menadzer");
 
         jTextFielDatumOD.setText("dd-mm-yyyy");
         jTextFielDatumOD.addActionListener(new java.awt.event.ActionListener() {
@@ -154,22 +158,18 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9)
+                    .addComponent(jLabelRegBroj, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNazivProj, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelOpisProj, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDatPoc, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelDatZav, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelMen)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
-                .addGap(80, 80, 80)
+                        .addComponent(jLabelBudzet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelTrajanje, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTextFielDatumOD, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextFieldDatumDO, javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,61 +179,87 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                     .addComponent(jTextFieldRegBr, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldNaziv)
                     .addComponent(jTextFieldOpisProjekta))
-                .addGap(62, 62, 62))
+                .addGap(136, 136, 136))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(79, 79, 79)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jTextFieldRegBr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(30, 30, 30)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jTextFieldOpisProjekta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jTextFielDatumOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(59, 59, 59))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldDatumDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel6)))
-                        .addGap(60, 60, 60))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7)))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextFieldBudzet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jComboBoxMenadzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabelRegBroj)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jLabelNazivProj)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jLabelOpisProj)
+                                        .addGap(38, 38, 38)
+                                        .addComponent(jLabelDatPoc)
+                                        .addGap(62, 62, 62))
+                                    .addComponent(jLabelDatZav))
+                                .addGap(60, 60, 60))
+                            .addComponent(jLabelTrajanje))
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabelBudzet)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabelMen))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jTextFieldRegBr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jTextFieldOpisProjekta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(jTextFielDatumOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(59, 59, 59))
+                                    .addComponent(jTextFieldDatumDO, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(60, 60, 60))
+                            .addComponent(jTextFieldTrajanje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(jTextFieldBudzet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jComboBoxMenadzer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
+
+        jButtonSacuvaj.setText("Zavrsi sa kreiranjem");
+        jButtonSacuvaj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSacuvajActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Nazad");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel11.setText("Podaci o aktivnostima");
+        jLabelPodaciAkt.setText("Podaci o aktivnostima");
 
-        jLabel12.setText("Naziv aktivnosti");
+        jLabelNazviAkt.setText("Naziv aktivnosti");
 
-        jLabel13.setText("Opis ");
+        jLabelOpisAkt.setText("Opis ");
 
-        jLabel14.setText("Vrsta");
+        jLabelVrstaAkt.setText("Vrsta");
 
         jButtonDodajAkt.setText("Dodaj");
         jButtonDodajAkt.addActionListener(new java.awt.event.ActionListener() {
@@ -258,18 +284,18 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonDodajAkt)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabelNazviAkt, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelOpisAkt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelVrstaAkt, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel11)
+                            .addComponent(jLabelPodaciAkt)
                             .addComponent(jTextFieldNazivAkt)
                             .addComponent(jTextFieldOpisAkt)
                             .addComponent(jComboBoxVAktivnosti, 0, 223, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(62, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonObrisiAkt)
@@ -279,20 +305,20 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel11)
+                .addComponent(jLabelPodaciAkt)
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
+                    .addComponent(jLabelNazviAkt)
                     .addComponent(jTextFieldNazivAkt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
+                    .addComponent(jLabelOpisAkt)
                     .addComponent(jTextFieldOpisAkt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxVAktivnosti, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addComponent(jLabelVrstaAkt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDodajAkt)
                     .addComponent(jButtonObrisiAkt))
@@ -312,16 +338,45 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTableAktivnost);
 
-        jButtonSacuvaj.setText("Zavrsi sa kreiranjem");
-        jButtonSacuvaj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSacuvajActionPerformed(evt);
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jTableSponzori.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
+        ));
+        jScrollPane2.setViewportView(jTableSponzori);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel10.setText("Sponzori");
+        jLabelSpon.setText("Sponzori");
 
         jButtonDodajSponzor.setText("Dodaj");
         jButtonDodajSponzor.addActionListener(new java.awt.event.ActionListener() {
@@ -364,9 +419,9 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelSpon, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(71, 71, 71)
-                                .addComponent(jComboBoxSponzor, 0, 196, Short.MAX_VALUE))
+                                .addComponent(jComboBoxSponzor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCheckBoxRobni)
@@ -379,7 +434,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
+                    .addComponent(jLabelSpon)
                     .addComponent(jComboBoxSponzor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jCheckBoxRobni)
@@ -389,32 +444,33 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelIznosSpon)
                     .addComponent(jTextFieldIznosSponz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonDodajSponzor)
                     .addComponent(jButtonObrisiSponzor))
                 .addGap(24, 24, 24))
         );
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jTableSponzori.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTableSponzori);
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -422,43 +478,34 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButtonSacuvaj)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35))))
+                    .addComponent(jButton1)
+                    .addComponent(jButtonSacuvaj))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(41, 41, 41)
+                        .addComponent(jButtonSacuvaj)
+                        .addGap(170, 170, 170))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSacuvaj)
-                    .addComponent(jButton1))
-                .addGap(21, 21, 21))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -614,23 +661,25 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private javax.swing.JComboBox<model.Sponzor> jComboBoxSponzor;
     private javax.swing.JComboBox<VrstaAktivnosti> jComboBoxVAktivnosti;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelBudzet;
+    private javax.swing.JLabel jLabelDatPoc;
+    private javax.swing.JLabel jLabelDatZav;
     private javax.swing.JLabel jLabelIznosSpon;
+    private javax.swing.JLabel jLabelMen;
+    private javax.swing.JLabel jLabelNazivProj;
+    private javax.swing.JLabel jLabelNazviAkt;
+    private javax.swing.JLabel jLabelOpisAkt;
+    private javax.swing.JLabel jLabelOpisProj;
+    private javax.swing.JLabel jLabelPodaciAkt;
+    private javax.swing.JLabel jLabelRegBroj;
+    private javax.swing.JLabel jLabelSpon;
+    private javax.swing.JLabel jLabelTrajanje;
+    private javax.swing.JLabel jLabelVrstaAkt;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableAktivnost;
@@ -690,7 +739,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private void popuniTabeluDetalji() {
         List<JeSponzor> listaS = new ArrayList<>();
         listaS = komunikacijaKlijent.Komunikacija.getInstance().vratiListuJeSponzor(pu);
-        
+
         JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
         jTableSponzori.setModel(smt);
 
@@ -735,7 +784,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         }
 
         return false;
-    
+
     }
 
     private void sacuvajKreiranje() {
@@ -758,7 +807,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         sacuvajAktivnosti(ugovor);
         sacuvajSponzore(ugovor);
-        
+
         this.dispose();
 
     }
@@ -793,7 +842,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         int tr = Integer.parseInt(trajanje);
         double budz = Double.parseDouble(budzet);
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         java.util.Date datumOd = null;
         java.util.Date datumDo = null;
         try {
@@ -809,8 +858,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         Projekat pu = new Projekat(regBroj, naziv, opisProj, budz, tr, datumOd, datumDo, men, false);
         return pu;
-        
-        
+
     }
 
     private void sacuvajAktivnosti(Projekat ugovor) {
@@ -821,7 +869,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         }
         List<Aktivnost> lista = amt.getLista();
         for (Aktivnost akt : lista) {
-            akt.setProjektniUgovor(ugovor); 
+            akt.setProjektniUgovor(ugovor);
             if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajAktivnost(akt)) {
                 return;
             }
@@ -836,7 +884,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFieldRegBr.setText(pu.getRegBroj() + "");
         jTextFieldNaziv.setText(pu.getNazivProjekta());
         jTextFieldOpisProjekta.setText(pu.getOpisProjekta());
-        SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         jTextFieldDatumDO.setText(format.format(pu.getDatumZavrsetka()));
         jTextFielDatumOD.setText(format.format(pu.getDatumPocetka()));
         jTextFieldTrajanje.setText(pu.getTrajanje() + "");
@@ -912,7 +960,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFielDatumOD.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-             
+
                 if (jTextFielDatumOD.getText().equals("dd-mm-yyyy")) {
                     jTextFielDatumOD.setText("");
                 }
@@ -920,7 +968,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
             @Override
             public void focusLost(FocusEvent e) {
-                
+
                 if (jTextFielDatumOD.getText().isEmpty()) {
                     jTextFielDatumOD.setText("dd-mm-yyyy");
                 }
@@ -929,7 +977,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFieldDatumDO.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                
+
                 if (jTextFieldDatumDO.getText().equals("dd-mm-yyyy")) {
                     jTextFieldDatumDO.setText("");
                 }
@@ -937,7 +985,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
             @Override
             public void focusLost(FocusEvent e) {
-                
+
                 if (jTextFieldDatumDO.getText().isEmpty()) {
                     jTextFieldDatumDO.setText("dd-mm-yyyy");
                 }
@@ -963,6 +1011,10 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         for (int i = 0; i < aktivnosti.size(); i++) {
             aktivnosti.get(i).setRedniBroj(i + 1);
         }
+    }
+
+    private void setLabels() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

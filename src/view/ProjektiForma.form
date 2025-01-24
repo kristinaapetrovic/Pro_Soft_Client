@@ -83,16 +83,16 @@
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jLabel1" min="-2" pref="117" max="-2" attributes="0"/>
+                          <Component id="jLabelKriterijumi" min="-2" pref="117" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel3" alignment="0" pref="96" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabelMen" alignment="0" pref="96" max="32767" attributes="0"/>
+                                  <Component id="jLabelRegBr" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jLabel4" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="jLabelSponz" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -122,15 +122,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelKriterijumi" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelRegBr" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldRegBroj" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelMen" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxMenadzer" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -138,7 +138,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabelSponz" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jComboBoxSponzor" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -153,22 +153,22 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabelKriterijumi">
           <Properties>
             <Property name="text" type="java.lang.String" value="Kriterijumi pretrage"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabelRegBr">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reg broj"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLabelMen">
           <Properties>
             <Property name="text" type="java.lang.String" value="Menadzer"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="jLabelSponz">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sponzor"/>
           </Properties>

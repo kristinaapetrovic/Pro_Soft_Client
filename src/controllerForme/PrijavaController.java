@@ -11,6 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import language.LanguageManager;
 import model.Menadzer;
 import view.PrijavaForma;
 
@@ -50,7 +51,7 @@ public class PrijavaController {
                 Menadzer ulogovani=komunikacijaKlijent.Komunikacija.getInstance().prijava(menadzer);
                 
                 if(ulogovani==null){
-                    JOptionPane.showMessageDialog(pf, "Pogresan email ili lozinka", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("credentials_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 }else if(!ulogovani.isPrviLog()){
                     Cordinator.getInstance().setUlogovani(ulogovani);
                     Cordinator.getInstance().otvoriGlavnuFormu();

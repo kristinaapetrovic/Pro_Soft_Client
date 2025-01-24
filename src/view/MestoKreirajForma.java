@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Mesto;
 
 /**
@@ -27,6 +28,7 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     public MestoKreirajForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLabels();
         roditelj = (MestoForma) parent;
         popuniFormuKreiraj();
     }
@@ -34,6 +36,7 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     public MestoKreirajForma(java.awt.Frame parent, boolean modal, Mesto mesto) {
         super(parent, modal);
         initComponents();
+        setLabels();
         roditelj = (MestoForma) parent;
         this.mesto = mesto;
         popuniFormuDetalji();
@@ -49,11 +52,11 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelPB = new javax.swing.JLabel();
         jTextFieldPostanski = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelPodaci = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButtonIzmeni = new javax.swing.JButton();
         jButtonSacuvaj = new javax.swing.JButton();
@@ -64,11 +67,11 @@ public class MestoKreirajForma extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel2.setText("Naziv");
+        jLabelNaziv.setText("Naziv");
 
-        jLabel1.setText("Postanski broj");
+        jLabelPB.setText("Postanski broj");
 
-        jLabel3.setText("Podaci");
+        jLabelPodaci.setText("Podaci");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -78,12 +81,12 @@ public class MestoKreirajForma extends javax.swing.JDialog {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelPodaci, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPB, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(40, 40, 40)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextFieldPostanski)
@@ -94,14 +97,14 @@ public class MestoKreirajForma extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel3)
+                .addComponent(jLabelPodaci)
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelPB)
                     .addComponent(jTextFieldPostanski, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(43, 43, 43))
         );
@@ -200,7 +203,7 @@ public class MestoKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(id, naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -209,10 +212,10 @@ public class MestoKreirajForma extends javax.swing.JDialog {
 
         if (uspesno) {
             Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
-            JOptionPane.showMessageDialog(this, "Mesto je uspesno ubaceno u bazu", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("insert_city_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri unosu mesta u bazu", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("insert_city_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
@@ -224,7 +227,7 @@ public class MestoKreirajForma extends javax.swing.JDialog {
 
     private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
 
-        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete mesto?", "Potvrda", JOptionPane.YES_NO_OPTION);
+        int odgovor = JOptionPane.showConfirmDialog(this, LanguageManager.getString("detele_city_question"), LanguageManager.getString("confirmation"), JOptionPane.YES_NO_OPTION);
         if (odgovor != JOptionPane.YES_OPTION) {
             return;
         }
@@ -238,20 +241,20 @@ public class MestoKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(id, naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         Mesto mesto = new Mesto(id, naziv, false);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMesto(mesto);
         if (uspesno) {
             Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
-            JOptionPane.showMessageDialog(this, "Mesto je uspesno promenjeno", "Obaveztenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_city_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri promeni mesta", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_city_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
 
     /**
@@ -302,9 +305,9 @@ public class MestoKreirajForma extends javax.swing.JDialog {
     private javax.swing.JButton jButtonKreiraj;
     private javax.swing.JButton jButtonObrisi;
     private javax.swing.JButton jButtonSacuvaj;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelNaziv;
+    private javax.swing.JLabel jLabelPB;
+    private javax.swing.JLabel jLabelPodaci;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldNaziv;
@@ -326,7 +329,7 @@ public class MestoKreirajForma extends javax.swing.JDialog {
             jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
         }
 
-        JOptionPane.showMessageDialog(this, "Greska prilikom unosa podataka", "Greska", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         return false;
     }
 
@@ -358,12 +361,24 @@ public class MestoKreirajForma extends javax.swing.JDialog {
         mesto.setObrisano(true);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMesto(mesto);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Mesto je obrisano iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_city_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "Mesto nije obrisano iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_city_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return false;
         }
+
+    }
+
+    private void setLabels() {
+
+        jLabelNaziv.setText(LanguageManager.getString("city_name"));
+        jLabelPB.setText(LanguageManager.getString("postal_code"));
+        jLabelPodaci.setText(LanguageManager.getString("data"));
+        jButtonIzmeni.setText(LanguageManager.getString("update_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonObrisi.setText(LanguageManager.getString("delete_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
 
     }
 

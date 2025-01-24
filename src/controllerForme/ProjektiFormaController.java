@@ -12,11 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
-import model.JeSponzor;
+import language.LanguageManager;
 import model.Menadzer;
 import model.Projekat;
 import model.Sponzor;
-import model.VrstaAktivnosti;
 import modeliTabela.ProjekatModelTabele;
 import view.ProjektiForma;
 
@@ -72,7 +71,7 @@ public class ProjektiFormaController {
                 Sponzor sponzor = (Sponzor) pf.getjComboBoxSponzor().getSelectedItem();
 
                 if (regBroj.isEmpty() && menadzer == null && sponzor == null) {
-                    JOptionPane.showMessageDialog(pf, "Unesite barjem jedan kriterijum", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 if (!validacija(regBroj)) {
@@ -85,7 +84,7 @@ public class ProjektiFormaController {
 
             private boolean validacija(String regBroj) {
                 if (!regBroj.isEmpty() && !regBroj.matches("\\d{4}/20\\d{2}")) {
-                    JOptionPane.showMessageDialog(pf, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     pf.getjTextFieldRegBroj().setBorder(new LineBorder(Color.RED, 3));
                     return false;
                 }
@@ -122,7 +121,7 @@ public class ProjektiFormaController {
                     pf.getjTableProjekti().setModel(pmt);
 
                 } else {
-                    JOptionPane.showMessageDialog(pf, "Sistem ne moze da pronadje ugovor o radu", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("read_projects_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
 
                 }
 
@@ -146,7 +145,7 @@ public class ProjektiFormaController {
                 int sel = pf.getjTableProjekti().getSelectedRow();
 
                 if (sel == -1) {
-                    JOptionPane.showMessageDialog(pf, "Odaberite projektni ugovor", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("project_not_chosen"), LanguageManager.getString("warning"), JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
 

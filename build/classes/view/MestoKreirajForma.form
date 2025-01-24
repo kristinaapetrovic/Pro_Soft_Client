@@ -62,13 +62,13 @@
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="jLabelPodaci" min="-2" pref="37" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
+                              <Component id="jLabelNaziv" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jLabelPB" alignment="0" min="-2" pref="82" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -85,15 +85,15 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelPodaci" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelPB" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldPostanski" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="46" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelNaziv" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldNaziv" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -102,21 +102,21 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jLabelNaziv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Naziv"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldNaziv">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabelPB">
           <Properties>
             <Property name="text" type="java.lang.String" value="Postanski broj"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextFieldPostanski">
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="jLabelPodaci">
           <Properties>
             <Property name="text" type="java.lang.String" value="Podaci"/>
           </Properties>

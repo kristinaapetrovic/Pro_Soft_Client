@@ -117,7 +117,7 @@ public class MenadzerNalogFromaController {
                     return;
                 }
 
-                int odgovor = JOptionPane.showConfirmDialog(mnf, LanguageManager.getString("delete_education_question"), LanguageManager.getString("chech"), JOptionPane.YES_NO_OPTION);
+                int odgovor = JOptionPane.showConfirmDialog(mnf, LanguageManager.getString("delete_education_question"), LanguageManager.getString("confirmation"), JOptionPane.YES_NO_OPTION);
                 if (odgovor != JOptionPane.YES_OPTION) {
                     return;
                 }
