@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Mesto;
 import model.Sponzor;
 import modeliTabela.SponzorModelTabele;
@@ -56,7 +57,7 @@ public class SponzorFormaController {
                 String naziv = sf.getjTextFieldNaziv().getText();
                 Mesto mesto = (Mesto) sf.getjComboBoxMesta().getSelectedItem();
                 if(naziv.isEmpty() && mesto==null){
-                    JOptionPane.showMessageDialog(sf, "Unesite bar jedan kriterijum", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 if (!validacija(naziv, mesto)) {
@@ -70,7 +71,7 @@ public class SponzorFormaController {
 
             private boolean validacija(String naziv, Mesto mesto) {
                 if (!naziv.isEmpty() && !naziv.matches("^[a-zA-Z ]+$")) {
-                    JOptionPane.showMessageDialog(sf, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     sf.getjTextFieldNaziv().setBorder(new LineBorder(Color.RED, 3));
                     return false;
                 }
@@ -98,7 +99,7 @@ public class SponzorFormaController {
             public void actionPerformed(ActionEvent e) {
                 int selektovano=sf.getjTableSponzori().getSelectedRow();
                 if(selektovano==-1){
-                    JOptionPane.showMessageDialog(sf, "Izaberite sponzora", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("spons_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 SponzorModelTabele smt=(SponzorModelTabele) sf.getjTableSponzori().getModel();
@@ -112,7 +113,7 @@ public class SponzorFormaController {
                 int selektovan = sf.getjTableSponzori().getSelectedRow();
 
                 if (selektovan == -1) {
-                    JOptionPane.showMessageDialog(sf, "Izaberite izvodjaca", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("spons_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 SponzorModelTabele smt = (SponzorModelTabele) sf.getjTableSponzori().getModel();

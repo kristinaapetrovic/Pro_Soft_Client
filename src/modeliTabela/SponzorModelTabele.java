@@ -6,6 +6,7 @@ package modeliTabela;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.Sponzor;
 
 /**
@@ -15,7 +16,11 @@ import model.Sponzor;
 public class SponzorModelTabele extends AbstractTableModel {
 
     private List<Sponzor> lista;
-    private String naziviKolona[] = {"Maticni broj", "Naziv firme", "Vlasnik", "Sediste"};
+    String kol1=LanguageManager.getString("rnc");
+    String kol2=LanguageManager.getString("company_name");
+    String kol3=LanguageManager.getString("owner");
+    String kol4=LanguageManager.getString("city");
+    private String naziviKolona[] = {kol1, kol2, kol3, kol4};
 
     public SponzorModelTabele(List<Sponzor> lista) {
         this.lista = lista;

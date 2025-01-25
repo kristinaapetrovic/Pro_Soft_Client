@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Sponzor;
 import model.Mesto;
 
@@ -32,7 +33,8 @@ public class SponzorForma extends javax.swing.JFrame {
         initComponents();
         
         setLocationRelativeTo(null);
-        setTitle("Sponzori");
+        setLabels();
+        setTitle(LanguageManager.getString("sponsors"));
         popuniTabelu();
         popuniComboBox();
         setDefaultCloseOperation(SponzorForma.DISPOSE_ON_CLOSE);
@@ -65,9 +67,9 @@ public class SponzorForma extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelKritPret = new javax.swing.JLabel();
+        jLabelNazivPred = new javax.swing.JLabel();
+        jLabelMesto = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jComboBoxMesta = new javax.swing.JComboBox<>();
         jButtonPretrazi = new javax.swing.JButton();
@@ -76,7 +78,7 @@ public class SponzorForma extends javax.swing.JFrame {
         jButtonDetalji = new javax.swing.JButton();
         jButtonKreiraj = new javax.swing.JButton();
         jButtonProjekti = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableSponzori = new javax.swing.JTable();
 
@@ -84,11 +86,11 @@ public class SponzorForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Kriterijumi pretrage");
+        jLabelKritPret.setText("Kriterijumi pretrage");
 
-        jLabel2.setText("Naziv preduzeca");
+        jLabelNazivPred.setText("Naziv preduzeca");
 
-        jLabel3.setText("Mesto");
+        jLabelMesto.setText("Mesto");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -112,12 +114,12 @@ public class SponzorForma extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelKritPret, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelNazivPred, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelMesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxMesta, 0, 118, Short.MAX_VALUE)
@@ -132,15 +134,15 @@ public class SponzorForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelKritPret)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelNazivPred)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonPretrazi))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelMesto)
                     .addComponent(jComboBoxMesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonOcistiFilter))
                 .addGap(26, 26, 26))
@@ -191,10 +193,10 @@ public class SponzorForma extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNazadActionPerformed(evt);
             }
         });
 
@@ -228,8 +230,8 @@ public class SponzorForma extends javax.swing.JFrame {
                         .addGap(44, 44, 44))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(78, 78, 78))
+                .addComponent(jButtonNazad)
+                .addGap(71, 71, 71))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,9 +242,9 @@ public class SponzorForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jButtonNazad)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -316,9 +318,9 @@ public class SponzorForma extends javax.swing.JFrame {
 //        
     }//GEN-LAST:event_jButtonProjektiActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNazadActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNazadActionPerformed
 
     private void jButtonOcistiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcistiFilterActionPerformed
 //        jTextFieldNaziv.setText("");
@@ -365,16 +367,16 @@ public class SponzorForma extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDetalji;
     private javax.swing.JButton jButtonKreiraj;
+    private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcistiFilter;
     private javax.swing.JButton jButtonPretrazi;
     private javax.swing.JButton jButtonProjekti;
     private javax.swing.JComboBox<Mesto> jComboBoxMesta;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelKritPret;
+    private javax.swing.JLabel jLabelMesto;
+    private javax.swing.JLabel jLabelNazivPred;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -420,5 +422,19 @@ public class SponzorForma extends javax.swing.JFrame {
 
     public void projektiActionListener(ActionListener actionListener) {
         jButtonProjekti.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKritPret.setText(LanguageManager.getString("criteria"));
+        jLabelMesto.setText(LanguageManager.getString("city"));
+        jLabelNazivPred.setText(LanguageManager.getString("company_name"));
+        
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
+        jButtonProjekti.setText(LanguageManager.getString("projects"));
+        
     }
 }

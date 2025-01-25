@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.Aktivnost;
 
 /**
@@ -19,6 +20,13 @@ public class AktivnostModelTabele extends AbstractTableModel {
     private List<Aktivnost> lista;
     private String[] naziviKolona;
 
+    String kol1=LanguageManager.getString("no");
+    String kol2=LanguageManager.getString("act_name");
+    String kol3=LanguageManager.getString("act_desc");
+    String kol4=LanguageManager.getString("act_type");
+    String kol5=LanguageManager.getString("done");
+    String kol6=LanguageManager.getString("done_date");
+    
     public AktivnostModelTabele() {
     }
 
@@ -29,9 +37,9 @@ public class AktivnostModelTabele extends AbstractTableModel {
     public AktivnostModelTabele(List<Aktivnost> lista, boolean daLiJeZavrsena) {
         this.lista = lista;
         if (daLiJeZavrsena) {
-            this.naziviKolona = new String[]{"Redni broj", "Naziv aktivnosti", "Opis", "Vrsta aktivnosti", "Zavrsena", "Datum realizacije"};
+            this.naziviKolona = new String[]{kol1, kol2, kol3, kol4, kol5, kol6};
         } else {
-            this.naziviKolona = new String[]{"Redni broj", "Naziv aktivnosti", "Opis", "Vrsta aktivnosti"};
+            this.naziviKolona = new String[]{kol1, kol2, kol3, kol4};
         }
 
     }
@@ -104,10 +112,10 @@ public class AktivnostModelTabele extends AbstractTableModel {
         if (columnIndex == 4 && aValue instanceof Boolean) {
             lista.get(rowIndex).setObavljena((boolean) aValue);
             if ((Boolean) aValue) {
-                lista.get(rowIndex).setDatumRealizacije(new Date()); // Postavi datum samo ako je obavljena
+                lista.get(rowIndex).setDatumRealizacije(new Date()); 
                 System.out.println("Obavljena: "+lista.get(rowIndex).getDatumRealizacije());
             } else {
-                lista.get(rowIndex).setDatumRealizacije(null); // Očisti datum ako se odčekira
+                lista.get(rowIndex).setDatumRealizacije(null); 
             }
             fireTableCellUpdated(rowIndex, columnIndex);
         }

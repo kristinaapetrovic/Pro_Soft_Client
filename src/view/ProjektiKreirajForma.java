@@ -77,7 +77,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelPodaciProj = new javax.swing.JLabel();
         jLabelRegBroj = new javax.swing.JLabel();
         jLabelNazivProj = new javax.swing.JLabel();
         jLabelOpisProj = new javax.swing.JLabel();
@@ -95,7 +95,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         jTextFieldBudzet = new javax.swing.JTextField();
         jComboBoxMenadzer = new javax.swing.JComboBox<>();
         jButtonSacuvaj = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabelPodaciAkt = new javax.swing.JLabel();
@@ -126,7 +126,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Podaci o projektu");
+        jLabelPodaciProj.setText("Podaci o projektu");
 
         jLabelRegBroj.setText("Reg broj");
 
@@ -182,14 +182,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                 .addGap(136, 136, 136))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabelPodaciProj, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel1)
+                .addComponent(jLabelPodaciProj)
                 .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -242,10 +242,10 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNazadActionPerformed(evt);
             }
         });
 
@@ -344,11 +344,11 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(217, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -485,7 +485,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(jButtonNazad)
                     .addComponent(jButtonSacuvaj))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -496,7 +496,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(jButtonNazad)
                         .addGap(41, 41, 41)
                         .addComponent(jButtonSacuvaj)
                         .addGap(170, 170, 170))
@@ -529,7 +529,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         VrstaAktivnosti vakt = (VrstaAktivnosti) jComboBoxVAktivnosti.getSelectedItem();
 
         if (!validacijaAktivnosti(naziv, opis, vakt)) {
-            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -543,7 +543,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private void jButtonObrisiAktActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiAktActionPerformed
         int sel = jTableAktivnost.getSelectedRow();
         if (sel == -1) {
-            JOptionPane.showMessageDialog(this, "Odaberite aktivnost", "Upozorenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("act_not_chosen"), LanguageManager.getString("warning"), JOptionPane.INFORMATION_MESSAGE);
             return;
         }
         AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
@@ -556,7 +556,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private void jButtonDodajSponzorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDodajSponzorActionPerformed
         Sponzor sponzor = (Sponzor) jComboBoxSponzor.getSelectedItem();
         if (sponzor == null) {
-            JOptionPane.showMessageDialog(this, "Odaberite sponzora iz liste", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("spons_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         boolean robni = false;
@@ -565,12 +565,12 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         robni = jCheckBoxRobni.isSelected();
         novcani = jCheckBoxNovcani.isSelected();
         if (!robni && !novcani) {
-            JOptionPane.showMessageDialog(this, "Sponzor mora biti bar jedno od ponudjenog: robni, novcani!", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("spons_type_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!jTextFieldIznosSponz.getText().matches("\\d+(\\.\\d+)?")) {
-            JOptionPane.showMessageDialog(this, "Greska pri unosu iznosa", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("amount_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         iznos = Double.parseDouble(jTextFieldIznosSponz.getText());
@@ -587,7 +587,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         int selektovan = jTableSponzori.getSelectedRow();
         if (selektovan == -1) {
-            JOptionPane.showMessageDialog(this, "Odaberite sponzora", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("spons_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -601,9 +601,9 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFielDatumODActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNazadActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNazadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -649,9 +649,9 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDodajAkt;
     private javax.swing.JButton jButtonDodajSponzor;
+    private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonObrisiAkt;
     private javax.swing.JButton jButtonObrisiSponzor;
     private javax.swing.JButton jButtonSacuvaj;
@@ -660,7 +660,6 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private javax.swing.JComboBox<Menadzer> jComboBoxMenadzer;
     private javax.swing.JComboBox<model.Sponzor> jComboBoxSponzor;
     private javax.swing.JComboBox<VrstaAktivnosti> jComboBoxVAktivnosti;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelBudzet;
     private javax.swing.JLabel jLabelDatPoc;
     private javax.swing.JLabel jLabelDatZav;
@@ -671,6 +670,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     private javax.swing.JLabel jLabelOpisAkt;
     private javax.swing.JLabel jLabelOpisProj;
     private javax.swing.JLabel jLabelPodaciAkt;
+    private javax.swing.JLabel jLabelPodaciProj;
     private javax.swing.JLabel jLabelRegBroj;
     private javax.swing.JLabel jLabelSpon;
     private javax.swing.JLabel jLabelTrajanje;
@@ -792,16 +792,16 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         Projekat ugovor = pokupiPodatkeVratiUgovor();
 
         if (ugovor == null) {
-            JOptionPane.showMessageDialog(this, "Greska pri ucitavanju podataka", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("data_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajProjektniUgovor(ugovor);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Sistem je zapamtio projektni ugovor", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("insert_project_succes"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getProjektiFormaController().azurirajTabelu();
 
         } else {
-            JOptionPane.showMessageDialog(this, "Sistem ne moze da zapamti projektni ugovor", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("insert_project_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -817,11 +817,11 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         List<Aktivnost> lista = amt.getLista();
         for (Aktivnost akt : lista) {
             if (!komunikacijaKlijent.Komunikacija.getInstance().promeniAktivnost(akt)) {
-                JOptionPane.showMessageDialog(this, "Greska pri cuvanju izmena", "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, LanguageManager.getString("update_project_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 return;
             }
         }
-        JOptionPane.showMessageDialog(this, "Izmene su uspesno sacuvane!", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, LanguageManager.getString("update_project_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
     }
 
     private Projekat pokupiPodatkeVratiUgovor() {
@@ -836,7 +836,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         Sponzor izv = (Sponzor) jComboBoxSponzor.getSelectedItem();
 
         if (!validacija(regBroj, naziv, opisProj, trajanje, budzet, men)) {
-            JOptionPane.showMessageDialog(this, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return null;
         }
 
@@ -852,7 +852,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         } catch (ParseException ex) {
             jTextFielDatumOD.setBorder(new LineBorder(Color.RED, 3));
             jTextFieldDatumDO.setBorder(new LineBorder(Color.RED, 3));
-            JOptionPane.showMessageDialog(this, "Greska pri unosu datuma", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("date_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return null;
         }
 
@@ -878,7 +878,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void popuniFormuDetalji() {
-        jButtonSacuvaj.setText("Sacuvaj izmene");
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
         jButtonObrisiAkt.setVisible(false);
         jButtonDodajAkt.setVisible(false);
         jTextFieldRegBr.setText(pu.getRegBroj() + "");
@@ -1014,7 +1014,29 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void setLabels() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        jLabelBudzet.setText(LanguageManager.getString("budget"));
+        jLabelDatPoc.setText(LanguageManager.getString("start_date"));
+        jLabelDatZav.setText(LanguageManager.getString("end_date"));
+        jLabelIznosSpon.setText(LanguageManager.getString("spons_amount"));
+        jLabelMen.setText(LanguageManager.getString("managers"));
+        jLabelNazivProj.setText(LanguageManager.getString("project_name"));
+        jLabelNazviAkt.setText(LanguageManager.getString("act_name"));
+        jLabelOpisAkt.setText(LanguageManager.getString("act_desc"));
+        jLabelOpisProj.setText(LanguageManager.getString("proj_desc"));
+        jLabelPodaciAkt.setText(LanguageManager.getString("act_data"));
+        jLabelPodaciProj.setText(LanguageManager.getString("proj_data"));
+        jLabelRegBroj.setText(LanguageManager.getString("reg_num"));
+        jLabelSpon.setText(LanguageManager.getString("sponsors"));
+        jLabelTrajanje.setText(LanguageManager.getString("duration"));
+        jLabelVrstaAkt.setText(LanguageManager.getString("act_type"));
+        
+        jButtonDodajAkt.setText(LanguageManager.getString("add_act_button"));
+        jButtonDodajSponzor.setText(LanguageManager.getString("add_spons_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonObrisiAkt.setText(LanguageManager.getString("delete_act_button"));
+        jButtonObrisiSponzor.setText(LanguageManager.getString("delete_spons_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_button"));
+        
     }
 
 }
