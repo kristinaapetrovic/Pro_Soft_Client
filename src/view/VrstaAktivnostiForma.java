@@ -5,15 +5,10 @@
 package view;
 
 import condinator.Cordinator;
-import java.awt.Color;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
-import model.VrstaAktivnosti;
+import language.LanguageManager;
 /**
  *
  * @author Korisnik
@@ -26,7 +21,8 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
     public VrstaAktivnostiForma() {
         initComponents();
         popuniTabelu();
-        setTitle("Vrste aktivnosti");
+        setLabels();
+        setTitle(LanguageManager.getString("act_type"));
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
         
     }
@@ -47,8 +43,8 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 
         jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelKritPret = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcistiFilter = new javax.swing.JButton();
@@ -68,9 +64,9 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Kriterijum pretrage:");
+        jLabelKritPret.setText("Kriterijum pretrage:");
 
-        jLabel3.setText("Naziv");
+        jLabelNaziv.setText("Naziv");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -94,12 +90,12 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelKritPret, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(51, 51, 51)
                                 .addComponent(jTextFieldNaziv))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -112,10 +108,10 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelKritPret)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -292,8 +288,8 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
     private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcistiFilter;
     private javax.swing.JButton jButtonPretrazi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelKritPret;
+    private javax.swing.JLabel jLabelNaziv;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPanePrviTab;
     private javax.swing.JTable jTableVA;
@@ -322,6 +318,18 @@ public class VrstaAktivnostiForma extends javax.swing.JFrame {
 
     public void detaljiActionListener(ActionListener actionListener) {
         jButtonDetalji.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKritPret.setText(LanguageManager.getString("criteria"));
+        jLabelNaziv.setText(LanguageManager.getString("act_type_name"));
+        
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
+       
     }
 
     

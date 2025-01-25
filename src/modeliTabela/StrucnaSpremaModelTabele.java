@@ -7,6 +7,7 @@ package modeliTabela;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.StrucnaSprema;
 
 /**
@@ -16,14 +17,14 @@ import model.StrucnaSprema;
 public class StrucnaSpremaModelTabele extends AbstractTableModel {
 
     private List<StrucnaSprema> lista = new ArrayList<>();
-    private String naziviKolona[] = {"ID", "Naziv strucne spreme"};
+    String kol1 = "ID";
+    String kol2 = LanguageManager.getString("education_name");
+    private String naziviKolona[] = {kol1, kol2};
 
     public List<StrucnaSprema> getLista() {
         return lista;
     }
 
-    
-    
     public StrucnaSpremaModelTabele() {
     }
 
@@ -35,7 +36,8 @@ public class StrucnaSpremaModelTabele extends AbstractTableModel {
         lista.add(element);
         fireTableDataChanged();
     }
-    public void ukloniElement(StrucnaSprema element){
+
+    public void ukloniElement(StrucnaSprema element) {
         lista.remove(element);
         fireTableDataChanged();
     }

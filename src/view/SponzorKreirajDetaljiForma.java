@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.Sponzor;
 import model.Mesto;
 
@@ -37,7 +38,8 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     public SponzorKreirajDetaljiForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Kreiraj sponzora");
+        setLabels();
+        setTitle(LanguageManager.getString("create_sponsor_title"));
         pripremiFormuKreiraj();
         popuniComboBox();
         roditelj = (SponzorForma) parent;
@@ -47,8 +49,9 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     public SponzorKreirajDetaljiForma(java.awt.Frame parent, boolean modal, Sponzor sponzor) {
         super(parent, modal);
         initComponents();
+        setLabels();
         popuniComboBox();
-        setTitle("Detalji sponzora");
+        setTitle(LanguageManager.getString("update_sponsor_title"));
         roditelj = (SponzorForma) parent;
         this.sponzor = sponzor;
         System.out.println(sponzor.getMesto());
@@ -66,11 +69,11 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelPodaci = new javax.swing.JLabel();
+        jLabelMatBr = new javax.swing.JLabel();
+        jLabelNazivFirme = new javax.swing.JLabel();
+        jLabelVlasnik = new javax.swing.JLabel();
+        jLabelMesto = new javax.swing.JLabel();
         jTextFieldMBroj = new javax.swing.JTextField();
         jTextFieldNaziv = new javax.swing.JTextField();
         jTextFieldVlasnik = new javax.swing.JTextField();
@@ -80,21 +83,21 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         jButtonSacuvaj = new javax.swing.JButton();
         jButtonObrisi = new javax.swing.JButton();
         jButtonKreiraj = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Podaci o izvodjacu");
+        jLabelPodaci.setText("Podaci o izvodjacu");
 
-        jLabel2.setText("Maticni broj");
+        jLabelMatBr.setText("Maticni broj");
 
-        jLabel3.setText("Naziv firme");
+        jLabelNazivFirme.setText("Naziv firme");
 
-        jLabel4.setText("Vlasnik");
+        jLabelVlasnik.setText("Vlasnik");
 
-        jLabel5.setText("Mesto");
+        jLabelMesto.setText("Mesto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,15 +107,15 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelPodaci)
                         .addGap(0, 75, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabelMatBr)
+                            .addComponent(jLabelNazivFirme)
+                            .addComponent(jLabelVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelMesto, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxMesto, 0, 95, Short.MAX_VALUE)
@@ -125,22 +128,22 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(jLabelPodaci)
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelMatBr)
                     .addComponent(jTextFieldMBroj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelNazivFirme)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(jLabelVlasnik)
                     .addComponent(jTextFieldVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(jLabelMesto)
                     .addComponent(jComboBoxMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(70, Short.MAX_VALUE))
         );
@@ -175,10 +178,10 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
             }
         });
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNazadActionPerformed(evt);
             }
         });
 
@@ -193,14 +196,14 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
                     .addComponent(jButtonObrisi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonSacuvaj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonNazad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jButton1)
+                .addComponent(jButtonNazad)
                 .addGap(49, 49, 49)
                 .addComponent(jButtonIzmeni)
                 .addGap(39, 39, 39)
@@ -243,17 +246,17 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
 
         if (!validacija(matBr, naziv, vlasnik, mesto)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajSponzor(sponzor);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Sponzor je uspesno kreiran", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno kreiran", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_sponsor_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -277,23 +280,23 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         Mesto mesto = (Mesto) jComboBoxMesto.getSelectedItem();
 
         if (!validacija(matBr, naziv, vlasnik, mesto)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniSponzor(sponzor);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Sponzor je uspesno izmenjen", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno izmenjen", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_sponsor_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
 
     private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
-        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete sponzora?", "Potvrda", JOptionPane.YES_NO_OPTION);
+        int odgovor = JOptionPane.showConfirmDialog(this, LanguageManager.getString("delete_sponsor_question"), LanguageManager.getString("confirmation"), JOptionPane.YES_NO_OPTION);
         if (odgovor != JOptionPane.YES_OPTION) {
             return;
         }
@@ -301,76 +304,76 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiSponzor(sponzor);
 
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Sponzor je uspesno obrisan", "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Sponzor nije uspesno obrisan", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_sponsor_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonObrisiActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNazadActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNazadActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                SponzorKreirajDetaljiForma dialog = new SponzorKreirajDetaljiForma(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SponzorKreirajDetaljiForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                SponzorKreirajDetaljiForma dialog = new SponzorKreirajDetaljiForma(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonIzmeni;
     private javax.swing.JButton jButtonKreiraj;
+    private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonObrisi;
     private javax.swing.JButton jButtonSacuvaj;
     private javax.swing.JComboBox<Mesto> jComboBoxMesto;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabelMatBr;
+    private javax.swing.JLabel jLabelMesto;
+    private javax.swing.JLabel jLabelNazivFirme;
+    private javax.swing.JLabel jLabelPodaci;
+    private javax.swing.JLabel jLabelVlasnik;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextFieldMBroj;
@@ -432,6 +435,22 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         jTextFieldVlasnik.setText(sponzor.getVlasnik());
         jComboBoxMesto.setSelectedItem(sponzor.getMesto());
 
+    }
+
+    private void setLabels() {
+        jLabelMatBr.setText(LanguageManager.getString("rnc"));
+        jLabelMesto.setText(LanguageManager.getString("city"));
+        jLabelNazivFirme.setText(LanguageManager.getString("company_name"));
+        jLabelPodaci.setText(LanguageManager.getString("data"));
+        jLabelVlasnik.setText(LanguageManager.getString("owner"));
+        
+        
+        jButtonIzmeni.setText(LanguageManager.getString("update_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonObrisi.setText(LanguageManager.getString("delete_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
+        
     }
 
 }

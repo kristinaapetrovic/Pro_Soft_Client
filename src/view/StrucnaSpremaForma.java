@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.StrucnaSprema;
 
 /**
@@ -28,8 +29,8 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
     public StrucnaSpremaForma() {
         initComponents();
         setLocationRelativeTo(null);
-        
-        setTitle("Strucne spreme");
+        setLabels();
+        setTitle(LanguageManager.getString("education"));
         popuniTabelu();
         setDefaultCloseOperation(MenadzerNalogForma.DISPOSE_ON_CLOSE);
     }
@@ -50,12 +51,12 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
         jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelKritPret = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcistiFilter = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
         jScrollPanePrviTab = new javax.swing.JScrollPane();
         jTableSS = new javax.swing.JTable();
         jButtonKreiraj = new javax.swing.JButton();
@@ -71,9 +72,9 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("Kriterijumi pretrage");
+        jLabelKritPret.setText("Kriterijumi pretrage");
 
-        jLabel3.setText("Naziv");
+        jLabelNaziv.setText("Naziv");
 
         jButtonPretrazi.setText("Pretrazi");
         jButtonPretrazi.addActionListener(new java.awt.event.ActionListener() {
@@ -97,12 +98,12 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelKritPret, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(51, 51, 51)
                                 .addComponent(jTextFieldNaziv))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
@@ -115,10 +116,10 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelKritPret)
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -127,10 +128,10 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jButton1.setText("Nazad");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonNazadActionPerformed(evt);
             }
         });
 
@@ -167,7 +168,7 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonDetalji)
                     .addComponent(jButtonKreiraj)
-                    .addComponent(jButton1))
+                    .addComponent(jButtonNazad))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -184,7 +185,7 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(jButtonKreiraj)
                 .addGap(27, 27, 27)
-                .addComponent(jButton1)
+                .addComponent(jButtonNazad)
                 .addGap(65, 65, 65))
         );
 
@@ -245,10 +246,10 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButtonPretraziActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonNazadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNazadActionPerformed
         this.dispose();
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jButtonNazadActionPerformed
 
     private void jButtonOcistiFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcistiFilterActionPerformed
 //        jTextFieldNaziv.setText("");
@@ -259,47 +260,47 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StrucnaSpremaForma().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(StrucnaSpremaForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new StrucnaSpremaForma().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDetalji;
     private javax.swing.JButton jButtonKreiraj;
+    private javax.swing.JButton jButtonNazad;
     private javax.swing.JButton jButtonOcistiFilter;
     private javax.swing.JButton jButtonPretrazi;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelKritPret;
+    private javax.swing.JLabel jLabelNaziv;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPanePrviTab;
     private javax.swing.JTable jTableSS;
@@ -329,6 +330,17 @@ public class StrucnaSpremaForma extends javax.swing.JFrame {
 
     public void detaljiActionListener(ActionListener actionListener) {
         jButtonDetalji.addActionListener(actionListener);
+    }
+
+    private void setLabels() {
+        jLabelKritPret.setText(LanguageManager.getString("criteria"));
+        jLabelNaziv.setText(LanguageManager.getString("education_name"));
+        
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonNazad.setText(LanguageManager.getString("back_button"));
+        jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
+        jButtonPretrazi.setText(LanguageManager.getString("search_button"));
     }
 
 

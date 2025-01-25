@@ -8,6 +8,7 @@ import condinator.Cordinator;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.VrstaAktivnosti;
 
 /**
@@ -25,6 +26,8 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     public VrstaAktivnostiKreirajForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLabels();
+        setTitle(LanguageManager.getString("create_act_type_title"));
         popuniFormuKreiraj();
         roditelj = (VrstaAktivnostiForma) parent;
     }
@@ -32,6 +35,8 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     public VrstaAktivnostiKreirajForma(java.awt.Frame parent, boolean modal, VrstaAktivnosti vakt) {
         super(parent, modal);
         initComponents();
+        setLabels();
+        setTitle(LanguageManager.getString("update_act_type_title"));
         this.vakt = vakt;
         popuniFormuDetalji();
         roditelj = (VrstaAktivnostiForma) parent;
@@ -46,7 +51,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonKreiraj = new javax.swing.JButton();
         jButtonIzmeni = new javax.swing.JButton();
@@ -55,7 +60,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Naziv");
+        jLabelNaziv.setText("Naziv");
 
         jButtonKreiraj.setText("Kreiraj");
         jButtonKreiraj.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(jTextFieldNaziv))
                     .addGroup(layout.createSequentialGroup()
@@ -112,7 +117,7 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -130,21 +135,21 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
             return;
         }
         if (ubaciUbazu(naziv)) {
-            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je ubacena u bazu", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_act_type_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getvaFormaController().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri unosu vrste aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_act_type_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
     private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
-        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete vrstu aktivnosti?", "Potvrda", JOptionPane.YES_NO_OPTION);
+        int odgovor = JOptionPane.showConfirmDialog(this, LanguageManager.getString("delete_act_type_question"), LanguageManager.getString("confirmation"), JOptionPane.YES_NO_OPTION);
         if (odgovor != JOptionPane.YES_OPTION) {
             return;
         }
@@ -162,16 +167,16 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
             return;
         }
         if (izmeniVA(naziv)) {
-            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je izmenjena", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_act_type_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getvaFormaController().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri izmeni vrste aktivnosti", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_act_type_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_jButtonSacuvajActionPerformed
@@ -179,52 +184,52 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                VrstaAktivnostiKreirajForma dialog = new VrstaAktivnostiKreirajForma(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(VrstaAktivnostiKreirajForma.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                VrstaAktivnostiKreirajForma dialog = new VrstaAktivnostiKreirajForma(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonIzmeni;
     private javax.swing.JButton jButtonKreiraj;
     private javax.swing.JButton jButtonObrisi;
     private javax.swing.JButton jButtonSacuvaj;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelNaziv;
     private javax.swing.JTextField jTextFieldNaziv;
     // End of variables declaration//GEN-END:variables
 
@@ -263,10 +268,10 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
         vakt.setObrisana(true);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiVrstaAktivnosti(vakt);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_act_type_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "Vrsta aktivnosti nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_act_type_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -275,7 +280,16 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     private boolean izmeniVA(String naziv) {
         vakt.setNazivVrstaAktivnosti(naziv);
         return komunikacijaKlijent.Komunikacija.getInstance().promeniVrstaAktivnosti(vakt);
-        
+
+    }
+
+    private void setLabels() {
+        jLabelNaziv.setText(LanguageManager.getString("act_type_name"));
+
+        jButtonIzmeni.setText(LanguageManager.getString("update_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonObrisi.setText(LanguageManager.getString("delete_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
     }
 
 }

@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import language.LanguageManager;
 import model.VrstaAktivnosti;
 import modeliTabela.VrstaAktivnostiModelTabele;
 import view.VrstaAktivnostiForma;
@@ -44,12 +45,12 @@ public class VrstaAktivnostiFormaController {
                 String naziv = vaf.getjTextFieldNaziv().getText().trim();
 
                 if (naziv.isEmpty()) {
-                    JOptionPane.showMessageDialog(vaf, "Unesite kriterijum pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 if ((!naziv.isEmpty() && !naziv.matches("^[a-zA-Z ]+$"))) {
-                    JOptionPane.showMessageDialog(vaf, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 VrstaAktivnosti vakt = new VrstaAktivnosti(0, naziv, false);
@@ -78,7 +79,7 @@ public class VrstaAktivnostiFormaController {
 
                 if (selektovano == -1) {
 
-                    JOptionPane.showMessageDialog(vaf, "Odaberite vrstu aktivnosti!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("act_type_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 

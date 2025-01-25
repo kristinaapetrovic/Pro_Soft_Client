@@ -7,6 +7,7 @@ package modeliTabela;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.VrstaAktivnosti;
 
 /**
@@ -16,13 +17,14 @@ import model.VrstaAktivnosti;
 public class VrstaAktivnostiModelTabele extends AbstractTableModel {
 
     private List<VrstaAktivnosti> lista = new ArrayList<>();
-    private String naziviKolona[] = {"ID", "Naziv"};
+    String kol1 = "ID";
+    String kol2 = LanguageManager.getString("act_name");
+    private String naziviKolona[] = {kol1, kol2};
 
     public List<VrstaAktivnosti> getLista() {
         return lista;
     }
 
- 
     public VrstaAktivnostiModelTabele(List<VrstaAktivnosti> lista) {
         this.lista = lista;
     }
@@ -64,7 +66,5 @@ public class VrstaAktivnostiModelTabele extends AbstractTableModel {
         lista.remove(vakt);
         fireTableDataChanged();
     }
-
-    
 
 }

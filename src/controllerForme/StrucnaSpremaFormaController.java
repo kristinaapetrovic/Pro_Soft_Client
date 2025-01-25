@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
+import language.LanguageManager;
 import model.StrucnaSprema;
 import modeliTabela.StrucnaSpremaModelTabele;
 import view.StrucnaSpremaForma;
@@ -44,12 +45,12 @@ public class StrucnaSpremaFormaController {
                 String naziv = ssf.getjTextFieldNaziv().getText();
 
                 if (naziv.isEmpty()) {
-                    JOptionPane.showMessageDialog(ssf, "Unesite kriterijum pretrage", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 if ((!naziv.isEmpty() && !naziv.matches("^[a-zA-Z ]+$"))) {
-                    JOptionPane.showMessageDialog(ssf, "Proverite unete podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -77,7 +78,7 @@ public class StrucnaSpremaFormaController {
                 int selektovano = ssf.getjTableSS().getSelectedRow();
 
                 if (selektovano == -1) {
-                    JOptionPane.showMessageDialog(ssf, "Odaberite strucnu spremu!", "Greska", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("education_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 

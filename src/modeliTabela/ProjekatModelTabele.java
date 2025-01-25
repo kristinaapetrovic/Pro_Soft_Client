@@ -6,6 +6,7 @@ package modeliTabela;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import language.LanguageManager;
 import model.Projekat;
 
 /**
@@ -15,9 +16,10 @@ import model.Projekat;
 public class ProjekatModelTabele extends AbstractTableModel {
 
     List<Projekat> lista;
-    String naziviKolona[] = {"Registarski broj", "Naziv projekta", "Menadzer"};
-
-   
+    String kol1 = LanguageManager.getString("reg_num");
+    String kol2 = LanguageManager.getString("project_name");
+    String kol3 = LanguageManager.getString("managers");
+    String naziviKolona[] = {kol1, kol2, kol2};
 
     public ProjekatModelTabele(List<Projekat> lista) {
         this.lista = lista;

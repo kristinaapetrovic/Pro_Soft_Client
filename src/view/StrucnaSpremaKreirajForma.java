@@ -8,6 +8,7 @@ import condinator.Cordinator;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
+import language.LanguageManager;
 import model.StrucnaSprema;
 
 /**
@@ -25,6 +26,8 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     public StrucnaSpremaKreirajForma(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLabels();
+        setTitle(LanguageManager.getString("create_education_title"));
         roditelj = (StrucnaSpremaForma) parent;
         popuniFormuKreiraj();
     }
@@ -32,6 +35,8 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     public StrucnaSpremaKreirajForma(java.awt.Frame parent, boolean modal, StrucnaSprema strucnaSprema) {
         super(parent, modal);
         initComponents();
+        setLabels();
+        setTitle(LanguageManager.getString("update_education_title"));
         this.strucnaSprema = strucnaSprema;
         roditelj = (StrucnaSpremaForma) parent;
         popuniFormuDetalji();
@@ -46,7 +51,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNaziv = new javax.swing.JLabel();
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonKreiraj = new javax.swing.JButton();
         jButtonIzmeni = new javax.swing.JButton();
@@ -55,7 +60,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Naziv strucne spreme");
+        jLabelNaziv.setText("Naziv strucne spreme");
 
         jButtonKreiraj.setText("Kreiraj");
         jButtonKreiraj.addActionListener(new java.awt.event.ActionListener() {
@@ -93,7 +98,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
@@ -112,7 +117,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabelNaziv)
                     .addComponent(jTextFieldNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -130,16 +135,16 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
             return;
         }
         if (ubaciUbazu(naziv)) {
-            JOptionPane.showMessageDialog(this, "Strucna sprema je ubacena u bazu", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_education_succes"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri unosu strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("create_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButtonKreirajActionPerformed
 
@@ -155,16 +160,16 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
         String naziv = jTextFieldNaziv.getText();
 
         if (!validacija(naziv)) {
-            JOptionPane.showMessageDialog(this, "Proverite unesene podatke", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("check_data"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             jTextFieldNaziv.setBorder(new LineBorder(Color.RED, 3));
             return;
         }
         if (izmeniSS(naziv)) {
-            JOptionPane.showMessageDialog(this, "Strucna sprema je izmenjena", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_education_succes"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "Greska pri izmeni strucne spreme", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,  LanguageManager.getString("update_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -172,7 +177,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
     private void jButtonObrisiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonObrisiActionPerformed
 
-        int odgovor = JOptionPane.showConfirmDialog(this, "Da li zelite da obrisete strucnu spremu?", "Provera", JOptionPane.YES_NO_OPTION);
+        int odgovor = JOptionPane.showConfirmDialog(this, LanguageManager.getString("delete_education_question"), LanguageManager.getString("confirmation"), JOptionPane.YES_NO_OPTION);
         if (odgovor != JOptionPane.YES_OPTION) {
             return;
         }
@@ -229,7 +234,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
     private javax.swing.JButton jButtonKreiraj;
     private javax.swing.JButton jButtonObrisi;
     private javax.swing.JButton jButtonSacuvaj;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelNaziv;
     private javax.swing.JTextField jTextFieldNaziv;
     // End of variables declaration//GEN-END:variables
     private boolean validacija(String naziv) {
@@ -277,12 +282,21 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
         ss.setObrisana(true);
         boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiStrucnaSprema(strucnaSprema);
         if (uspesno) {
-            JOptionPane.showMessageDialog(this, "Strucna sprema je obrisana iz baze", "Obavestenje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,LanguageManager.getString("delete_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;
         } else {
-            JOptionPane.showMessageDialog(this, "Strucna sprema nije obrisana iz baze", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
+    }
+
+    private void setLabels() {
+        jLabelNaziv.setText(LanguageManager.getString("education_name"));
+        
+        jButtonIzmeni.setText(LanguageManager.getString("update_button"));
+        jButtonKreiraj.setText(LanguageManager.getString("create_button"));
+        jButtonObrisi.setText(LanguageManager.getString("delete_button"));
+        jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
     }
 }

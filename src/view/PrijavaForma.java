@@ -9,6 +9,7 @@ import hashing.Hash;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -222,7 +223,9 @@ public class PrijavaForma extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldLozinkaActionPerformed
 
     private void jComboBoxJezikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJezikActionPerformed
-
+        if (isUpdating) {
+            return;
+        }
         String izabraniJezik = (String) jComboBoxJezik.getSelectedItem();
         LanguageManager.setLanguage(izabraniJezik);
         updateLabels();
@@ -284,10 +287,19 @@ public class PrijavaForma extends javax.swing.JFrame {
         jButtonPrijaviSe.addActionListener(actionListener);
     }
 
+    private boolean isUpdating = false;
+
     private void popuniComboBox() {
+        
+        isUpdating = true;
         jComboBoxJezik.removeAllItems();
         jComboBoxJezik.addItem(LanguageManager.getString("serbian_language"));
         jComboBoxJezik.addItem(LanguageManager.getString("english_language"));
+        isUpdating = false;
+    }
+
+    public JComboBox<String> getjComboBoxJezik() {
+        return jComboBoxJezik;
     }
 
     private void updateLabels() {
