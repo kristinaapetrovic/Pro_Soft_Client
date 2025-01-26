@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="39" max="32767" attributes="0"/>
+              <EmptySpace pref="51" max="32767" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
           </Group>
@@ -63,22 +63,22 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                           <Component id="jLabelPodaci" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="75" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="176" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabelMatBr" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelNazivFirme" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabelVlasnik" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="jLabelMesto" alignment="0" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="jLabelMatBr" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelNazivFirme" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabelVlasnik" max="32767" attributes="0"/>
+                              <Component id="jLabelMesto" alignment="0" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jComboBoxMesto" pref="95" max="32767" attributes="0"/>
-                              <Component id="jTextFieldVlasnik" pref="95" max="32767" attributes="0"/>
-                              <Component id="jTextFieldNaziv" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jTextFieldMBroj" max="32767" attributes="0"/>
+                              <Component id="jTextFieldNaziv" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jTextFieldVlasnik" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jComboBoxMesto" alignment="1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>

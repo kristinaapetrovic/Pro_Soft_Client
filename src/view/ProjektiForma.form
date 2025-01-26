@@ -28,8 +28,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" min="-2" pref="455" max="-2" attributes="0"/>
-                      <EmptySpace pref="31" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="602" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -47,7 +47,7 @@
                   <Component id="jPanel2" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" alignment="1" min="-2" pref="242" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,31 +74,22 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabelMen" alignment="0" pref="96" max="32767" attributes="0"/>
-                                  <Component id="jLabelRegBr" alignment="0" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jLabelMen" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                               <Component id="jLabelSponz" alignment="0" min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="jLabelRegBr" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                          <EmptySpace pref="33" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jTextFieldRegBroj" alignment="1" max="32767" attributes="0"/>
+                              <Component id="jComboBoxMenadzer" alignment="1" pref="220" max="32767" attributes="0"/>
+                              <Component id="jComboBoxSponzor" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jComboBoxSponzor" pref="189" max="32767" attributes="0"/>
-                                      <Component id="jComboBoxMenadzer" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="128" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jButtonOcistiFilter" max="32767" attributes="0"/>
-                                      <Component id="jButtonPretrazi" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" attributes="0">
-                                  <Component id="jTextFieldRegBroj" min="-2" pref="189" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jButtonOcistiFilter" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonPretrazi" min="-2" pref="88" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -113,27 +104,22 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelRegBr" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTextFieldRegBroj" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabelMen" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxMenadzer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonPretrazi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabelSponz" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jComboBoxSponzor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jButtonOcistiFilter" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxSponzor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                          <Component id="jButtonOcistiFilter" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabelSponz" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="83" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

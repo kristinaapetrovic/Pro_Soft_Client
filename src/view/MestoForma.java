@@ -50,7 +50,6 @@ public class MestoForma extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButtonDetalji = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabelKriterijum = new javax.swing.JLabel();
         jLabelPB = new javax.swing.JLabel();
@@ -59,19 +58,14 @@ public class MestoForma extends javax.swing.JFrame {
         jTextFieldNaziv = new javax.swing.JTextField();
         jButtonPretrazi = new javax.swing.JButton();
         jButtonOcistiFilter = new javax.swing.JButton();
-        jButtonNazad = new javax.swing.JButton();
         jScrollPanePrviTab = new javax.swing.JScrollPane();
         jTableMesta = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
         jButtonKreiraj = new javax.swing.JButton();
+        jButtonDetalji = new javax.swing.JButton();
+        jButtonNazad = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButtonDetalji.setText("Detalji");
-        jButtonDetalji.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDetaljiActionPerformed(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -106,14 +100,14 @@ public class MestoForma extends javax.swing.JFrame {
                         .addComponent(jLabelKriterijum, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelPB, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldPostanski, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                            .addComponent(jTextFieldNaziv))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelNaziv, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelPB, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldNaziv)
+                            .addComponent(jTextFieldPostanski))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonOcistiFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -137,13 +131,6 @@ public class MestoForma extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        jButtonNazad.setText("Nazad");
-        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNazadActionPerformed(evt);
-            }
-        });
-
         jTableMesta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -164,6 +151,44 @@ public class MestoForma extends javax.swing.JFrame {
             }
         });
 
+        jButtonDetalji.setText("Detalji");
+        jButtonDetalji.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDetaljiActionPerformed(evt);
+            }
+        });
+
+        jButtonNazad.setText("Nazad");
+        jButtonNazad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNazadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonNazad)
+                    .addComponent(jButtonDetalji)
+                    .addComponent(jButtonKreiraj))
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jButtonKreiraj)
+                .addGap(29, 29, 29)
+                .addComponent(jButtonDetalji)
+                .addGap(27, 27, 27)
+                .addComponent(jButtonNazad)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,30 +197,21 @@ public class MestoForma extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPanePrviTab, javax.swing.GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonDetalji)
-                    .addComponent(jButtonNazad)
-                    .addComponent(jButtonKreiraj))
-                .addGap(57, 57, 57))
+                    .addComponent(jScrollPanePrviTab, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(264, Short.MAX_VALUE)
-                .addComponent(jButtonKreiraj)
-                .addGap(26, 26, 26)
-                .addComponent(jButtonDetalji)
-                .addGap(30, 30, 30)
-                .addComponent(jButtonNazad)
-                .addGap(100, 100, 100))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(71, 71, 71)
-                .addComponent(jScrollPanePrviTab, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPanePrviTab, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -316,6 +332,7 @@ public class MestoForma extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNaziv;
     private javax.swing.JLabel jLabelPB;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPanePrviTab;
     private javax.swing.JTable jTableMesta;
     private javax.swing.JTextField jTextFieldNaziv;
@@ -351,7 +368,7 @@ public class MestoForma extends javax.swing.JFrame {
         jLabelKriterijum.setText(LanguageManager.getString("criteria"));
         jLabelNaziv.setText(LanguageManager.getString("city_name"));
         jLabelPB.setText(LanguageManager.getString("postal_code"));
-        jButtonDetalji.setText(LanguageManager.getString("details"));
+        jButtonDetalji.setText(LanguageManager.getString("details_button"));
         jButtonKreiraj.setText(LanguageManager.getString("create_button"));
         jButtonNazad.setText(LanguageManager.getString("back_button"));
         jButtonOcistiFilter.setText(LanguageManager.getString("remove_criteria_button"));
