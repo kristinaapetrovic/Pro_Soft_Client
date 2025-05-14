@@ -59,6 +59,12 @@ public class VrstaAktivnostiFormaController {
 
             private void postaviListu(VrstaAktivnosti vakt) {
                 List<VrstaAktivnosti> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuVrstaAktivnosti(vakt);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("sys_err_at_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("sys_at_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+
+                }
                 VrstaAktivnostiModelTabele vamt = new VrstaAktivnostiModelTabele(lista);
                 vaf.getjTableVA().setModel(vamt);
             }
@@ -84,12 +90,14 @@ public class VrstaAktivnostiFormaController {
                 }
 
                 VrstaAktivnostiModelTabele vamt = (VrstaAktivnostiModelTabele) vaf.getjTableVA().getModel();
-                VrstaAktivnosti va=vamt.getLista().get(selektovano);
-                Cordinator.getInstance().otvotiVAKreirajFormu(vaf,va);
+                VrstaAktivnosti va=vamt  .getLista().get(selektovano);
+                JOptionPane.showMessageDialog(vaf, LanguageManager.getString("sys_at_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                Cordinator.getInstance().otvotiVAKreirajFormu(vaf, va);
             }
         });
     }
-    public void azurirajTabelu(){
+
+    public void azurirajTabelu() {
         popuniTabelu();
     }
 }

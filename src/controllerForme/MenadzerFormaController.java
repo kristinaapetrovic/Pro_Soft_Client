@@ -54,7 +54,7 @@ public class MenadzerFormaController {
                     mf.getjTextFieldIP().setBorder(new LineBorder(Color.RED, 3));
                     return;
                 }
-                Menadzer menadzer=new Menadzer();
+                Menadzer menadzer = new Menadzer();
                 menadzer.setImePrezime(imePrezime);
                 postaviListu(menadzer);
             }
@@ -64,12 +64,17 @@ public class MenadzerFormaController {
             }
 
             private void postaviListu(Menadzer menadzer) {
-                List<Menadzer> lista=komunikacijaKlijent.Komunikacija.getInstance().vratiListuMenadzer(menadzer);
-                MenadzerModelTabele mmt=new MenadzerModelTabele(lista);
+                List<Menadzer> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMenadzer(menadzer);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_err_men_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_men_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                }
+                MenadzerModelTabele mmt = new MenadzerModelTabele(lista);
                 mf.getjTableMenadzeri().setModel(mmt);
             }
         });
-        
+
         mf.ocistiFilterActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

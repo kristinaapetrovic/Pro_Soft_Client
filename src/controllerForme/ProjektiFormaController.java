@@ -32,7 +32,7 @@ public class ProjektiFormaController {
     }
 
     public void otvoriFormu() {
-        if (pf.getMen() == null && pf.getSponzor()==null) {
+        if (pf.getMen() == null && pf.getSponzor() == null) {
             popuniTabelu();
         }
         popuniComboBox();
@@ -116,6 +116,13 @@ public class ProjektiFormaController {
 
                 if (kriterijumMenadzer || kriterijumIzvodjac || kriterijumUgovor) {
 
+                    if (listaUgovora.isEmpty()) {
+                        JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_err_proj_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    } else {
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_proj_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+
+                    }
+
                     pmt = new ProjekatModelTabele(listaUgovora);
 
                     pf.getjTableProjekti().setModel(pmt);
@@ -152,6 +159,7 @@ public class ProjektiFormaController {
                 ProjekatModelTabele pmt = (ProjekatModelTabele) pf.getjTableProjekti().getModel();
 
                 Projekat projekat = pmt.getLista().get(sel);
+                JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_proj_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
                 Cordinator.getInstance().otvoriProjektiKreirajFormu(pf, projekat);
 

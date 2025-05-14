@@ -194,15 +194,15 @@ public class MenadzerForma extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonDetaljiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDetaljiActionPerformed
-
         int sel = jTableMenadzeri.getSelectedRow();
 
         if (sel == -1) {
-            JOptionPane.showMessageDialog(this, "Odaberite menadzera", "Greska", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("men_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
         MenadzerModelTabele mmt = (MenadzerModelTabele) jTableMenadzeri.getModel();
         Menadzer menadzer = mmt.getLista().get(sel);
+        JOptionPane.showMessageDialog(this, LanguageManager.getString("sys_men_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
         Cordinator.getInstance().otvoriMenadzerNalogFormu(menadzer, false, false);
 
     }//GEN-LAST:event_jButtonDetaljiActionPerformed

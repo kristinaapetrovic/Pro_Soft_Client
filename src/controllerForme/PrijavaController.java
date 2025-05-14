@@ -35,7 +35,7 @@ public class PrijavaController {
             public void actionPerformed(ActionEvent e) {
                 String email = pf.getjTextFieldEmail().getText();
                 String sifra = new String(pf.getjPasswordFieldLozinka().getPassword());
-                Menadzer menadzer=new Menadzer();
+                Menadzer menadzer = new Menadzer();
                 menadzer.setEmail(email);
                 try {
                     menadzer.setLozinka(hashing.Hash.kriptuj(sifra));
@@ -43,32 +43,30 @@ public class PrijavaController {
                     Logger.getLogger(PrijavaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 prijava(menadzer);
-                
+
             }
-            
-            private void prijava(Menadzer menadzer){
+
+            private void prijava(Menadzer menadzer) {
                 komunikacijaKlijent.Komunikacija.getInstance().konkecija();
-                Menadzer ulogovani=komunikacijaKlijent.Komunikacija.getInstance().prijava(menadzer);
-                
-                if(ulogovani==null){
+                Menadzer ulogovani = komunikacijaKlijent.Komunikacija.getInstance().prijava(menadzer);
+
+                if (ulogovani == null) {
                     JOptionPane.showMessageDialog(pf, LanguageManager.getString("credentials_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
-                }else if(!ulogovani.isPrviLog()){
+                } else if (!ulogovani.isPrviLog()) {
                     Cordinator.getInstance().setUlogovani(ulogovani);
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("credentials_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+
                     Cordinator.getInstance().otvoriGlavnuFormu();
                     pf.dispose();
-                }else{
+                } else {
                     Cordinator.getInstance().setUlogovani(ulogovani);
                     Cordinator.getInstance().otvoriMenadzerNalogFormu(ulogovani, true, true);
                 }
             }
 
         });
-        
-       
 
     }
-    
-    
 
     public void otvoriFormu() {
         pf.setVisible(true);

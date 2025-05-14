@@ -41,7 +41,6 @@ public class AktivnostModelTabele extends AbstractTableModel {
         } else {
             this.naziviKolona = new String[]{kol1, kol2, kol3, kol4};
         }
-
     }
 
     @Override

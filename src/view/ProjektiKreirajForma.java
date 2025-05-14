@@ -65,7 +65,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         setSize(velicinaEkrana.width, velicinaEkrana.height);
         setLabels();
         setResizable(true);
-
+      
         roditelj = (ProjektiForma) parent;
         this.pu = pu;
         popuniComboBox();
@@ -756,6 +756,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
 
         List<Aktivnost> lista = new ArrayList<>();
         lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuAktivnost(pu);
+       
 
         AktivnostModelTabele amt = new AktivnostModelTabele(lista, true);
         jTableAktivnost.setModel(amt);
@@ -867,7 +868,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             return null;
         }
 
-        Projekat pu = new Projekat(regBroj, naziv, opisProj, budz, tr, datumOd, datumDo, men, false);
+        Projekat pu = new Projekat(regBroj, naziv, opisProj, budz, tr, datumOd, datumDo, men);
         return pu;
 
     }
@@ -879,6 +880,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             return;
         }
         List<Aktivnost> lista = amt.getLista();
+        System.out.println(lista.get(0).getNazivAktivnosti());
         for (Aktivnost akt : lista) {
             akt.setProjektniUgovor(ugovor);
             if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajAktivnost(akt)) {

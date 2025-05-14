@@ -71,6 +71,13 @@ public class MestoFormaController {
 
             private void postaviListu(Mesto mesto) {
                 List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMesto(mesto);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_err_city_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_city_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
                 MestoModelTabele mmt = new MestoModelTabele(lista);
                 mf.getjTableMesta().setModel(mmt);
             }
@@ -94,6 +101,7 @@ public class MestoFormaController {
                 }
                 MestoModelTabele mmt = (MestoModelTabele) mf.getjTableMesta().getModel();
                 Mesto mesto = mmt.getLista().get(selektovano);
+                JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_city_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                 Cordinator.getInstance().otvoriMestoKreirajFomru(mf, mesto);
             }
         });

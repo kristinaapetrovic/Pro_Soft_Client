@@ -56,7 +56,7 @@ public class SponzorFormaController {
             public void actionPerformed(ActionEvent e) {
                 String naziv = sf.getjTextFieldNaziv().getText();
                 Mesto mesto = (Mesto) sf.getjComboBoxMesta().getSelectedItem();
-                if(naziv.isEmpty() && mesto==null){
+                if (naziv.isEmpty() && mesto == null) {
                     JOptionPane.showMessageDialog(sf, LanguageManager.getString("crriteria_input_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
@@ -80,6 +80,11 @@ public class SponzorFormaController {
 
             private void postaviListu(Sponzor sponzor) {
                 List<Sponzor> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSponzor(sponzor);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("sys_err_sp_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("sys_sp_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                }
                 SponzorModelTabele smt = new SponzorModelTabele(lista);
                 sf.getjTableSponzori().setModel(smt);
             }
@@ -93,17 +98,18 @@ public class SponzorFormaController {
                 popuniTabelu();
             }
         });
-        
+
         sf.detaljiActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int selektovano=sf.getjTableSponzori().getSelectedRow();
-                if(selektovano==-1){
+                int selektovano = sf.getjTableSponzori().getSelectedRow();
+                if (selektovano == -1) {
                     JOptionPane.showMessageDialog(sf, LanguageManager.getString("spons_not_chosen"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                SponzorModelTabele smt=(SponzorModelTabele) sf.getjTableSponzori().getModel();
-                Sponzor sponzor=smt.getLista().get(selektovano);
+                SponzorModelTabele smt = (SponzorModelTabele) sf.getjTableSponzori().getModel();
+                Sponzor sponzor = smt.getLista().get(selektovano);
+                JOptionPane.showMessageDialog(sf, LanguageManager.getString("sys_sp_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                 Cordinator.getInstance().otvoriSponzorKreirajFormu(sf, sponzor);
             }
         });
@@ -118,10 +124,8 @@ public class SponzorFormaController {
                 }
                 SponzorModelTabele smt = (SponzorModelTabele) sf.getjTableSponzori().getModel();
                 Sponzor sponzor = smt.getLista().get(selektovan);
-                
-                Cordinator.getInstance().otvoriProjektiFormu(sponzor);
-                
 
+                Cordinator.getInstance().otvoriProjektiFormu(sponzor);
 
             }
         });

@@ -61,6 +61,12 @@ public class StrucnaSpremaFormaController {
             private void postaviListu(StrucnaSprema strucnaSprema) {
                 List<StrucnaSprema> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuStrucnaSprema(strucnaSprema);
                 StrucnaSpremaModelTabele ssmt = new StrucnaSpremaModelTabele(lista);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("sys_err_pq_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("sys_pq_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+
+                }
                 ssf.getjTableSS().setModel(ssmt);
             }
         });
@@ -84,7 +90,8 @@ public class StrucnaSpremaFormaController {
 
                 StrucnaSpremaModelTabele ssmt = (StrucnaSpremaModelTabele) ssf.getjTableSS().getModel();
                 StrucnaSprema ss = ssmt.getLista().get(selektovano);
-                Cordinator.getInstance().otvoriStrucnaSpremaDetaljiFormu(ssf,ss);
+                JOptionPane.showMessageDialog(ssf, LanguageManager.getString("sys_pq_open"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                Cordinator.getInstance().otvoriStrucnaSpremaDetaljiFormu(ssf, ss);
             }
         });
     }

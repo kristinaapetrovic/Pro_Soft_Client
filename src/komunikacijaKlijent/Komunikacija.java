@@ -4,17 +4,18 @@
  */
 package komunikacijaKlijent;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import jsonFormat.JSONFormat;
 import komunikacija.Operacija;
 import komunikacija.Receiver;
 import komunikacija.Request;
 import komunikacija.Response;
 import komunikacija.Sender;
+import listWrapper.ListaMesto;
 import model.Aktivnost;
 import model.JeSponzor;
 import model.MSS;
@@ -56,19 +57,22 @@ public class Komunikacija {
             receiver = new Receiver(soket);
         } catch (IOException ex) {
             System.out.println("Server nije povezan");
+            System.exit(0);
             ex.printStackTrace();
         }
 
     }
 
     public Menadzer prijava(Menadzer menadzer) {
-        Request request = new Request(komunikacija.Operacija.PRIJAVA, menadzer);
+        String obj = JSONFormat.toJson(menadzer);
+
+        Request request = new Request(komunikacija.Operacija.PRIJAVA, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
-        menadzer = (Menadzer) response.getOdgovor();
+        menadzer = JSONFormat.fromJson(response.getOdgovor().toString(), Menadzer.class);
 
         return menadzer;
     }
@@ -84,6 +88,9 @@ public class Komunikacija {
 
         lista = (List<StrucnaSprema>) response.getOdgovor();
 
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
 
     }
@@ -100,6 +107,9 @@ public class Komunikacija {
 
         lista = (List<MSS>) response.getOdgovor();
 
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
 
     }
@@ -115,6 +125,9 @@ public class Komunikacija {
 
         lista = (List<Mesto>) response.getOdgovor();
 
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
@@ -128,7 +141,9 @@ public class Komunikacija {
         Response response = (Response) receiver.receive();
 
         lista = (List<VrstaAktivnosti>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
@@ -142,7 +157,9 @@ public class Komunikacija {
         Response response = (Response) receiver.receive();
 
         lista = (List<Projekat>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
 
     }
@@ -157,7 +174,9 @@ public class Komunikacija {
         Response response = (Response) receiver.receive();
 
         lista = (List<Menadzer>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
@@ -171,48 +190,63 @@ public class Komunikacija {
         Response response = (Response) receiver.receive();
 
         lista = (List<Sponzor>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
     public List<Menadzer> vratiListuMenadzer(Menadzer menadzer) {
         List<Menadzer> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE_FILTER, menadzer);
+        String obj = JSONFormat.toJson(menadzer);
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE_FILTER, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<Menadzer>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
     public List<Mesto> vratiListuMesto(Mesto mesto) {
         List<Mesto> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA_FILTER, mesto);
+        String obj = JSONFormat.toJson(mesto);
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA_FILTER, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<Mesto>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
     public List<Sponzor> vratiListuSponzor(Sponzor kriterijumSponzor) {
         List<Sponzor> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZOR_FILTER, kriterijumSponzor);
+        String obj = JSONFormat.toJson(kriterijumSponzor);
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZOR_FILTER, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<Sponzor>) response.getOdgovor();
+        if (response.getExc() != null) {
+            return null;
+        }
 
         return lista;
     }
@@ -220,13 +254,18 @@ public class Komunikacija {
     public List<StrucnaSprema> vratiListuStrucnaSprema(StrucnaSprema strucnaSprema) {
         List<StrucnaSprema> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_SS_FILTER, strucnaSprema);
+        String obj = jsonFormat.JSONFormat.toJson(strucnaSprema);
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_SS_FILTER, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<StrucnaSprema>) response.getOdgovor();
+        if (response.getExc() != null) {
+            return null;
+        }
 
         return lista;
     }
@@ -234,48 +273,61 @@ public class Komunikacija {
     public List<VrstaAktivnosti> vratiListuVrstaAktivnosti(VrstaAktivnosti vakt) {
         List<VrstaAktivnosti> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_VAKT_FILTER, vakt);
+        String obj = JSONFormat.toJson(vakt);
+
+        Request request = new Request(komunikacija.Operacija.UCITAJ_VAKT_FILTER, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<VrstaAktivnosti>) response.getOdgovor();
+        if (response.getExc() != null) {
+            return null;
+        }
 
         return lista;
     }
 
     public boolean kreirajMesto(Mesto mesto) {
-        Request request = new Request(Operacija.KREIRAJ_MESTO, mesto);
+        String obj = jsonFormat.JSONFormat.toJson(mesto);
+        Request request = new Request(Operacija.KREIRAJ_MESTO, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
+
         return response.getExc() == null;
     }
 
     public boolean obrisiMesto(Mesto mesto) {
-        Request request = new Request(Operacija.OBRISI_MESTO, mesto);
+        String obj = JSONFormat.toJson(mesto);
+        Request request = new Request(Operacija.OBRISI_MESTO, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
         return response.getExc() == null;
     }
 
     public boolean promeniMesto(Mesto mesto) {
-        Request request = new Request(Operacija.PROMENI_MESTO, mesto);
+        String obj = JSONFormat.toJson(mesto);
+
+        Request request = new Request(Operacija.PROMENI_MESTO, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
         return response.getExc() == null;
     }
 
     public boolean kreirajSponzor(Sponzor sponzor) {
-        Request request = new Request(Operacija.KREIRAJ_SPONZOR, sponzor);
+        String obj = JSONFormat.toJson(sponzor);
+
+        Request request = new Request(Operacija.KREIRAJ_SPONZOR, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
         return response.getExc() == null;
     }
 
     public boolean obrisiSponzor(Sponzor sponzor) {
+        String obj = JSONFormat.toJson(sponzor);
 
-        Request request = new Request(Operacija.OBRISI_SPONZOR, sponzor);
+        Request request = new Request(Operacija.OBRISI_SPONZOR, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -283,7 +335,9 @@ public class Komunikacija {
     }
 
     public boolean promeniSponzor(Sponzor sponzor) {
-        Request request = new Request(Operacija.PROMENI_SPONZOR, sponzor);
+        String obj = JSONFormat.toJson(sponzor);
+
+        Request request = new Request(Operacija.PROMENI_SPONZOR, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -291,7 +345,9 @@ public class Komunikacija {
     }
 
     public boolean promeniStrucnaSprema(StrucnaSprema strucnaSprema) {
-        Request request = new Request(Operacija.PROMENI_STRUCNA_SPREMA, strucnaSprema);
+        String obj = JSONFormat.toJson(strucnaSprema);
+
+        Request request = new Request(Operacija.PROMENI_STRUCNA_SPREMA, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -299,7 +355,9 @@ public class Komunikacija {
     }
 
     public boolean obrisiStrucnaSprema(StrucnaSprema strucnaSprema) {
-        Request request = new Request(Operacija.OBRISI_STRUCNA_SPREMA, strucnaSprema);
+        String obj = JSONFormat.toJson(strucnaSprema);
+
+        Request request = new Request(Operacija.OBRISI_STRUCNA_SPREMA, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -307,7 +365,9 @@ public class Komunikacija {
     }
 
     public boolean kreirajStrucnaSprema(StrucnaSprema strucnaSprema) {
-        Request request = new Request(Operacija.UBACI_STRUCNA_SPREMA, strucnaSprema);
+        String obj = JSONFormat.toJson(strucnaSprema);
+
+        Request request = new Request(Operacija.UBACI_STRUCNA_SPREMA, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -315,7 +375,9 @@ public class Komunikacija {
     }
 
     public boolean promeniVrstaAktivnosti(VrstaAktivnosti vakt) {
-        Request request = new Request(Operacija.PROMENI_VRSTA_AKTIVNOSTI, vakt);
+        String obj = JSONFormat.toJson(vakt);
+
+        Request request = new Request(Operacija.PROMENI_VRSTA_AKTIVNOSTI, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -323,7 +385,9 @@ public class Komunikacija {
     }
 
     public boolean obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
-        Request request = new Request(Operacija.OBRISI_VRSTA_AKTIVNOSTI, vrstaAktivnosti);
+        String obj = JSONFormat.toJson(vrstaAktivnosti);
+
+        Request request = new Request(Operacija.OBRISI_VRSTA_AKTIVNOSTI, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -331,7 +395,9 @@ public class Komunikacija {
     }
 
     public boolean kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
-        Request request = new Request(Operacija.KREIRAJ_VRSTA_AKTIVNOSTI, vrstaAktivnosti);
+        String obj = JSONFormat.toJson(vrstaAktivnosti);
+
+        Request request = new Request(Operacija.KREIRAJ_VRSTA_AKTIVNOSTI, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -339,7 +405,9 @@ public class Komunikacija {
     }
 
     public boolean kreirajMSS(MSS mss) {
-        Request request = new Request(Operacija.KREIRAJ_MSS, mss);
+        String obj = JSONFormat.toJson(mss);
+
+        Request request = new Request(Operacija.KREIRAJ_MSS, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -347,7 +415,9 @@ public class Komunikacija {
     }
 
     public boolean obrisiMSS(MSS mss) {
-        Request request = new Request(Operacija.OBRISI_MSS, mss);
+        String obj = JSONFormat.toJson(mss);
+
+        Request request = new Request(Operacija.OBRISI_MSS, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -355,7 +425,9 @@ public class Komunikacija {
     }
 
     public boolean obrisiMenadzer(Menadzer men) {
-        Request request = new Request(Operacija.OBRISI_MENADZER, men);
+        String obj = JSONFormat.toJson(men);
+
+        Request request = new Request(Operacija.OBRISI_MENADZER, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -363,7 +435,9 @@ public class Komunikacija {
     }
 
     public boolean promeniMenadzer(Menadzer men) {
-        Request request = new Request(Operacija.PROMENI_MENADZER, men);
+        String obj = JSONFormat.toJson(men);
+
+        Request request = new Request(Operacija.PROMENI_MENADZER, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -371,7 +445,9 @@ public class Komunikacija {
     }
 
     public Menadzer kreirajMenadzer(Menadzer menadzer) {
-        Request request = new Request(Operacija.KREIRAJ_MENADZER, menadzer);
+        String obj = JSONFormat.toJson(menadzer);
+
+        Request request = new Request(Operacija.KREIRAJ_MENADZER, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -379,7 +455,8 @@ public class Komunikacija {
     }
 
     public boolean vratiListuProjektniUgovor(OpstiDomenskiObjekat kriterijum, List<Projekat> listaUgovora) {
-        Request request = new Request(Operacija.PRETRAZI_PROJEKAT, kriterijum);
+        String obj = JSONFormat.toJson(kriterijum);
+        Request request = new Request(Operacija.PRETRAZI_PROJEKAT, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
         List<Projekat> dobijenaLista = (List<Projekat>) response.getOdgovor();
@@ -394,33 +471,40 @@ public class Komunikacija {
     public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) {
         List<JeSponzor> lista = new ArrayList<>();
 
-        Request request = new Request(komunikacija.Operacija.UCITAJ_JESPONZOR_PROJEKTA, projekat);
+        String obj = JSONFormat.toJson(projekat);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_JESPONZOR_PROJEKTA, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
 
         lista = (List<JeSponzor>) response.getOdgovor();
-
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
     public List<Aktivnost> vratiListuAktivnost(Projekat projekat) {
         List<Aktivnost> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_AKTIVNOST_PROJEKTA, projekat);
+        String obj = JSONFormat.toJson(projekat);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_AKTIVNOST_PROJEKTA, obj);
 
         sender.send(request);
 
         Response response = (Response) receiver.receive();
-        
+
         lista = (List<Aktivnost>) response.getOdgovor();
-        
+        if (response.getExc() != null) {
+            return null;
+        }
         return lista;
     }
 
     public boolean kreirajProjektniUgovor(Projekat ugovor) {
-        Request request = new Request(Operacija.KREIRAJ_UGOVOR, ugovor);
+        String obj = JSONFormat.toJson(ugovor);
+
+        Request request = new Request(Operacija.KREIRAJ_UGOVOR, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -428,7 +512,9 @@ public class Komunikacija {
     }
 
     public boolean kreirajAktivnost(Aktivnost aktivnosti) {
-        Request request = new Request(Operacija.KREIRAJ_AKTIVNOST, aktivnosti);
+        String obj = JSONFormat.toJson(aktivnosti);
+
+        Request request = new Request(Operacija.KREIRAJ_AKTIVNOST, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -436,7 +522,9 @@ public class Komunikacija {
     }
 
     public boolean kreirajJeSponzor(JeSponzor js) {
-        Request request = new Request(Operacija.KREIRAJ_JESPONZOR, js);
+        String obj = JSONFormat.toJson(js);
+
+        Request request = new Request(Operacija.KREIRAJ_JESPONZOR, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
@@ -444,7 +532,9 @@ public class Komunikacija {
     }
 
     public boolean promeniAktivnost(Aktivnost aktivnost) {
-        Request request = new Request(Operacija.PROMENI_AKTIVNOST, aktivnost);
+        String obj = JSONFormat.toJson(aktivnost);
+
+        Request request = new Request(Operacija.PROMENI_AKTIVNOST, obj);
         sender.send(request);
         Response response = (Response) receiver.receive();
 
