@@ -7,6 +7,8 @@ package view;
 import condinator.Cordinator;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
@@ -208,7 +210,13 @@ public class MestoKreirajForma extends javax.swing.JDialog {
         }
 
         Mesto mesto = new Mesto(id, naziv, false);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajMesto(mesto);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajMesto(mesto);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
 
         if (uspesno) {
             Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
@@ -245,7 +253,13 @@ public class MestoKreirajForma extends javax.swing.JDialog {
             return;
         }
         Mesto mesto = new Mesto(id, naziv, false);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMesto(mesto);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMesto(mesto);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             Cordinator.getInstance().getMestoFormaController().azurirajTbelu();
             JOptionPane.showMessageDialog(this, LanguageManager.getString("update_city_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -359,7 +373,13 @@ public class MestoKreirajForma extends javax.swing.JDialog {
 
     private boolean obrisiIzBaze(Mesto mesto) {
         mesto.setObrisano(true);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMesto(mesto);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMesto(mesto);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_city_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;

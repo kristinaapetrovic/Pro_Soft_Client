@@ -8,6 +8,8 @@ import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import language.LanguageManager;
 import model.StrucnaSprema;
@@ -33,7 +35,13 @@ public class StrucnaSpremaFormaController {
     }
 
     private void popuniTabelu() {
-        List<StrucnaSprema> lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajStrucneSpreme();
+        List<StrucnaSprema> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajStrucneSpreme();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(ssf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         StrucnaSpremaModelTabele ssmt = new StrucnaSpremaModelTabele(lista);
         ssf.getjTableSS().setModel(ssmt);
     }
@@ -59,7 +67,13 @@ public class StrucnaSpremaFormaController {
             }
 
             private void postaviListu(StrucnaSprema strucnaSprema) {
-                List<StrucnaSprema> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuStrucnaSprema(strucnaSprema);
+                List<StrucnaSprema> lista=null;
+                try {
+                    lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuStrucnaSprema(strucnaSprema);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(ssf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 StrucnaSpremaModelTabele ssmt = new StrucnaSpremaModelTabele(lista);
                 if (lista.isEmpty()) {
                     JOptionPane.showMessageDialog(ssf, LanguageManager.getString("sys_err_pq_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);

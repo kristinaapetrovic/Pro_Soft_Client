@@ -14,6 +14,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -65,7 +67,7 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         setSize(velicinaEkrana.width, velicinaEkrana.height);
         setLabels();
         setResizable(true);
-      
+
         roditelj = (ProjektiForma) parent;
         this.pu = pu;
         popuniComboBox();
@@ -708,29 +710,34 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void popuniComboBox() {
-        List<Menadzer> listaMen = new ArrayList<>();
-        listaMen = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
+        try {
+            List<Menadzer> listaMen = new ArrayList<>();
+            listaMen = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
 
-        for (Menadzer men : listaMen) {
-            jComboBoxMenadzer.addItem(men);
+            for (Menadzer men : listaMen) {
+                jComboBoxMenadzer.addItem(men);
+            }
+            jComboBoxMenadzer.setSelectedItem(null);
+
+            List<Sponzor> listaSponzor = new ArrayList<>();
+            listaSponzor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+
+            for (Sponzor sponzor : listaSponzor) {
+                jComboBoxSponzor.addItem(sponzor);
+            }
+            jComboBoxSponzor.setSelectedItem(null);
+
+            List<VrstaAktivnosti> listaVA = new ArrayList<>();
+            listaVA = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
+
+            for (VrstaAktivnosti va:listaVA  ) {
+                jComboBoxVAktivnosti.addItem(va);
+            }
+            jComboBoxVAktivnosti.setSelectedItem(null);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
-        jComboBoxMenadzer.setSelectedItem(null);
-
-        List<Sponzor> listaSponzor = new ArrayList<>();
-        listaSponzor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
-
-        for (Sponzor sponzor : listaSponzor) {
-            jComboBoxSponzor.addItem(sponzor);
-        }
-        jComboBoxSponzor.setSelectedItem(null);
-
-        List<VrstaAktivnosti> listaVA = new ArrayList<>();
-        listaVA = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
-
-        for (VrstaAktivnosti va:listaVA  ) {
-            jComboBoxVAktivnosti.addItem(va);
-        }
-        jComboBoxVAktivnosti.setSelectedItem(null);
 
     }
 
@@ -748,18 +755,22 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
     }
 
     private void popuniTabeluDetalji() {
-        List<JeSponzor> listaS = new ArrayList<>();
-        listaS = komunikacijaKlijent.Komunikacija.getInstance().vratiListuJeSponzor(pu);
+        try {
+            List<JeSponzor> listaS = new ArrayList<>();
+            listaS = komunikacijaKlijent.Komunikacija.getInstance().vratiListuJeSponzor(pu);
 
-        JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
-        jTableSponzori.setModel(smt);
+            JeSponzorModelTabele smt = new JeSponzorModelTabele(listaS);
+            jTableSponzori.setModel(smt);
 
-        List<Aktivnost> lista = new ArrayList<>();
-        lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuAktivnost(pu);
-       
+            List<Aktivnost> lista = new ArrayList<>();
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuAktivnost(pu);
 
-        AktivnostModelTabele amt = new AktivnostModelTabele(lista, true);
-        jTableAktivnost.setModel(amt);
+            AktivnostModelTabele amt = new AktivnostModelTabele(lista, true);
+            jTableAktivnost.setModel(amt);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
 
     }
 
@@ -807,7 +818,13 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("data_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
             return;
         }
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajProjektniUgovor(ugovor);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajProjektniUgovor(ugovor);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("insert_project_succes"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getProjektiFormaController().azurirajTabelu();
@@ -828,9 +845,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         AktivnostModelTabele amt = (AktivnostModelTabele) jTableAktivnost.getModel();
         List<Aktivnost> lista = amt.getLista();
         for (Aktivnost akt : lista) {
-            if (!komunikacijaKlijent.Komunikacija.getInstance().promeniAktivnost(akt)) {
-                JOptionPane.showMessageDialog(this, LanguageManager.getString("update_project_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
-                return;
+            try {
+                if (!komunikacijaKlijent.Komunikacija.getInstance().promeniAktivnost(akt)) {
+                    JOptionPane.showMessageDialog(this, LanguageManager.getString("update_project_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
         }
         JOptionPane.showMessageDialog(this, LanguageManager.getString("update_project_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -882,9 +904,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         List<Aktivnost> lista = amt.getLista();
         System.out.println(lista.get(0).getNazivAktivnosti());
         for (Aktivnost akt : lista) {
-            akt.setProjektniUgovor(ugovor);
-            if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajAktivnost(akt)) {
-                return;
+            try {
+                akt.setProjektniUgovor(ugovor);
+                if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajAktivnost(akt)) {
+                    return;
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
         }
 
@@ -960,9 +987,14 @@ public class ProjektiKreirajForma extends javax.swing.JDialog {
         }
         List<JeSponzor> lista = smt.getLista();
         for (JeSponzor s : lista) {
-            s.setProjekat(ugovor);
-            if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajJeSponzor(s)) {
-                return;
+            try {
+                s.setProjekat(ugovor);
+                if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajJeSponzor(s)) {
+                    return;
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
 
         }

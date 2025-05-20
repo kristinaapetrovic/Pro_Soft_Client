@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -34,7 +36,13 @@ public class MenadzerFormaController {
     }
 
     private void popuniTabelu() {
-        List<Menadzer> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
+        List<Menadzer> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         MenadzerModelTabele mmt = new MenadzerModelTabele(lista);
         mf.getjTableMenadzeri().setModel(mmt);
         addActionListener();
@@ -64,7 +72,13 @@ public class MenadzerFormaController {
             }
 
             private void postaviListu(Menadzer menadzer) {
-                List<Menadzer> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMenadzer(menadzer);
+                List<Menadzer> lista = null;
+                try {
+                    lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMenadzer(menadzer);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 if (lista.isEmpty()) {
                     JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_err_men_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 } else {

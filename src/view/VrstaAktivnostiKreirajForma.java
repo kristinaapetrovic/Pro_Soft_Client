@@ -6,6 +6,8 @@ package view;
 
 import condinator.Cordinator;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -242,8 +244,13 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
     private boolean ubaciUbazu(String naziv) {
 
         VrstaAktivnosti vrstaAktivnosti = new VrstaAktivnosti(0, naziv, false);
-        return komunikacijaKlijent.Komunikacija.getInstance().kreirajVrstaAktivnosti(vrstaAktivnosti);
-
+        try {
+            return komunikacijaKlijent.Komunikacija.getInstance().kreirajVrstaAktivnosti(vrstaAktivnosti);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        return false;
     }
 
     private void popuniFormuKreiraj() {
@@ -268,7 +275,13 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
 
     private boolean obrisiIzBaze(VrstaAktivnosti vakt) {
         vakt.setObrisana(true);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiVrstaAktivnosti(vakt);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiVrstaAktivnosti(vakt);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_act_type_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;
@@ -281,8 +294,13 @@ public class VrstaAktivnostiKreirajForma extends javax.swing.JDialog {
 
     private boolean izmeniVA(String naziv) {
         vakt.setNazivVrstaAktivnosti(naziv);
-        return komunikacijaKlijent.Komunikacija.getInstance().promeniVrstaAktivnosti(vakt);
-
+        try {
+            return komunikacijaKlijent.Komunikacija.getInstance().promeniVrstaAktivnosti(vakt);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        return false;
     }
 
     private void setLabels() {

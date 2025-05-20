@@ -8,6 +8,8 @@ import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import language.LanguageManager;
 import model.VrstaAktivnosti;
@@ -33,7 +35,13 @@ public class VrstaAktivnostiFormaController {
     }
 
     private void popuniTabelu() {
-        List<VrstaAktivnosti> lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
+        List<VrstaAktivnosti> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajVrstaAktivnosti();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(vaf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         VrstaAktivnostiModelTabele vamt = new VrstaAktivnostiModelTabele(lista);
         vaf.getjTableVA().setModel(vamt);
     }
@@ -58,7 +66,13 @@ public class VrstaAktivnostiFormaController {
             }
 
             private void postaviListu(VrstaAktivnosti vakt) {
-                List<VrstaAktivnosti> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuVrstaAktivnosti(vakt);
+                List<VrstaAktivnosti> lista = null;
+                try {
+                    lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuVrstaAktivnosti(vakt);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(vaf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 if (lista.isEmpty()) {
                     JOptionPane.showMessageDialog(vaf, LanguageManager.getString("sys_err_at_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 } else {

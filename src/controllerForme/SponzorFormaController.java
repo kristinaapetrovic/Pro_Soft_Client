@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -37,13 +39,25 @@ public class SponzorFormaController {
     }
 
     private void popuniTabelu() {
-        List<Sponzor> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+        List<Sponzor> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(sf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         SponzorModelTabele smt = new SponzorModelTabele(lista);
         sf.getjTableSponzori().setModel(smt);
     }
 
     private void popuniComboBox() {
-        List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+        List<Mesto> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(sf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         for (Mesto mesto : lista) {
             sf.getjComboBoxMesta().addItem(mesto);
         }
@@ -79,7 +93,13 @@ public class SponzorFormaController {
             }
 
             private void postaviListu(Sponzor sponzor) {
-                List<Sponzor> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSponzor(sponzor);
+                List<Sponzor> lista = null;
+                try {
+                    lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSponzor(sponzor);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(sf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 if (lista.isEmpty()) {
                     JOptionPane.showMessageDialog(sf, LanguageManager.getString("sys_err_sp_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 } else {

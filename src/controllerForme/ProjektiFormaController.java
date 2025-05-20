@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -41,14 +43,32 @@ public class ProjektiFormaController {
     }
 
     private void popuniTabelu() {
-        List<Projekat> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviProjekat();
+        List<Projekat> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviProjekat();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
         pf.getjTableProjekti().setModel(pmt);
     }
 
     private void popuniComboBox() {
-        List<Menadzer> listaMenadzera = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
-        List<Sponzor> listaSponzora = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+        List<Menadzer> listaMenadzera = null;
+        try {
+            listaMenadzera = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMenadzer();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        List<Sponzor> listaSponzora = null;
+        try {
+            listaSponzora = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviSponzor();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
 
         for (Menadzer men : listaMenadzera) {
             pf.getjComboBoxMenadzer().addItem(men);
@@ -104,14 +124,29 @@ public class ProjektiFormaController {
 
                 if (!regBroj.isEmpty()) {
                     projekat.setRegBroj(regBroj);
-                    kriterijumUgovor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(projekat, listaUgovora);
+                    try {
+                        kriterijumUgovor = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(projekat, listaUgovora);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
 
                 }
                 if (sponzor != null) {
-                    kriterijumIzvodjac = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, listaUgovora);
+                    try {
+                        kriterijumIzvodjac = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, listaUgovora);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
                 }
                 if (menadzer != null) {
-                    kriterijumMenadzer = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(menadzer, listaUgovora);
+                    try {
+                        kriterijumMenadzer = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(menadzer, listaUgovora);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
                 }
 
                 if (kriterijumMenadzer || kriterijumIzvodjac || kriterijumUgovor) {
@@ -119,7 +154,7 @@ public class ProjektiFormaController {
                     if (listaUgovora.isEmpty()) {
                         JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_err_proj_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                     } else {
-                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_proj_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(pf, LanguageManager.getString("sys_proj_find"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
                     }
 

@@ -6,6 +6,8 @@ package view;
 
 import condinator.Cordinator;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -171,7 +173,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
             Cordinator.getInstance().getStrucnaSpremaForma().azurirajTabelu();
             this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this,  LanguageManager.getString("update_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("update_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -245,8 +247,13 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
     private boolean ubaciUbazu(String naziv) {
         StrucnaSprema ss = new StrucnaSprema(0, naziv, false);
-        return komunikacijaKlijent.Komunikacija.getInstance().kreirajStrucnaSprema(ss);
-
+        try {
+            return komunikacijaKlijent.Komunikacija.getInstance().kreirajStrucnaSprema(ss);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        return false;
     }
 
     private void popuniFormuKreiraj() {
@@ -266,9 +273,13 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
     private boolean izmeniSS(String naziv) {
         this.strucnaSprema.setNazivStrucnaSprema(naziv);
-        return komunikacijaKlijent.Komunikacija.getInstance().promeniStrucnaSprema(strucnaSprema);
-  
-        
+        try {
+            return komunikacijaKlijent.Komunikacija.getInstance().promeniStrucnaSprema(strucnaSprema);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+        return false;
     }
 
     private void obrisiSS(StrucnaSprema ss) {
@@ -282,9 +293,15 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
     private boolean obrisiIzBaze(StrucnaSprema ss) {
         ss.setObrisana(true);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiStrucnaSprema(strucnaSprema);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiStrucnaSprema(strucnaSprema);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
-            JOptionPane.showMessageDialog(this,LanguageManager.getString("delete_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             return true;
         } else {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_education_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
@@ -295,7 +312,7 @@ public class StrucnaSpremaKreirajForma extends javax.swing.JDialog {
 
     private void setLabels() {
         jLabelNaziv.setText(LanguageManager.getString("education_name"));
-        
+
         jButtonIzmeni.setText(LanguageManager.getString("update_button"));
         jButtonKreiraj.setText(LanguageManager.getString("create_button"));
         jButtonObrisi.setText(LanguageManager.getString("delete_button"));

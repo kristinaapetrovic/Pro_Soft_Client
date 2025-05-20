@@ -8,6 +8,8 @@ import condinator.Cordinator;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
@@ -250,7 +252,13 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
             return;
         }
         Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajSponzor(sponzor);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajSponzor(sponzor);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("create_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
@@ -284,7 +292,13 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
             return;
         }
         Sponzor sponzor = new Sponzor(matBr, naziv, vlasnik, false, mesto);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniSponzor(sponzor);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniSponzor(sponzor);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("update_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
             Cordinator.getInstance().getsponzorFormaController().azurirajTabelu();
@@ -301,7 +315,13 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
             return;
         }
         sponzor.setObrisan(true);
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiSponzor(sponzor);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiSponzor(sponzor);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
 
         if (uspesno) {
             JOptionPane.showMessageDialog(this, LanguageManager.getString("delete_sponsor_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -416,9 +436,14 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
     }
 
     private void popuniComboBox() {
-        List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
-        for (Mesto mesto : lista) {
-            jComboBoxMesto.addItem(mesto);
+        try {
+            List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+            for (Mesto mesto : lista) {
+                jComboBoxMesto.addItem(mesto);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
 
@@ -443,14 +468,13 @@ public class SponzorKreirajDetaljiForma extends javax.swing.JDialog {
         jLabelNazivFirme.setText(LanguageManager.getString("company_name"));
         jLabelPodaci.setText(LanguageManager.getString("data"));
         jLabelVlasnik.setText(LanguageManager.getString("owner"));
-        
-        
+
         jButtonIzmeni.setText(LanguageManager.getString("update_button"));
         jButtonKreiraj.setText(LanguageManager.getString("create_button"));
         jButtonNazad.setText(LanguageManager.getString("back_button"));
         jButtonObrisi.setText(LanguageManager.getString("delete_button"));
         jButtonSacuvaj.setText(LanguageManager.getString("save_changes_button"));
-        
+
     }
 
 }

@@ -42,14 +42,26 @@ public class MenadzerNalogFromaController {
     }
 
     private void popuniComboBox() {
-        List<StrucnaSprema> lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajStrucneSpreme();
+        List<StrucnaSprema> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().ucitajStrucneSpreme();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         for (StrucnaSprema ss : lista) {
             mnf.getjComboBoxSS().addItem(ss);
         }
     }
 
     private void popuniTabelu() {
-        List<MSS> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMSS(mnf.getMen());
+        List<MSS> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMSS(mnf.getMen());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         MSSModelTabele mssmt = new MSSModelTabele(lista);
         mnf.getjTableSS().setModel(mssmt);
     }
@@ -96,7 +108,13 @@ public class MenadzerNalogFromaController {
             private void ubaciUBazu(StrucnaSprema ss, Date datumSS) {
                 Menadzer men = Cordinator.getInstance().getUlogovani();
                 MSS mss = new MSS(men, ss, false, datumSS);
-                boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajMSS(mss);
+                boolean uspesno = false;
+                try {
+                    uspesno = komunikacijaKlijent.Komunikacija.getInstance().kreirajMSS(mss);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 MSSModelTabele mssmt = (MSSModelTabele) mnf.getjTableSS().getModel();
                 if (uspesno) {
                     mssmt.dodajElement(mss);
@@ -127,7 +145,13 @@ public class MenadzerNalogFromaController {
                 if (mnf.isRegistracija()) {
                     mssmt.ukloniElement(mss);
                 } else {
-                    boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMSS(mss);
+                    boolean uspesno = false;
+                    try {
+                        uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMSS(mss);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
                     if (uspesno) {
                         mssmt.ukloniElement(mss);
                         JOptionPane.showMessageDialog(mnf, LanguageManager.getString("delete_education_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
@@ -144,7 +168,13 @@ public class MenadzerNalogFromaController {
                 if (odgovor == JOptionPane.YES_OPTION) {
                     Menadzer men = Cordinator.getInstance().getUlogovani();
                     men.setAktivanNalog(false);
-                    boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMenadzer(men);
+                    boolean uspesno = false;
+                    try {
+                        uspesno = komunikacijaKlijent.Komunikacija.getInstance().obrisiMenadzer(men);
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
+                    }
                     if (uspesno) {
                         JOptionPane.showMessageDialog(mnf, LanguageManager.getString("bye"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
                         System.exit(0);
@@ -180,7 +210,7 @@ public class MenadzerNalogFromaController {
                 } else {
 
                     proveriPromenuLozinke(loz1, loz2);
-                    JOptionPane.showMessageDialog(mnf,LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
                 }
             }
@@ -218,7 +248,13 @@ public class MenadzerNalogFromaController {
                 men.setLozinka(kriptovana);
                 men.setPrviLog(false);
                 Cordinator.getInstance().setUlogovani(men);
-                boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMenadzer(men);
+                boolean uspesno = false;
+                try {
+                    uspesno = komunikacijaKlijent.Komunikacija.getInstance().promeniMenadzer(men);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 if (uspesno) {
                     JOptionPane.showMessageDialog(mnf, LanguageManager.getString("acc_config_success"), LanguageManager.getString("success"), JOptionPane.INFORMATION_MESSAGE);
 
@@ -230,9 +266,14 @@ public class MenadzerNalogFromaController {
             private void ubaciMSS(List<MSS> lista) {
                 for (MSS mss : lista) {
                     mss.setMenadzer(Cordinator.getInstance().getUlogovani());
-                    if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajMSS(mss)) {
-                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_educations_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
-                        return;
+                    try {
+                        if (!komunikacijaKlijent.Komunikacija.getInstance().kreirajMSS(mss)) {
+                            JOptionPane.showMessageDialog(mnf, LanguageManager.getString("insert_educations_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                        System.exit(0);
                     }
                 }
                 if (!lista.isEmpty()) {
@@ -248,7 +289,13 @@ public class MenadzerNalogFromaController {
                 } catch (NoSuchAlgorithmException ex) {
                     Logger.getLogger(MenadzerNalogFromaController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                return komunikacijaKlijent.Komunikacija.getInstance().promeniMenadzer(men);
+                try {
+                    return komunikacijaKlijent.Komunikacija.getInstance().promeniMenadzer(men);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mnf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
+                return false;
             }
         }
         );

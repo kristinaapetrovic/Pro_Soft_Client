@@ -8,6 +8,8 @@ import condinator.Cordinator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import language.LanguageManager;
 import model.Mesto;
@@ -34,7 +36,13 @@ public class MestoFormaController {
     }
 
     private void popuniTabelu() {
-        List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+        List<Mesto> lista = null;
+        try {
+            lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuSviMesto();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(mf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         MestoModelTabele mmt = new MestoModelTabele(lista);
         mf.getjTableMesta().setModel(mmt);
     }
@@ -70,7 +78,13 @@ public class MestoFormaController {
             }
 
             private void postaviListu(Mesto mesto) {
-                List<Mesto> lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMesto(mesto);
+                List<Mesto> lista = null;
+                try {
+                    lista = komunikacijaKlijent.Komunikacija.getInstance().vratiListuMesto(mesto);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(mf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
                 if (lista.isEmpty()) {
                     JOptionPane.showMessageDialog(mf, LanguageManager.getString("sys_err_city_find"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
                 } else {

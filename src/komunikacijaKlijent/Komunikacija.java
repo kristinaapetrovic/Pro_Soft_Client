@@ -63,482 +63,524 @@ public class Komunikacija {
 
     }
 
-    public Menadzer prijava(Menadzer menadzer) {
+    public Menadzer prijava(Menadzer menadzer) throws Exception {
         String obj = JSONFormat.toJson(menadzer);
-
         Request request = new Request(komunikacija.Operacija.PRIJAVA, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        menadzer = JSONFormat.fromJson(response.getOdgovor().toString(), Menadzer.class);
-
-        return menadzer;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            menadzer = JSONFormat.fromJson(response.getOdgovor().toString(), Menadzer.class);
+            return menadzer;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public List<StrucnaSprema> ucitajStrucneSpreme() {
+    public List<StrucnaSprema> ucitajStrucneSpreme() throws Exception {
         List<StrucnaSprema> lista = new ArrayList<>();
-
         Request request = new Request(komunikacija.Operacija.UCITAJ_STRUCNE_SPREME, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<StrucnaSprema>) response.getOdgovor();
-
-        if (response.getExc() != null) {
-            return null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<StrucnaSprema>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return lista;
 
     }
 
     //PROBLEMOS
-    public List<MSS> vratiListuMSS(Menadzer menadzer) {
+    public List<MSS> vratiListuMSS(Menadzer menadzer) throws Exception {
         List<MSS> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MSS, menadzer);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<MSS>) response.getOdgovor();
-
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-
-    }
-
-    public List<Mesto> vratiListuSviMesto() {
-        List<Mesto> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Mesto>) response.getOdgovor();
-
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-    }
-
-    public List<VrstaAktivnosti> ucitajVrstaAktivnosti() {
-        List<VrstaAktivnosti> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_VRSTA_AKTIVNOSTI, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<VrstaAktivnosti>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-    }
-
-    public List<Projekat> vratiListuSviProjekat() {
-        List<Projekat> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_PROJEKTE, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Projekat>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-
-    }
-
-    public List<Menadzer> vratiListuSviMenadzer() {
-        List<Menadzer> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Menadzer>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-    }
-
-    public List<Sponzor> vratiListuSviSponzor() {
-        List<Sponzor> lista = new ArrayList<>();
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZORE, null);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Sponzor>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-        return lista;
-    }
-
-    public List<Menadzer> vratiListuMenadzer(Menadzer menadzer) {
-        List<Menadzer> lista = new ArrayList<>();
-
         String obj = JSONFormat.toJson(menadzer);
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE_FILTER, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Menadzer>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MSS, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<MSS>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return lista;
+
     }
 
-    public List<Mesto> vratiListuMesto(Mesto mesto) {
+    public List<Mesto> vratiListuSviMesto() throws Exception {
         List<Mesto> lista = new ArrayList<>();
-
-        String obj = JSONFormat.toJson(mesto);
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA_FILTER, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Mesto>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA, null);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Mesto>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return lista;
     }
 
-    public List<Sponzor> vratiListuSponzor(Sponzor kriterijumSponzor) {
-        List<Sponzor> lista = new ArrayList<>();
-
-        String obj = JSONFormat.toJson(kriterijumSponzor);
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZOR_FILTER, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Sponzor>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-
-        return lista;
-    }
-
-    public List<StrucnaSprema> vratiListuStrucnaSprema(StrucnaSprema strucnaSprema) {
-        List<StrucnaSprema> lista = new ArrayList<>();
-
-        String obj = jsonFormat.JSONFormat.toJson(strucnaSprema);
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_SS_FILTER, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<StrucnaSprema>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
-        }
-
-        return lista;
-    }
-
-    public List<VrstaAktivnosti> vratiListuVrstaAktivnosti(VrstaAktivnosti vakt) {
+    public List<VrstaAktivnosti> ucitajVrstaAktivnosti() throws Exception {
         List<VrstaAktivnosti> lista = new ArrayList<>();
+        Request request = new Request(komunikacija.Operacija.UCITAJ_VRSTA_AKTIVNOSTI, null);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<VrstaAktivnosti>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
 
-        String obj = JSONFormat.toJson(vakt);
-
-        Request request = new Request(komunikacija.Operacija.UCITAJ_VAKT_FILTER, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<VrstaAktivnosti>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
         }
-
-        return lista;
     }
 
-    public boolean kreirajMesto(Mesto mesto) {
+    public List<Projekat> vratiListuSviProjekat() throws Exception {
+        List<Projekat> lista = new ArrayList<>();
+        Request request = new Request(komunikacija.Operacija.UCITAJ_PROJEKTE, null);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Projekat>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+
+    }
+
+    public List<Menadzer> vratiListuSviMenadzer() throws Exception {
+        List<Menadzer> lista = new ArrayList<>();
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE, null);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Menadzer>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<Sponzor> vratiListuSviSponzor() throws Exception {
+        List<Sponzor> lista = new ArrayList<>();
+        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZORE, null);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Sponzor>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<Menadzer> vratiListuMenadzer(Menadzer menadzer) throws Exception {
+        List<Menadzer> lista = new ArrayList<>();
+        String obj = JSONFormat.toJson(menadzer);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MENADZERE_FILTER, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Menadzer>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<Mesto> vratiListuMesto(Mesto mesto) throws Exception {
+        List<Mesto> lista = new ArrayList<>();
+        String obj = JSONFormat.toJson(mesto);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_MESTA_FILTER, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Mesto>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<Sponzor> vratiListuSponzor(Sponzor kriterijumSponzor) throws Exception {
+        List<Sponzor> lista = new ArrayList<>();
+        String obj = JSONFormat.toJson(kriterijumSponzor);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_SPONZOR_FILTER, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Sponzor>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<StrucnaSprema> vratiListuStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
+        List<StrucnaSprema> lista = new ArrayList<>();
+        String obj = jsonFormat.JSONFormat.toJson(strucnaSprema);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_SS_FILTER, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<StrucnaSprema>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public List<VrstaAktivnosti> vratiListuVrstaAktivnosti(VrstaAktivnosti vakt) throws Exception {
+        List<VrstaAktivnosti> lista = new ArrayList<>();
+        String obj = JSONFormat.toJson(vakt);
+        Request request = new Request(komunikacija.Operacija.UCITAJ_VAKT_FILTER, obj);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<VrstaAktivnosti>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
+    }
+
+    public boolean kreirajMesto(Mesto mesto) throws Exception {
         String obj = jsonFormat.JSONFormat.toJson(mesto);
         Request request = new Request(Operacija.KREIRAJ_MESTO, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiMesto(Mesto mesto) {
+    public boolean obrisiMesto(Mesto mesto) throws Exception {
         String obj = JSONFormat.toJson(mesto);
         Request request = new Request(Operacija.OBRISI_MESTO, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniMesto(Mesto mesto) {
+    public boolean promeniMesto(Mesto mesto) throws Exception {
         String obj = JSONFormat.toJson(mesto);
-
         Request request = new Request(Operacija.PROMENI_MESTO, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajSponzor(Sponzor sponzor) {
+    public boolean kreirajSponzor(Sponzor sponzor) throws Exception {
         String obj = JSONFormat.toJson(sponzor);
-
         Request request = new Request(Operacija.KREIRAJ_SPONZOR, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiSponzor(Sponzor sponzor) {
+    public boolean obrisiSponzor(Sponzor sponzor) throws Exception {
         String obj = JSONFormat.toJson(sponzor);
-
         Request request = new Request(Operacija.OBRISI_SPONZOR, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniSponzor(Sponzor sponzor) {
+    public boolean promeniSponzor(Sponzor sponzor) throws Exception {
         String obj = JSONFormat.toJson(sponzor);
-
         Request request = new Request(Operacija.PROMENI_SPONZOR, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniStrucnaSprema(StrucnaSprema strucnaSprema) {
+    public boolean promeniStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         String obj = JSONFormat.toJson(strucnaSprema);
-
         Request request = new Request(Operacija.PROMENI_STRUCNA_SPREMA, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiStrucnaSprema(StrucnaSprema strucnaSprema) {
+    public boolean obrisiStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         String obj = JSONFormat.toJson(strucnaSprema);
-
         Request request = new Request(Operacija.OBRISI_STRUCNA_SPREMA, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajStrucnaSprema(StrucnaSprema strucnaSprema) {
+    public boolean kreirajStrucnaSprema(StrucnaSprema strucnaSprema) throws Exception {
         String obj = JSONFormat.toJson(strucnaSprema);
-
         Request request = new Request(Operacija.UBACI_STRUCNA_SPREMA, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniVrstaAktivnosti(VrstaAktivnosti vakt) {
+    public boolean promeniVrstaAktivnosti(VrstaAktivnosti vakt) throws Exception {
         String obj = JSONFormat.toJson(vakt);
-
         Request request = new Request(Operacija.PROMENI_VRSTA_AKTIVNOSTI, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
+    public boolean obrisiVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         String obj = JSONFormat.toJson(vrstaAktivnosti);
-
         Request request = new Request(Operacija.OBRISI_VRSTA_AKTIVNOSTI, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) {
+    public boolean kreirajVrstaAktivnosti(VrstaAktivnosti vrstaAktivnosti) throws Exception {
         String obj = JSONFormat.toJson(vrstaAktivnosti);
-
         Request request = new Request(Operacija.KREIRAJ_VRSTA_AKTIVNOSTI, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajMSS(MSS mss) {
+    public boolean kreirajMSS(MSS mss) throws Exception {
         String obj = JSONFormat.toJson(mss);
-
         Request request = new Request(Operacija.KREIRAJ_MSS, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiMSS(MSS mss) {
+    public boolean obrisiMSS(MSS mss) throws Exception {
         String obj = JSONFormat.toJson(mss);
-
         Request request = new Request(Operacija.OBRISI_MSS, obj);
         sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean obrisiMenadzer(Menadzer men) {
+    public boolean obrisiMenadzer(Menadzer men) throws Exception {
         String obj = JSONFormat.toJson(men);
-
         Request request = new Request(Operacija.OBRISI_MENADZER, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniMenadzer(Menadzer men) {
+    public boolean promeniMenadzer(Menadzer men) throws Exception {
         String obj = JSONFormat.toJson(men);
-
         Request request = new Request(Operacija.PROMENI_MENADZER, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public Menadzer kreirajMenadzer(Menadzer menadzer) {
+    public Menadzer kreirajMenadzer(Menadzer menadzer) throws Exception {
         String obj = JSONFormat.toJson(menadzer);
-
         Request request = new Request(Operacija.KREIRAJ_MENADZER, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return (Menadzer) response.getOdgovor();
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return (Menadzer) response.getOdgovor();
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean vratiListuProjektniUgovor(OpstiDomenskiObjekat kriterijum, List<Projekat> listaUgovora) {
+    public boolean vratiListuProjektniUgovor(OpstiDomenskiObjekat kriterijum, List<Projekat> listaUgovora) throws Exception {
         String obj = JSONFormat.toJson(kriterijum);
         Request request = new Request(Operacija.PRETRAZI_PROJEKAT, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        List<Projekat> dobijenaLista = (List<Projekat>) response.getOdgovor();
-        for (Projekat p : dobijenaLista) {
-            if (!listaUgovora.contains(p)) {
-                listaUgovora.add(p);
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            List<Projekat> dobijenaLista = (List<Projekat>) response.getOdgovor();
+            for (Projekat p : dobijenaLista) {
+                if (!listaUgovora.contains(p)) {
+                    listaUgovora.add(p);
+                }
             }
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return response.getExc() == null;
     }
 
-    public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) {
+    public List<JeSponzor> vratiListuJeSponzor(Projekat projekat) throws Exception {
         List<JeSponzor> lista = new ArrayList<>();
-
         String obj = JSONFormat.toJson(projekat);
         Request request = new Request(komunikacija.Operacija.UCITAJ_JESPONZOR_PROJEKTA, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<JeSponzor>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<JeSponzor>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return lista;
     }
 
-    public List<Aktivnost> vratiListuAktivnost(Projekat projekat) {
+    public List<Aktivnost> vratiListuAktivnost(Projekat projekat) throws Exception {
         List<Aktivnost> lista = new ArrayList<>();
         String obj = JSONFormat.toJson(projekat);
         Request request = new Request(komunikacija.Operacija.UCITAJ_AKTIVNOST_PROJEKTA, obj);
-
-        sender.send(request);
-
-        Response response = (Response) receiver.receive();
-
-        lista = (List<Aktivnost>) response.getOdgovor();
-        if (response.getExc() != null) {
-            return null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            lista = (List<Aktivnost>) response.getOdgovor();
+            if (response.getExc() != null) {
+                return null;
+            }
+            return lista;
+        } else {
+            throw new Exception("Server nije aktivan");
         }
-        return lista;
     }
 
-    public boolean kreirajProjektniUgovor(Projekat ugovor) {
+    public boolean kreirajProjektniUgovor(Projekat ugovor) throws Exception {
         String obj = JSONFormat.toJson(ugovor);
-
         Request request = new Request(Operacija.KREIRAJ_UGOVOR, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajAktivnost(Aktivnost aktivnosti) {
+    public boolean kreirajAktivnost(Aktivnost aktivnosti) throws Exception {
         String obj = JSONFormat.toJson(aktivnosti);
-
         Request request = new Request(Operacija.KREIRAJ_AKTIVNOST, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean kreirajJeSponzor(JeSponzor js) {
+    public boolean kreirajJeSponzor(JeSponzor js) throws Exception {
         String obj = JSONFormat.toJson(js);
-
         Request request = new Request(Operacija.KREIRAJ_JESPONZOR, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
-    public boolean promeniAktivnost(Aktivnost aktivnost) {
+    public boolean promeniAktivnost(Aktivnost aktivnost) throws Exception {
         String obj = JSONFormat.toJson(aktivnost);
-
         Request request = new Request(Operacija.PROMENI_AKTIVNOST, obj);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-
-        return response.getExc() == null;
+        if (sender.isAlive()) {
+            sender.send(request);
+            Response response = (Response) receiver.receive();
+            return response.getExc() == null;
+        } else {
+            throw new Exception("Server nije aktivan");
+        }
     }
 
 }

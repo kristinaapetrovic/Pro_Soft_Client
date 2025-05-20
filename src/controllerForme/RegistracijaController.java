@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import language.LanguageManager;
@@ -91,7 +93,13 @@ public class RegistracijaController {
             }
 
             private Menadzer registruj(Menadzer menadzer) {
-                return komunikacijaKlijent.Komunikacija.getInstance().kreirajMenadzer(menadzer);
+                try {
+                    return komunikacijaKlijent.Komunikacija.getInstance().kreirajMenadzer(menadzer);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(rf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
+                return null;
             }
         });
     }

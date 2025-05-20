@@ -48,7 +48,13 @@ public class PrijavaController {
 
             private void prijava(Menadzer menadzer) {
                 komunikacijaKlijent.Komunikacija.getInstance().konkecija();
-                Menadzer ulogovani = komunikacijaKlijent.Komunikacija.getInstance().prijava(menadzer);
+                Menadzer ulogovani = null;
+                try {
+                    ulogovani = komunikacijaKlijent.Komunikacija.getInstance().prijava(menadzer);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(pf, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+                    System.exit(0);
+                }
 
                 if (ulogovani == null) {
                     JOptionPane.showMessageDialog(pf, LanguageManager.getString("credentials_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);

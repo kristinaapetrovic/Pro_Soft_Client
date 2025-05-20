@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 import java.lang.ModuleLayer.Controller;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -470,7 +472,13 @@ public class ProjektiForma extends javax.swing.JFrame {
 
     private void popuniFiltrirano(Menadzer men) {
         List<Projekat> lista = new ArrayList<>();
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(men, lista);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(men, lista);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
             jTableProjekti.setModel(pmt);
@@ -484,13 +492,19 @@ public class ProjektiForma extends javax.swing.JFrame {
 
     private void popuniFiltrirano(Sponzor sponzor) {
         List<Projekat> lista = new ArrayList<>();
-        boolean uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, lista);
+        boolean uspesno = false;
+        try {
+            uspesno = komunikacijaKlijent.Komunikacija.getInstance().vratiListuProjektniUgovor(sponzor, lista);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("server_down"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
         if (uspesno) {
             ProjekatModelTabele pmt = new ProjekatModelTabele(lista);
             jTableProjekti.setModel(pmt);
 
         } else {
-            JOptionPane.showMessageDialog(this,  LanguageManager.getString("read_projects_error"),  LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LanguageManager.getString("read_projects_error"), LanguageManager.getString("error"), JOptionPane.ERROR_MESSAGE);
         }
 
     }
